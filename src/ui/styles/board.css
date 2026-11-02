@@ -64,6 +64,7 @@
 @keyframes breathe { 50% { transform: scale(1.025, 1.04); } }
 @keyframes blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.08); } }
 .interactive .piece:hover .art { animation-duration: 1.2s; }
+.interactive .art .b, .interactive .art .t, .interactive .art .s, .interactive .art circle { cursor: pointer; }
 
 /* ---------- fx ---------- */
 .fx-canvas { position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 60; }

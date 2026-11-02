@@ -100,6 +100,7 @@ export class Board {
   }
   private place(rec: PieceRec) {
     rec.el.style.transform = this.tr(this.pos(rec.sq));
+    rec.el.dataset.sq = rec.sq;
   }
   /** Screen position of a piece's body centre and of its feet. */
   screenOf(rec: PieceRec): { body: Pt; feet: Pt } {
@@ -191,6 +192,14 @@ export class Board {
       dir: color === 'w' ? 1 : -1,
     };
     this.setFace(rec, rec.dir);
+    el.addEventListener('click', (e) => {
+      // A tall piece in front can cover the square behind it. If a legal target lies under the pointer, the player meant that square.
+      const under = document.elementsFromPoint(e.clientX, e.clientY).find((n) => n.classList.contains('sq'))?.getAttribute('data-sq') as Square | undefined;
+      const targets = this.marks.targets ?? [];
+      const sq = under && targets.some((t) => t.sq === under) && !targets.some((t) => t.sq === rec.sq) ? under : rec.sq;
+      this.focused = sq;
+      this.opts.onSquare?.(sq);
+    });
     this.layer.append(el);
     this.place(rec);
     return rec;

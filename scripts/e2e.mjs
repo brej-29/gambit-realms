@@ -8,6 +8,20 @@ const errors = [];
 page.on('pageerror', (e) => errors.push(String(e)));
 page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
 const steps = [];
+// Pieces sit above the square buttons, so click where a person would: the centre of the square.
+// A piece is clicked on its head, which is never covered by the piece in front of it.
+const clickPiece = async (sq) => {
+  await page.waitForSelector('.board-wrap .piece');
+  await page.waitForTimeout(500);
+  const box = await page.locator('.piece[data-sq=' + sq + '] .hop').boundingBox();
+  await page.mouse.click(box.x + box.width / 2, box.y + box.height * 0.3);
+};
+const clickSq = async (sq) => {
+  await page.waitForSelector('.board-wrap .piece');
+  await page.waitForTimeout(500); // let the route and theme transitions settle
+  const box = await page.locator('button[data-sq=' + sq + ']').boundingBox();
+  await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
+};
 const ok = (name) => (steps.push(name), console.log('ok  ', name));
 const fail = async (name, err) => {
   console.error('FAIL', name, String(err).split('\n')[0]);
@@ -36,21 +50,21 @@ await step('realm switch changes the theme', async () => {
 });
 await step('lesson: click squares then advance', async () => {
   await page.goto(base + '#/learn/board');
-  await page.click('button[data-sq=e4]');
+  await clickSq('e4');
   await page.waitForSelector('[data-a=next]:not([hidden])');
 });
 await step('lesson: make the expected pawn move', async () => {
   await page.goto(base + '#/learn/pawn');
-  await page.click('button[data-sq=e2]');
-  await page.click('button[data-sq=e4]');
+  await clickPiece('e2');
+  await clickSq('e4');
   await page.waitForSelector('.feedback.ok', { timeout: 6000 });
 });
 await step('game: play e4 and get an engine reply', async () => {
   await page.goto(base + '#/play?first=1');
   await page.click('.start');
   await page.waitForSelector('.game .piece');
-  await page.click('button[data-sq=e2]');
-  await page.click('button[data-sq=e4]');
+  await clickPiece('e2');
+  await clickSq('e4');
   await page.waitForFunction(() => document.querySelectorAll('.movelist li span:nth-child(3)').length && [...document.querySelectorAll('.movelist li span:nth-child(3)')].some((s) => s.textContent), null, { timeout: 25000 });
 });
 if (errors.length) {
