@@ -31,3 +31,8 @@ jobs:
           npx vite preview --port 4173 &
           npx wait-on http://localhost:4173 --timeout 30000
           node scripts/e2e.mjs http://localhost:4173/
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: e2e-failure
+          path: e2e-failure.png
