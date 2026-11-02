@@ -16,10 +16,16 @@
     "eval": "tsx eval/run.ts --profile full"
   },
   "dependencies": {
+    "@fontsource/chakra-petch": "^5.3.0",
+    "@fontsource/dela-gothic-one": "^5.3.0",
+    "@fontsource/im-fell-english": "^5.3.0",
+    "@fontsource/instrument-sans": "^5.3.0",
+    "@fontsource/pirata-one": "^5.3.0",
     "chess.js": "^1.4.0"
   },
   "devDependencies": {
     "@types/node": "^26.6.6",
+    "playwright-core": "^1.64.1",
     "stockfish": "19.0.1",
     "tsx": "^4.19.0",
     "typescript": "^5.6.0",
