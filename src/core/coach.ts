@@ -18,6 +18,13 @@ export interface Threat {
   netLoss: number;
 }
 
+export interface CoachOptions {
+  /** Ablation: do not account for recaptures by defenders in SEE. */
+  countDefenders?: boolean;
+  /** Ablation: treat geometrically attacking pinned pieces as attackers. */
+  pinnedPieceRule?: boolean;
+}
+
 function other(color: Color): Color {
   return color === 'w' ? 'b' : 'w';
 }
@@ -34,7 +41,7 @@ function moveText(move: Move): string {
   return `${pieceName(move.piece)} on ${move.from}`;
 }
 
-export function assessMove(fen: string, uci: string): MoveAssessment {
+export function assessMove(fen: string, uci: string, options: CoachOptions = {}): MoveAssessment {
   const chess = new Chess(fen);
   const config = parseUci(uci);
   const move = chess.move(config);
@@ -42,19 +49,21 @@ export function assessMove(fen: string, uci: string): MoveAssessment {
   if (!move || !movedPiece) throw new Error(`illegal UCI move: ${uci}`);
   const enemy = other(movedPiece.color);
   const after = new Chess(chess.fen({ forceEnpassantSquare: true }));
-  const attackers = legalAttackers(after, config.to, enemy);
-  const defenders = legalAttackers(after, config.to, movedPiece.color);
-  const netLoss = staticExchange(after, config.to, enemy);
+  const legalAttackersAfter = legalAttackers(after, config.to, enemy);
+  const geometricAttackers = after.attackers(config.to, enemy);
+  const attackers = options.pinnedPieceRule === false ? geometricAttackers.length : legalAttackersAfter.length;
+  const defenders = options.countDefenders === false ? 0 : legalAttackers(after, config.to, movedPiece.color).length;
+  const netLoss = staticExchange(after, config.to, enemy, { includeDefenders: options.countDefenders !== false });
   const hangs = netLoss >= 100 && movedPiece.type !== 'k';
   const piece = pieceName(movedPiece.type);
   let message = `${piece[0]?.toUpperCase() ?? ''}${piece.slice(1)} on ${config.to} is safe for now.`;
   if (hangs) {
-    const attacker = attackers[0];
+    const attacker = legalAttackersAfter[0];
     message = `${piece[0]?.toUpperCase() ?? ''}${piece.slice(1)} on ${config.to} can be taken by ${attacker ? pieceName(attacker.piece) + ' from ' + attacker.from : 'the opponent'} and cannot be recovered without losing material.`;
-  } else if (attackers.length) {
+  } else if (attackers) {
     message = `${piece[0]?.toUpperCase() ?? ''}${piece.slice(1)} on ${config.to} is attacked, but your pieces can defend or recapture it.`;
   }
-  return { hangs, piece, attackers: attackers.length, defenders: defenders.length, netLoss, message };
+  return { hangs, piece, attackers, defenders, netLoss, message };
 }
 
 export function explainThreats(fen: string, color: Color): Threat[] {

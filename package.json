@@ -13,7 +13,8 @@
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "eval:quick": "tsx eval/run.ts --profile quick",
-    "eval": "tsx eval/run.ts --profile full"
+    "eval": "tsx eval/run.ts --profile full",
+    "eval:tune": "tsx eval/tune.ts"
   },
   "dependencies": {
     "chess.js": "^1.4.0"

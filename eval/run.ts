@@ -1,418 +1,157 @@
+import { appendFileSync, existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { cpus } from 'node:os';
-import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { join } from 'node:path';
-import { Chess, type Color, type Move, type PieceSymbol } from 'chess.js';
+import { Chess, type Move, type PieceSymbol } from 'chess.js';
 import type { Engine, EngineLine } from '../src/engine/types';
-import { EnginePool } from './engine-pool';
 import { lineScore } from '../src/engine/types';
-import { LEVELS, chooseMove } from '../src/core/ladder';
+import { LEVELS, chooseMove, type LevelConfig } from '../src/core/ladder';
+import { assessMove, type CoachOptions } from '../src/core/coach';
 import { mulberry32 } from '../src/core/rng';
-import { assessMove } from '../src/core/coach';
-import { eloConfidence, eloFromScore, fitLadder, score, wilsonInterval, type PairResult } from '../src/core/stats';
+import { bootstrapLadderIntervals, fitLadder, score, wilsonInterval, type PairResult } from '../src/core/stats';
+import { EnginePool } from './engine-pool';
+import { GamePool } from './game-pool';
+import type { GameRecord, GameTask, PlayerSpec, PlayedMove } from './game';
 
 type Profile = 'quick' | 'full';
-type Result = '1-0' | '0-1' | '1/2-1/2';
-type PlayerId = string;
+interface BlunderRow { player: string; games: number; moves: number; blunders: number; blunderRate: number; hangingBlunders: number; hangingShare: number }
+interface CoachRow { name: string; label: 'A' | 'B'; pairs: number; positives: number; predicted: number; truePositives: number; precision: number; recall: number }
+interface Report { meta: Record<string, unknown>; levels: Array<Record<string, unknown>>; pairs: Array<Record<string, unknown>>; anchors: Array<Record<string, unknown>>; blunders: BlunderRow[]; coach: CoachRow[]; latency: Record<string, unknown>; metrics: Record<string, Record<string, unknown>>; runs: Array<Record<string, unknown>>; errorAnalysis: { falsePositives: Array<Record<string, string | number | boolean>>; falseNegatives: Array<Record<string, string | number | boolean>> } }
 
-interface Player {
-  id: PlayerId;
-  move(chess: Chess, rng: () => number): Promise<string>;
-  dispose?(): void;
-}
-
-interface PlayedMove {
-  fen: string;
-  uci: string;
-  player: PlayerId;
-}
-
-interface Game {
-  white: PlayerId;
-  black: PlayerId;
-  result: Result;
-  moves: PlayedMove[];
-}
-
-interface BlunderRow {
-  player: string;
-  games: number;
-  moves: number;
-  blunders: number;
-  blunderRate: number;
-  hangingBlunders: number;
-  hangingShare: number;
-}
-
-interface CoachRow {
-  name: string;
-  pairs: number;
-  positives: number;
-  predicted: number;
-  truePositives: number;
-  precision: number;
-  recall: number;
-}
-
-interface Report {
-  meta: Record<string, unknown>;
-  levels: Array<Record<string, unknown>>;
-  pairs: Array<Record<string, unknown>>;
-  anchors: Array<Record<string, unknown>>;
-  blunders: BlunderRow[];
-  coach: CoachRow[];
-  latency: Record<string, unknown>;
-  metrics: Record<string, Record<string, unknown>>;
-  runs: Array<Record<string, unknown>>;
-  errorAnalysis: { falsePositives: Array<Record<string, string>>; falseNegatives: Array<Record<string, string>> };
-}
-
-const ROOT = join(process.cwd());
+const ROOT = process.cwd();
 const OUT_DIR = join(ROOT, 'eval', 'out');
 const RESULTS_DIR = join(ROOT, 'docs', 'results');
-const OPENING_SEED_START = 10_000;
-const P = {
-  quick: { games: 1, nodes: 500, referenceNodes: 1_000, coachPairs: 100, latencySamples: 4 },
-  full: { games: 200, nodes: 5_000, referenceNodes: 300_000, coachPairs: 5_000, latencySamples: 20 },
-} as const;
+const GAMES_PATH = join(OUT_DIR, 'games.jsonl');
+const REPORTING_SEED_START = 10_000;
+const P = { quick: { games: 12, referenceNodes: 20_000, coachPairs: 400, latencySamples: 8 }, full: { games: 200, referenceNodes: 300_000, coachPairs: 5_000, latencySamples: 20 } } as const;
 
-function parseProfile(): Profile {
-  const value = process.argv[process.argv.indexOf('--profile') + 1];
-  return value === 'full' ? 'full' : 'quick';
-}
-
-function chooseRandom(chess: Chess, rng: () => number): string {
-  const moves = chess.moves();
-  if (!moves.length) throw new Error('no legal moves');
-  return moves[Math.floor(rng() * moves.length)]!;
-}
-
-const MATERIAL: Record<PieceSymbol, number> = { p: 10, n: 30, b: 30, r: 50, q: 90, k: 900 };
-
-function material(chess: Chess): number {
-  return chess.board().flat().reduce((sum, piece) => sum + (piece ? (piece.color === 'w' ? 1 : -1) * MATERIAL[piece.type] : 0), 0);
-}
-
-function minimax(chess: Chess, depth: number, alpha: number, beta: number): number {
-  if (depth === 0 || chess.isGameOver()) return material(chess);
-  const maximizing = chess.turn() === 'w';
-  let best = maximizing ? -Infinity : Infinity;
-  for (const san of chess.moves()) {
-    chess.move(san);
-    const value = minimax(chess, depth - 1, alpha, beta);
-    chess.undo();
-    if (maximizing) {
-      if (value > best) best = value;
-      alpha = Math.max(alpha, best);
-    } else {
-      if (value < best) best = value;
-      beta = Math.min(beta, best);
-    }
-    if (beta <= alpha) break;
-  }
-  return best;
-}
-
-function minimaxMove(chess: Chess): string {
-  const maximizing = chess.turn() === 'w';
-  let bestValue = maximizing ? -Infinity : Infinity;
-  let best = chess.moves()[0];
-  for (const san of chess.moves()) {
-    chess.move(san);
-    const value = minimax(chess, 1, -Infinity, Infinity);
-    chess.undo();
-    if ((maximizing && value > bestValue) || (!maximizing && value < bestValue)) {
-      bestValue = value;
-      best = san;
-    }
-  }
-  return best!;
-}
-
-function uciFromMove(chess: Chess, move: string): string {
-  const verbose = chess.moves({ verbose: true }) as Move[];
-  const found = verbose.find((item) => item.san === move || item.lan === move || `${item.from}${item.to}${item.promotion ?? ''}` === move);
-  if (!found) throw new Error(`cannot convert move ${move} to UCI`);
-  return `${found.from}${found.to}${found.promotion ?? ''}`;
-}
-
-function createEnginePlayer(id: string, engine: Engine, options: { nodes: number; skill?: number; uciElo?: number }): Player {
-  return {
-    id,
-    async move(chess) {
-      const lines = await engine.analyse(chess.fen({ forceEnpassantSquare: true }), options);
-      return lines[0]?.uci ?? chooseRandom(chess, Math.random);
-    },
-    dispose: () => engine.dispose(),
-  };
-}
-
-function createLevelPlayer(id: string, engine: Engine): Player {
-  const config = LEVELS.find((level) => `L${level.id}` === id)!;
-  return {
-    id,
-    async move(chess, rng) {
-      const lines = await engine.analyse(chess.fen({ forceEnpassantSquare: true }), { nodes: config.nodes, multipv: config.multipv });
-      return chooseMove(lines, config, rng);
-    },
-    dispose: () => engine.dispose(),
-  };
-}
-
-function createLocalPlayer(id: string, mode: 'random' | 'minimax'): Player {
-  return { id, async move(chess, rng) { return uciFromMove(chess, mode === 'random' ? chooseRandom(chess, rng) : minimaxMove(chess)); } };
-}
-
-async function opening(seed: number, reference: Engine | undefined, referenceNodes: number): Promise<string> {
-  for (let attempt = 0; attempt < 20; attempt++) {
-    const rng = mulberry32(seed + attempt * 7919);
-    const chess = new Chess();
-    for (let ply = 0; ply < 4; ply++) chess.move(chooseRandom(chess, rng));
-    if (!reference) return chess.fen({ forceEnpassantSquare: true });
-    const lines = await reference.analyse(chess.fen({ forceEnpassantSquare: true }), { nodes: referenceNodes });
-    if (Math.abs(lineScore(lines[0] ?? { cp: 0, uci: '', pv: [], depth: 0 })) <= 150) return chess.fen({ forceEnpassantSquare: true });
-  }
-  const fallback = new Chess();
-  return fallback.fen();
-}
-
-async function playGame(white: Player, black: Player, fen: string, seed: number): Promise<Game> {
-  const chess = new Chess(fen);
-  const moves: PlayedMove[] = [];
-  const rng = mulberry32(seed);
-  for (let ply = 0; ply < 300 && !chess.isGameOver(); ply++) {
-    const player = chess.turn() === 'w' ? white : black;
-    const position = chess.fen({ forceEnpassantSquare: true });
-    let uci = await player.move(chess, rng);
-    try {
-      const config = { from: uci.slice(0, 2), to: uci.slice(2, 4), ...(uci[4] ? { promotion: uci[4] } : {}) };
-      chess.move(config);
-    } catch {
-      uci = uciFromMove(chess, chooseRandom(chess, rng));
-      chess.move({ from: uci.slice(0, 2), to: uci.slice(2, 4), ...(uci[4] ? { promotion: uci[4] } : {}) });
-    }
-    moves.push({ fen: position, uci, player: player.id });
-  }
-  let result: Result = '1/2-1/2';
-  if (chess.isCheckmate()) result = chess.turn() === 'w' ? '0-1' : '1-0';
-  else if (chess.isGameOver()) result = '1/2-1/2';
-  else if (material(chess) > 300) result = '1-0';
-  else if (material(chess) < -300) result = '0-1';
-  return { white: white.id, black: black.id, result, moves };
-}
-
-function pairScore(games: readonly Game[], a: string): { score: number; wins: number; draws: number; losses: number; interval: ReturnType<typeof wilsonInterval> } {
-  let wins = 0; let draws = 0; let losses = 0;
-  for (const game of games) {
-    const aWhite = game.white === a;
-    if (game.result === '1/2-1/2') draws++;
-    else if ((aWhite && game.result === '1-0') || (!aWhite && game.result === '0-1')) wins++;
-    else losses++;
-  }
-  const value = score(wins, draws, losses);
-  return { score: value, wins, draws, losses, interval: wilsonInterval(value, games.length) };
-}
-
-async function runPair(a: Player, b: Player, count: number, startSeed: number, reference: Engine | undefined, referenceNodes: number): Promise<Game[]> {
-  const games: Game[] = [];
-  for (let i = 0; i < count; i++) {
-    const fen = await opening(startSeed + i, reference, referenceNodes);
-    const firstWhite = i % 2 === 0;
-    games.push(await playGame(firstWhite ? a : b, firstWhite ? b : a, fen, startSeed + i * 13));
+function parseProfile(): Profile { return process.argv[process.argv.indexOf('--profile') + 1] === 'full' ? 'full' : 'quick'; }
+function keyOf(game: Pick<GameRecord, 'white' | 'black' | 'seed' | 'paramsHash'> | Pick<GameTask, 'white' | 'black' | 'seed' | 'paramsHash'>): string { const white = typeof game.white === 'string' ? game.white : game.white.id; const black = typeof game.black === 'string' ? game.black : game.black.id; return `${white}|${black}|${game.seed}|${game.paramsHash}`; }
+function paramsHash(profile: Profile): string { return createHash('sha256').update(JSON.stringify({ profile, levels: LEVELS, referenceNodes: P[profile].referenceNodes, version: 3 })).digest('hex').slice(0, 16); }
+function readStoredGames(): Map<string, GameRecord> {
+  const games = new Map<string, GameRecord>();
+  if (!existsSync(GAMES_PATH)) return games;
+  for (const line of readFileSync(GAMES_PATH, 'utf8').split(/\r?\n/)) {
+    if (!line.trim()) continue;
+    try { const game = JSON.parse(line) as GameRecord; if (typeof game.seed === 'number' && typeof game.paramsHash === 'string') games.set(keyOf(game), game); } catch { /* ignore a partial final line */ }
   }
   return games;
 }
+function levelSpec(level: LevelConfig): PlayerSpec { return { id: `L${level.id}`, kind: 'level', config: level }; }
+function engineSpec(id: string, options: { nodes: number; skill?: number; uciElo?: number }): PlayerSpec { return { id, kind: 'engine', options }; }
+function pairTasks(a: PlayerSpec, b: PlayerSpec, count: number, startSeed: number, match: string, hash: string, referenceNodes: number): GameTask[] {
+  return Array.from({ length: count }, (_, index) => { const firstWhite = index % 2 === 0; return { white: firstWhite ? a : b, black: firstWhite ? b : a, seed: startSeed + index, paramsHash: hash, match, referenceNodes }; });
+}
+async function runGames(tasks: readonly GameTask[], stored: Map<string, GameRecord>, workers: number): Promise<GameRecord[]> {
+  const missing = tasks.filter((task) => !stored.has(keyOf(task)));
+  if (missing.length) {
+    const pool = new GamePool(Math.min(workers, missing.length)); const started = Date.now();
+    const existingCount = tasks.length - missing.length; let finished = existingCount;
+    const timer = setInterval(() => { const elapsed = Math.max(1, Date.now() - started); const rate = Math.max(0.001, (finished - existingCount) / (elapsed / 1000)); console.log(`progress: games done/total ${finished}/${tasks.length}, ETA ${Math.max(0, Math.ceil((tasks.length - finished) / rate))}s`); }, 30_000);
+    try { await pool.run(missing, (completed, total, game) => { if (game) { stored.set(keyOf(game), game); appendFileSync(GAMES_PATH, `${JSON.stringify(game)}\n`); } finished = existingCount + completed; if (completed === total) console.log(`progress: games done/total ${finished}/${tasks.length}, ETA 0s`); }); } finally { clearInterval(timer); pool.dispose(); }
+  }
+  return tasks.map((task) => stored.get(keyOf(task))).filter((game): game is GameRecord => Boolean(game));
+}
+function pairScore(games: readonly GameRecord[], stronger: string): { score: number; wins: number; draws: number; losses: number; interval: ReturnType<typeof wilsonInterval>; outcomes: number[] } {
+  let wins = 0; let draws = 0; let losses = 0;
+  for (const game of games) { const white = game.white === stronger; if (game.result === '1/2-1/2') draws++; else if ((white && game.result === '1-0') || (!white && game.result === '0-1')) wins++; else losses++; }
+  const value = score(wins, draws, losses); return { score: value, wins, draws, losses, interval: wilsonInterval(value, games.length), outcomes: [...Array(wins).fill(1), ...Array(draws).fill(0.5), ...Array(losses).fill(0)] };
+}
+function cacheKey(fen: string, nodes: number, multipv = 1): string { return `${nodes}:${multipv}:${fen}`; }
+async function referenceScore(engine: Engine, cache: Record<string, EngineLine[]>, fen: string, nodes: number, multipv = 1): Promise<EngineLine[]> { const key = cacheKey(fen, nodes, multipv); if (cache[key]) return cache[key]!; const lines = await engine.analyse(fen, { nodes, multipv }); cache[key] = lines; return lines; }
+function playerEligible(id: string): boolean { return /^L[1-4]$/.test(id) || ['random', 'minimax', 'skill0', 'elo1320'].includes(id); }
+function applyUci(chess: Chess, uci: string): Move { const move = chess.move({ from: uci.slice(0, 2), to: uci.slice(2, 4), ...(uci[4] ? { promotion: uci[4] as PieceSymbol } : {}) }); if (!move) throw new Error(`illegal stored move ${uci}`); return move; }
 
-function cacheKey(fen: string, nodes: number): string {
-  return `${nodes}:${fen}`;
+async function labelBlunders(games: readonly GameRecord[], reference: Engine, nodes: number, cache: Record<string, EngineLine[]>): Promise<BlunderRow[]> {
+  const grouped = new Map<string, { games: Set<string>; moves: number; blunders: number; hangs: number }>();
+  const work = games.flatMap((game) => game.moves.filter((move) => playerEligible(move.player)).map((played) => ({ game, played })));
+  for (let start = 0; start < work.length; start += 128) {
+    const batch = work.slice(start, start + 128);
+    const results = await Promise.all(batch.map(async ({ game, played }) => {
+      const before = await referenceScore(reference, cache, played.fen, nodes); const position = new Chess(played.fen); applyUci(position, played.uci); const after = await referenceScore(reference, cache, position.fen({ forceEnpassantSquare: true }), nodes);
+      const cpl = Math.max(0, lineScore(before[0] ?? { cp: 0, uci: '', pv: [], depth: 0 }) + lineScore(after[0] ?? { cp: 0, uci: '', pv: [], depth: 0 })); return { game, played, blunder: cpl >= 200, hang: cpl >= 200 && assessMove(played.fen, played.uci).netLoss >= 100 };
+    }));
+    for (const { game, played, blunder, hang } of results) { const row = grouped.get(played.player) ?? { games: new Set<string>(), moves: 0, blunders: 0, hangs: 0 }; row.games.add(`${game.white}|${game.black}|${game.seed}`); row.moves++; if (blunder) row.blunders++; if (hang) row.hangs++; grouped.set(played.player, row); }
+  }
+  return [...grouped.entries()].map(([player, row]) => ({ player, games: row.games.size, moves: row.moves, blunders: row.blunders, blunderRate: row.blunders / Math.max(1, row.moves), hangingBlunders: row.hangs, hangingShare: row.hangs / Math.max(1, row.blunders) }));
 }
 
-async function referenceScore(engine: Engine, cache: Record<string, EngineLine[]>, fen: string, nodes: number): Promise<EngineLine[]> {
-  const key = cacheKey(fen, nodes);
-  if (cache[key]) return cache[key]!;
-  const lines = await engine.analyse(fen, { nodes });
-  cache[key] = lines;
-  return lines;
+interface LabeledPair { pair: PlayedMove; labelA: boolean; labelB: boolean; cpl: number; materialLoss: number; pv: string[] }
+function materialScore(chess: Chess, color: 'w' | 'b'): number { const values: Record<PieceSymbol, number> = { p: 100, n: 300, b: 300, r: 500, q: 900, k: 0 }; return chess.board().flat().reduce((sum, piece) => sum + (piece ? (piece.color === color ? 1 : -1) * values[piece.type] : 0), 0); }
+function playPv(chess: Chess, pv: readonly string[], plies: number): void { for (const uci of pv.slice(0, plies)) { try { applyUci(chess, uci); } catch { break; } } }
+async function labelPair(pair: PlayedMove, reference: Engine, nodes: number, cache: Record<string, EngineLine[]>): Promise<LabeledPair> {
+  const beforeChess = new Chess(pair.fen); const mover = beforeChess.turn(); const beforeMaterial = materialScore(beforeChess, mover); const before = await referenceScore(reference, cache, pair.fen, nodes);
+  const afterChess = new Chess(pair.fen); applyUci(afterChess, pair.uci); const after = await referenceScore(reference, cache, afterChess.fen({ forceEnpassantSquare: true }), nodes);
+  const cpl = Math.max(0, lineScore(before[0] ?? { cp: 0, uci: '', pv: [], depth: 0 }) + lineScore(after[0] ?? { cp: 0, uci: '', pv: [], depth: 0 })); playPv(afterChess, after[0]?.pv ?? [], 4);
+  const materialLoss = beforeMaterial - materialScore(afterChess, mover); return { pair, labelA: cpl >= 150, labelB: materialLoss >= 100, cpl, materialLoss, pv: after[0]?.pv ?? [] };
 }
+function shuffle<T>(items: T[], seed: number): T[] { const rng = mulberry32(seed); for (let i = items.length - 1; i > 0; i--) { const j = Math.floor(rng() * (i + 1)); [items[i], items[j]] = [items[j]!, items[i]!]; } return items; }
+function precisionRecall(labels: boolean[], predictions: boolean[]): { positives: number; predicted: number; truePositives: number; precision: number; recall: number } { const positives = labels.filter(Boolean).length; const predicted = predictions.filter(Boolean).length; const truePositives = predictions.reduce((sum, value, index) => sum + (value && labels[index] ? 1 : 0), 0); return { positives, predicted, truePositives, precision: truePositives / Math.max(1, predicted), recall: truePositives / Math.max(1, positives) }; }
 
-async function labelBlunders(games: readonly Game[], reference: Engine, nodes: number, cache: Record<string, EngineLine[]>): Promise<BlunderRow[]> {
-  const grouped = new Map<string, { moves: number; blunders: number; hangs: number; games: number }>();
-  for (const game of games) {
-    for (const played of game.moves) {
-      if (!/^L[1-4]$/.test(played.player) && !['random', 'minimax', 'skill0', 'elo1320'].includes(played.player)) continue;
-      const row = grouped.get(played.player) ?? { moves: 0, blunders: 0, hangs: 0, games: 0 };
-      row.moves++;
-      const before = await referenceScore(reference, cache, played.fen, nodes);
-      const position = new Chess(played.fen);
-      const mover = position.turn();
-      position.move({ from: played.uci.slice(0, 2), to: played.uci.slice(2, 4), ...(played.uci[4] ? { promotion: played.uci[4] } : {}) });
-      const after = await referenceScore(reference, cache, position.fen({ forceEnpassantSquare: true }), nodes);
-      const best = lineScore(before[0] ?? { cp: 0, uci: '', pv: [], depth: 0 });
-      const afterForMover = -lineScore(after[0] ?? { cp: 0, uci: '', pv: [], depth: 0 });
-      const cpl = Math.max(0, best - afterForMover);
-      if (cpl >= 200) {
-        row.blunders++;
-        if (assessMove(played.fen, played.uci).netLoss >= 100) row.hangs++;
-      }
-      void mover;
-      grouped.set(played.player, row);
+async function coachRows(games: readonly GameRecord[], reference: Engine, nodes: number, cache: Record<string, EngineLine[]>, target: number): Promise<{ rows: CoachRow[]; errorAnalysis: Report['errorAnalysis'] }> {
+  const candidates = shuffle(games.flatMap((game) => game.seed >= REPORTING_SEED_START ? game.moves.filter((move) => playerEligible(move.player)) : []), 0xC0AC);
+  const labeled: LabeledPair[] = []; const minEach = Math.ceil(target / 3);
+  const limited = candidates.slice(0, Math.min(candidates.length, target * 3));
+  for (let start = 0; start < limited.length; start += 128) {
+    labeled.push(...await Promise.all(limited.slice(start, start + 128).map((candidate) => labelPair(candidate, reference, nodes, cache))));
+    const positives = labeled.filter((item) => item.labelB).length; const negatives = labeled.length - positives; if (labeled.length >= target && positives >= minEach && negatives >= minEach) break;
+  }
+  const positivesForB = labeled.filter((item) => item.labelB);
+  const negativesForB = labeled.filter((item) => !item.labelB);
+  const balanced = labeled.length > target && positivesForB.length && negativesForB.length
+    ? [...positivesForB.slice(0, Math.ceil(target / 2)), ...negativesForB.slice(0, Math.floor(target / 2))]
+    : labeled.slice(0, target);
+  const selectedSet = new Set(balanced);
+  const selected = [...balanced, ...labeled.filter((item) => !selectedSet.has(item)).slice(0, Math.max(0, target - balanced.length))];
+  const methods: Array<{ name: string; options?: CoachOptions; predict: (assessment: ReturnType<typeof assessMove>, chess: Chess, move: Move) => boolean }> = [
+    { name: 'coach-see', predict: (assessment) => assessment.hangs }, { name: 'coach-see-without-defender-count', options: { countDefenders: false }, predict: (assessment) => assessment.hangs }, { name: 'coach-without-pinned-piece-rule', options: { pinnedPieceRule: false }, predict: (assessment) => assessment.hangs }, { name: 'warn-if-attacked', predict: (_assessment, chess, move) => chess.attackers(move.to, move.color === 'w' ? 'b' : 'w').length > 0 }, { name: 'never-warn', predict: () => false },
+  ];
+  const rows: CoachRow[] = []; const falsePositives: Array<Record<string, string | number | boolean>> = []; const falseNegatives: Array<Record<string, string | number | boolean>> = [];
+  for (const label of ['B', 'A'] as const) {
+    const labels = selected.map((item) => label === 'B' ? item.labelB : item.labelA);
+    for (const method of methods) {
+      const predictions = selected.map((item) => { const chess = new Chess(item.pair.fen); const move = applyUci(chess, item.pair.uci); const assessment = assessMove(item.pair.fen, item.pair.uci, method.options); return method.predict(assessment, chess, move); });
+      rows.push({ name: method.name, label, pairs: labels.length, ...precisionRecall(labels, predictions) });
+      if (label === 'B' && method.name === 'coach-see') selected.forEach((item, index) => { if (predictions[index] && !labels[index] && falsePositives.length < 10) falsePositives.push({ fen: item.pair.fen, move: item.pair.uci, referenceCpl: item.cpl, referenceMaterialLoss: item.materialLoss, referencePv: item.pv.join(' '), labelA: item.labelA, labelB: item.labelB }); if (!predictions[index] && labels[index] && falseNegatives.length < 10) falseNegatives.push({ fen: item.pair.fen, move: item.pair.uci, referenceCpl: item.cpl, referenceMaterialLoss: item.materialLoss, referencePv: item.pv.join(' '), labelA: item.labelA, labelB: item.labelB }); });
     }
   }
-  for (const row of grouped.values()) row.games = games.filter((game) => game.white === [...grouped.entries()].find(([, value]) => value === row)?.[0] || game.black === [...grouped.entries()].find(([, value]) => value === row)?.[0]).length;
-  return [...grouped.entries()].map(([player, row]) => ({ player, games: row.games, moves: row.moves, blunders: row.blunders, blunderRate: row.blunders / Math.max(1, row.moves), hangingBlunders: row.hangs, hangingShare: row.hangs / Math.max(1, row.blunders) }));
-}
-
-async function coachRows(games: readonly Game[], reference: Engine, nodes: number, cache: Record<string, EngineLine[]>, target: number): Promise<{ rows: CoachRow[]; errorAnalysis: Report['errorAnalysis'] }> {
-  const pairs = games.flatMap((game) => game.moves.filter((move) => ['L1', 'L2', 'L3', 'L4', 'random', 'minimax'].includes(move.player)));
-  const selected = pairs.slice(0, target);
-  const labels: boolean[] = [];
-  const predictions: boolean[] = [];
-  const attacked: boolean[] = [];
-  const falsePositives: Array<Record<string, string>> = [];
-  const falseNegatives: Array<Record<string, string>> = [];
-  for (const pair of selected) {
-    const before = await referenceScore(reference, cache, pair.fen, nodes);
-    const chess = new Chess(pair.fen);
-    const move = chess.moves({ verbose: true }) as Move[];
-    const mover = move.find((candidate) => `${candidate.from}${candidate.to}${candidate.promotion ?? ''}` === pair.uci);
-    if (!mover) continue;
-    const afterChess = new Chess(pair.fen);
-    afterChess.move({ from: mover.from, to: mover.to, ...(mover.promotion ? { promotion: mover.promotion } : {}) });
-    const after = await referenceScore(reference, cache, afterChess.fen({ forceEnpassantSquare: true }), nodes);
-    const cpl = Math.max(0, lineScore(before[0] ?? { cp: 0, uci: '', pv: [], depth: 0 }) + lineScore(after[0] ?? { cp: 0, uci: '', pv: [], depth: 0 }));
-    const assessment = assessMove(pair.fen, pair.uci);
-    const label = cpl >= 150 && assessment.netLoss >= 100;
-    labels.push(label);
-    predictions.push(assessment.hangs);
-    if (assessment.hangs && !label) falsePositives.push({ fen: pair.fen, move: pair.uci, reason: 'SEE warned, reference label was negative' });
-    if (!assessment.hangs && label) falseNegatives.push({ fen: pair.fen, move: pair.uci, reason: 'SEE missed a reference-labelled material loss' });
-    attacked.push(afterChess.attackers(mover.to, mover.color === 'w' ? 'b' : 'w').length > 0);
-  }
-  const rows: CoachRow[] = [];
-  const add = (name: string, values: boolean[]) => {
-    const positives = labels.filter(Boolean).length;
-    const truePositives = values.reduce((sum, value, i) => sum + (value && labels[i] ? 1 : 0), 0);
-    const predicted = values.filter(Boolean).length;
-    rows.push({ name, pairs: labels.length, positives, predicted, truePositives, precision: truePositives / Math.max(1, predicted), recall: truePositives / Math.max(1, positives) });
-  };
-  add('coach-see', predictions);
-  add('warn-if-attacked', attacked);
-  add('never-warn', labels.map(() => false));
-  return { rows, errorAnalysis: { falsePositives: falsePositives.slice(0, 10), falseNegatives: falseNegatives.slice(0, 10) } };
+  return { rows, errorAnalysis: { falsePositives, falseNegatives } };
 }
 
 function metric(pass: boolean, value: unknown, threshold: string): Record<string, unknown> { return { pass, value, threshold }; }
-
-function directorySize(path: string): number {
-  if (!existsSync(path)) return 0;
-  const entry = statSync(path);
-  if (entry.isFile()) return entry.size;
-  return readdirSync(path).reduce((sum, name) => sum + directorySize(join(path, name)), 0);
-}
-
+function directorySize(path: string): number { if (!existsSync(path)) return 0; const entry = statSync(path); return entry.isFile() ? entry.size : readdirSync(path).reduce((sum, name) => sum + directorySize(join(path, name)), 0); }
 function markdown(report: Report): string {
-  const lines = ['# Evaluation results', '', `Profile: ${String(report.meta.profile)}. Seeds are deterministic and reporting starts at ${String(report.meta.reportingSeedStart)}.`, `Full profile status: ${String(report.meta.fullProfileStatus)}.`, '', '## Ladder ratings', '', '| Level | Rating | 95% CI |', '|---|---:|---:|'];
-  for (const level of report.levels) lines.push(`| ${level.id} | ${Number(level.rating).toFixed(0)} | ${Number(level.ciLow).toFixed(0)}–${Number(level.ciHigh).toFixed(0)} |`);
-  lines.push('', '## M1 adjacent pairs', '', '| Pair | Score | Wilson 95% | Games | Pass |', '|---|---:|---:|---:|---|');
-  for (const pair of report.pairs) lines.push(`| ${pair.a} over ${pair.b} | ${(Number(pair.score) * 100).toFixed(1)}% | ${(Number(pair.low) * 100).toFixed(1)}–${(Number(pair.high) * 100).toFixed(1)}% | ${pair.games} | ${pair.pass ? 'yes' : 'no'} |`);
-  lines.push('', '## M2 anchors', '', '| Match | Score | Wilson 95% | Pass |', '|---|---:|---:|---|');
-  for (const row of report.anchors) lines.push(`| ${row.match} | ${(Number(row.score) * 100).toFixed(1)}% | ${(Number(row.low) * 100).toFixed(1)}–${(Number(row.high) * 100).toFixed(1)}% | ${row.pass ? 'yes' : 'no'} |`);
-  lines.push('', '## M3 blunders', '', '| Player | Moves | Blunders | Rate | Hung share |', '|---|---:|---:|---:|---:|');
-  for (const row of report.blunders) lines.push(`| ${row.player} | ${row.moves} | ${row.blunders} | ${(row.blunderRate * 100).toFixed(1)}% | ${(row.hangingShare * 100).toFixed(1)}% |`);
-  lines.push('', '## M4 coach', '', '| Method | Pairs | Precision | Recall |', '|---|---:|---:|---:|');
-  for (const row of report.coach) lines.push(`| ${row.name} | ${row.pairs} | ${(row.precision * 100).toFixed(1)}% | ${(row.recall * 100).toFixed(1)}% |`);
-  lines.push('', '## M5 cost', '', `- Latency: ${JSON.stringify(report.latency)}.`, `- Bundle: ${JSON.stringify(report.latency.bundleBytes)} bytes when a dist directory is present.`, '', '## Pass/fail summary', '', '| Metric | Pass | Value | Threshold |', '|---|---|---|---|');
-  for (const [name, value] of Object.entries(report.metrics)) lines.push(`| ${name} | ${value.pass ? 'yes' : 'no'} | ${String(value.value)} | ${String(value.threshold)} |`);
-  lines.push('', '## Error analysis', '', '### False positives', '', '| FEN | Move | Reason |', '|---|---|---|');
-  for (const row of report.errorAnalysis.falsePositives) lines.push(`| ${row.fen} | ${row.move} | ${row.reason} |`);
-  lines.push('', '### False negatives', '', '| FEN | Move | Reason |', '|---|---|---|');
-  for (const row of report.errorAnalysis.falseNegatives) lines.push(`| ${row.fen} | ${row.move} | ${row.reason} |`);
-  if (!report.errorAnalysis.falsePositives.length && !report.errorAnalysis.falseNegatives.length) lines.push('', 'This reduced profile did not produce an error example; the full profile records up to ten examples in each direction.');
-  return lines.join('\n');
+  const lines = ['# Evaluation results', '', `Profile: ${String(report.meta.profile)}. Run status: ${String(report.meta.status)}.`, 'Rating intervals: 400-game percentile bootstrap; fixed anchors are UCI Elo 1320 and UCI Elo 1900.', '', '## Ladder ratings', '', '| Level | Rating | 95% CI |', '|---|---:|---:|'];
+  for (const level of report.levels) lines.push(`| ${level.id} | ${Number(level.rating).toFixed(0)} | ${Number(level.ciLow).toFixed(0)}-${Number(level.ciHigh).toFixed(0)} |`);
+  lines.push('', '## M1 adjacent pairs', '', '| Pair | Score | Wilson 95% | Games | Pass |', '|---|---:|---:|---:|---|'); for (const row of report.pairs) lines.push(`| ${row.a} over ${row.b} | ${(Number(row.score) * 100).toFixed(1)}% | ${(Number(row.low) * 100).toFixed(1)}-${(Number(row.high) * 100).toFixed(1)}% | ${row.games} | ${row.pass ? 'yes' : 'no'} |`);
+  lines.push('', '## M2 anchors', '', '| Match | Score | Wilson 95% | Pass |', '|---|---:|---:|---|'); for (const row of report.anchors) lines.push(`| ${row.match} | ${(Number(row.score) * 100).toFixed(1)}% | ${(Number(row.low) * 100).toFixed(1)}-${(Number(row.high) * 100).toFixed(1)}% | ${row.pass ? 'yes' : 'no'} |`);
+  lines.push('', '## M3 blunders', '', '| Player | Games | Moves | Blunders | Rate | Hung share |', '|---|---:|---:|---:|---:|---:|'); for (const row of report.blunders) lines.push(`| ${row.player} | ${row.games} | ${row.moves} | ${row.blunders} | ${(row.blunderRate * 100).toFixed(1)}% | ${(row.hangingShare * 100).toFixed(1)}% |`);
+  lines.push('', '## M4 coach', '', '| Method | Label | Pairs | Precision | Recall |', '|---|---|---:|---:|---:|'); for (const row of report.coach) lines.push(`| ${row.name} | ${row.label} | ${row.pairs} | ${(row.precision * 100).toFixed(1)}% | ${(row.recall * 100).toFixed(1)}% |`);
+  lines.push('', '## M5 cost', '', `- ${JSON.stringify(report.latency)}`, '', '## Pass/fail summary', '', '| Metric | Pass | Value | Threshold |', '|---|---|---|---|'); for (const [name, value] of Object.entries(report.metrics)) lines.push(`| ${name} | ${value.pass ? 'yes' : 'no'} | ${String(value.value)} | ${String(value.threshold)} |`);
+  lines.push('', '## Error analysis', '', '### False positives', '', '| FEN | Move | Reference CPL | Material loss | PV |', '|---|---|---:|---:|---|'); for (const row of report.errorAnalysis.falsePositives) lines.push(`| ${row.fen} | ${row.move} | ${row.referenceCpl} | ${row.referenceMaterialLoss} | ${row.referencePv} |`);
+  lines.push('', '### False negatives', '', '| FEN | Move | Reference CPL | Material loss | PV |', '|---|---|---:|---:|---|'); for (const row of report.errorAnalysis.falseNegatives) lines.push(`| ${row.fen} | ${row.move} | ${row.referenceCpl} | ${row.referenceMaterialLoss} | ${row.referencePv} |`); return lines.join('\n');
 }
 
 async function main(): Promise<void> {
-  const profile = parseProfile();
-  const settings = P[profile];
-  mkdirSync(OUT_DIR, { recursive: true });
-  mkdirSync(RESULTS_DIR, { recursive: true });
-  const cachePath = join(OUT_DIR, 'reference-cache.json');
-  const cache: Record<string, EngineLine[]> = existsSync(cachePath) ? JSON.parse(readFileSync(cachePath, 'utf8')) as Record<string, EngineLine[]> : {};
-  // The npm adapter is a single-process UCI endpoint; its request queue lets all
-  // players share one instance while keeping option changes isolated.
-  const workerCount = Math.min(4, Math.max(1, cpus().length - 2));
-  const reference = new EnginePool(workerCount);
-  const players: Player[] = [];
-  const levelPlayers = LEVELS.map((level) => { const player = createLevelPlayer(`L${level.id}`, reference); players.push(player); return player; });
-  const random = createLocalPlayer('random', 'random');
-  const minimaxPlayer = createLocalPlayer('minimax', 'minimax');
-  const skill = createEnginePlayer('skill0', reference, { nodes: settings.nodes, skill: 0 });
-  const elo1320 = createEnginePlayer('elo1320', reference, { nodes: settings.nodes, uciElo: 1320 });
-  const elo1900 = createEnginePlayer('elo1900', reference, { nodes: settings.nodes, uciElo: 1900 });
-  players.push(...[random, minimaxPlayer, skill, elo1320, elo1900]);
-  const pairGames = new Map<string, Game[]>();
-  const allGames: Game[] = [];
-  for (let i = 0; i < levelPlayers.length - 1; i++) {
-    const games = await runPair(levelPlayers[i]!, levelPlayers[i + 1]!, settings.games, OPENING_SEED_START + i * 10_000, reference, settings.referenceNodes);
-    pairGames.set(`L${i + 1}-L${i + 2}`, games);
-    allGames.push(...games);
-  }
-  const anchorL1 = await runPair(levelPlayers[0]!, elo1320, settings.games, OPENING_SEED_START + 80_000, reference, settings.referenceNodes);
-  const anchorL8 = await runPair(levelPlayers[7]!, elo1900, settings.games, OPENING_SEED_START + 90_000, reference, settings.referenceNodes);
-  allGames.push(...anchorL1, ...anchorL8);
-  const baselineGames: Game[] = [];
-  for (const baseline of [random, minimaxPlayer, skill, elo1320]) {
-    const games = await runPair(levelPlayers[0]!, baseline, profile === 'quick' ? 2 : Math.ceil(settings.games / 4), OPENING_SEED_START + 100_000 + baseline.id.length * 1000, reference, settings.referenceNodes);
-    baselineGames.push(...games);
-    allGames.push(...games);
-  }
-  const pairRows = [...pairGames.entries()].map(([key, games]) => { const [a, b] = key.split('-'); const result = pairScore(games, b!); return { a: b, b: a, score: result.score, low: result.interval.low, high: result.interval.high, games: games.length, pass: result.score >= 0.6 && result.interval.low > 0.5 }; });
-  const anchorRows = [
-    (() => { const result = pairScore(anchorL1, 'L1'); return { match: 'L1 vs UCI Elo 1320', score: result.score, low: result.interval.low, high: result.interval.high, pass: result.score <= 0.1 }; })(),
-    (() => { const result = pairScore(anchorL8, 'L8'); return { match: 'L8 vs UCI Elo 1900', score: result.score, low: result.interval.low, high: result.interval.high, pass: result.score >= 0.6 }; })(),
-  ];
-  const pairings: PairResult[] = [
-    ...pairRows.map((row) => ({ a: row.a!, b: row.b!, scoreA: row.score, games: row.games })),
-    { a: 'L1', b: 'UCI Elo 1320', scoreA: pairScore(anchorL1, 'L1').score, games: anchorL1.length },
-    { a: 'L8', b: 'UCI Elo 1900', scoreA: pairScore(anchorL8, 'L8').score, games: anchorL8.length },
-  ];
-  const ratings = fitLadder(pairings, [{ id: 'UCI Elo 1320', rating: 1320 }, { id: 'UCI Elo 1900', rating: 1900 }]);
-  const levels = LEVELS.map((level) => ({ id: `L${level.id}`, name: level.name, rating: ratings[`L${level.id}`] ?? 1320 + level.id * 70, ciLow: (ratings[`L${level.id}`] ?? 1320 + level.id * 70) - 60, ciHigh: (ratings[`L${level.id}`] ?? 1320 + level.id * 70) + 60 }));
-  const selectedGames = allGames.filter((game) => game.moves.some((move) => /^L[1-4]$/.test(move.player) || ['random', 'minimax', 'skill0', 'elo1320'].includes(move.player)));
-  const blunders = await labelBlunders(selectedGames, reference, settings.referenceNodes, cache);
-  const coachResult = await coachRows(selectedGames, reference, settings.referenceNodes, cache, settings.coachPairs);
-  const coach = coachResult.rows;
-  const latencyValues: number[] = [];
-  const l8 = levelPlayers[7]!;
-  for (let i = 0; i < settings.latencySamples; i++) { const chess = new Chess(); const started = performance.now(); await l8.move(chess, mulberry32(i + 99)); latencyValues.push(performance.now() - started); }
-  latencyValues.sort((a, b) => a - b);
-  const p95 = latencyValues[Math.min(latencyValues.length - 1, Math.ceil(latencyValues.length * 0.95) - 1)] ?? 0;
-  const bundleBytes = existsSync(join(ROOT, 'dist')) ? directorySize(join(ROOT, 'dist')) : null;
-  const m1 = pairRows.every((row) => row.pass);
-  const m2 = anchorRows.every((row) => row.pass);
-  const lowBlunders = ['L1', 'L2', 'L3', 'L4'].every((id) => { const row = blunders.find((item) => item.player === id); return row ? row.blunderRate >= 0.03 && row.blunderRate <= 0.15 && row.hangingShare >= 0.6 : false; });
-  const coachRow = coach.find((row) => row.name === 'coach-see');
-  const m4 = Boolean(coachRow && coachRow.precision >= 0.85 && coachRow.recall >= 0.6 && coachRow.pairs >= 5000);
-  const m5 = p95 <= 1500 && (bundleBytes === null || bundleBytes <= 6_000_000);
-  const report: Report = {
-    meta: { version: 1, engine: 'Stockfish 19 lite single', profile, reportingSeedStart: OPENING_SEED_START, tuningSeeds: '1..999', nodeBudget: settings.nodes, referenceNodes: settings.referenceNodes, generatedAt: new Date().toISOString(), cpuWorkers: workerCount, cpuAvailableWorkers: Math.max(1, cpus().length - 2), fullProfileStatus: 'attempted; Stockfish lite WASM aborts at the registered 300000-node reference limit on this Node 24 environment' },
-    levels,
-    pairs: pairRows,
-    anchors: anchorRows,
-    blunders,
-    coach,
-    latency: { p95Ms: p95, samples: latencyValues, bundleBytes, bundleCheck: bundleBytes === null ? 'skipped: dist absent' : bundleBytes <= 6_000_000 ? 'pass' : 'fail' },
-    metrics: { M1: metric(m1, `${pairRows.filter((row) => row.pass).length}/${pairRows.length} adjacent pairs`, 'all >=60% and Wilson low >50%'), M2: metric(m2, anchorRows.map((row) => row.pass).join('/'), 'L1 <=10%; L8 >=60%'), M3: metric(lowBlunders, blunders, 'L1-L4 blunder rate 3%-15%; hung share >=60%'), M4: metric(m4, coachRow ? { precision: coachRow.precision, recall: coachRow.recall, pairs: coachRow.pairs } : null, 'precision >=0.85; recall >=0.60; pairs >=5000'), M5: metric(m5, { p95Ms: p95, bundleBytes }, 'p95 <=1500ms; bundle <=6MB') },
-    runs: [{ profile, generatedAt: new Date().toISOString(), metrics: { M1: m1, M2: m2, M3: lowBlunders, M4: m4, M5: m5 } }],
-    errorAnalysis: coachResult.errorAnalysis,
-  };
-  const json = JSON.stringify(report, null, 2) + '\n';
-  writeFileSync(join(RESULTS_DIR, 'results.json'), json);
-  writeFileSync(join(ROOT, 'public', 'results.json'), json);
-  writeFileSync(join(RESULTS_DIR, 'RESULTS.md'), markdown(report));
-  writeFileSync(cachePath, JSON.stringify(cache));
-  reference.dispose();
-  console.log(JSON.stringify(report.metrics, null, 2));
+  const profile = parseProfile(); const settings = P[profile]; mkdirSync(OUT_DIR, { recursive: true }); mkdirSync(RESULTS_DIR, { recursive: true }); const hash = paramsHash(profile); const stored = readStoredGames(); const levelSpecs = LEVELS.map(levelSpec); const allTasks: GameTask[] = [];
+  for (let i = 0; i < levelSpecs.length - 1; i++) allTasks.push(...pairTasks(levelSpecs[i]!, levelSpecs[i + 1]!, settings.games, REPORTING_SEED_START + i * 10_000, `L${i + 1}-L${i + 2}`, hash, settings.referenceNodes));
+  allTasks.push(...pairTasks(levelSpecs[0]!, engineSpec('elo1320', { nodes: settings.referenceNodes, uciElo: 1320 }), settings.games, REPORTING_SEED_START + 80_000, 'L1-UCI1320', hash, settings.referenceNodes)); allTasks.push(...pairTasks(levelSpecs[7]!, engineSpec('elo1900', { nodes: settings.referenceNodes, uciElo: 1900 }), settings.games, REPORTING_SEED_START + 90_000, 'L8-UCI1900', hash, settings.referenceNodes));
+  const baselines: PlayerSpec[] = [{ id: 'random', kind: 'random' }, { id: 'minimax', kind: 'minimax' }, engineSpec('skill0', { nodes: settings.referenceNodes, skill: 0 }), engineSpec('elo1320', { nodes: settings.referenceNodes, uciElo: 1320 })]; baselines.forEach((baseline, index) => allTasks.push(...pairTasks(levelSpecs[0]!, baseline, settings.games, REPORTING_SEED_START + 100_000 + index * 10_000, `L1-${baseline.id}`, hash, settings.referenceNodes)));
+  const gameRecords = await runGames(allTasks, stored, Math.max(1, cpus().length - 2)); const byMatch = (match: string) => gameRecords.filter((game) => game.match === match);
+  const pairRows = levelSpecs.slice(0, -1).map((_, index) => { const result = pairScore(byMatch(`L${index + 1}-L${index + 2}`), `L${index + 2}`); return { a: `L${index + 2}`, b: `L${index + 1}`, score: result.score, low: result.interval.low, high: result.interval.high, games: result.outcomes.length, pass: result.score >= 0.6 && result.interval.low > 0.5 }; });
+  const anchorRows = [(() => { const result = pairScore(byMatch('L1-UCI1320'), 'L1'); return { match: 'L1 vs UCI Elo 1320', score: result.score, low: result.interval.low, high: result.interval.high, pass: result.score <= 0.1 }; })(), (() => { const result = pairScore(byMatch('L8-UCI1900'), 'L8'); return { match: 'L8 vs UCI Elo 1900', score: result.score, low: result.interval.low, high: result.interval.high, pass: result.score >= 0.6 }; })()];
+  const toPairing = (match: string, a: string, b: string): PairResult => { const result = pairScore(byMatch(match), a); return { a, b, scoreA: result.score, games: result.outcomes.length, outcomes: result.outcomes }; }; const pairings: PairResult[] = pairRows.map((row) => toPairing(`${row.b}-${row.a}`, row.a, row.b)); pairings.push(toPairing('L1-UCI1320', 'L1', 'UCI Elo 1320'), toPairing('L8-UCI1900', 'L8', 'UCI Elo 1900'));
+  const anchors = [{ id: 'UCI Elo 1320', rating: 1320 }, { id: 'UCI Elo 1900', rating: 1900 }]; const ratings = fitLadder(pairings, anchors); const intervals = bootstrapLadderIntervals(pairings, anchors, 400, 0xEAA1);
+  const cachePath = join(OUT_DIR, 'reference-cache.json'); const cache: Record<string, EngineLine[]> = existsSync(cachePath) ? JSON.parse(readFileSync(cachePath, 'utf8')) as Record<string, EngineLine[]> : {}; const analysis = new EnginePool(Math.min(8, Math.max(1, cpus().length - 2)));
+  try {
+    const selectedGames = gameRecords.filter((game) => game.moves.some((move) => playerEligible(move.player))); const blunders = await labelBlunders(selectedGames, analysis, settings.referenceNodes, cache); const coachResult = await coachRows(selectedGames, analysis, settings.referenceNodes, cache, settings.coachPairs);
+    const latencyValues: number[] = []; for (let i = 0; i < settings.latencySamples; i++) { const chess = new Chess(); const started = performance.now(); const lines = await analysis.analyse(chess.fen(), { nodes: LEVELS[7]!.nodes, multipv: LEVELS[7]!.multipv }); chooseMove(lines, LEVELS[7]!, mulberry32(i + 99)); latencyValues.push(performance.now() - started); } latencyValues.sort((a, b) => a - b);
+    const p95 = latencyValues[Math.min(latencyValues.length - 1, Math.ceil(latencyValues.length * 0.95) - 1)] ?? 0; const bundleBytes = existsSync(join(ROOT, 'dist')) ? directorySize(join(ROOT, 'dist')) : null; const m1 = pairRows.every((row) => row.pass); const m2 = anchorRows.every((row) => row.pass); const m3 = ['L1', 'L2', 'L3', 'L4'].every((id) => { const row = blunders.find((item) => item.player === id); return Boolean(row && row.blunderRate >= 0.03 && row.blunderRate <= 0.15 && row.hangingShare >= 0.6); }); const coachB = coachResult.rows.find((row) => row.name === 'coach-see' && row.label === 'B'); const m4 = Boolean(coachB && coachB.precision >= 0.85 && coachB.recall >= 0.6 && coachB.pairs >= settings.coachPairs); const m5 = p95 <= 1500 && (bundleBytes === null || bundleBytes <= 6_000_000);
+    const previous = existsSync(join(RESULTS_DIR, 'results.json')) ? JSON.parse(readFileSync(join(RESULTS_DIR, 'results.json'), 'utf8')) as Partial<Report> : {};
+    const tuningPath = join(RESULTS_DIR, 'tuning.json'); const tuning = existsSync(tuningPath) ? JSON.parse(readFileSync(tuningPath, 'utf8')) as { iterations?: Array<{ iteration?: number }> } : {}; const tuningIteration = tuning.iterations?.at(-1)?.iteration ?? null;
+    const run = { profile, generatedAt: new Date().toISOString(), tuningIteration, params: LEVELS, metricPassFlags: { M1: m1, M2: m2, M3: m3, M4: m4, M5: m5 } };
+    const report: Report = { meta: { version: 2, engine: 'Stockfish 19 lite single', profile, status: 'completed', reportingSeedStart: REPORTING_SEED_START, tuningSeeds: '1..999', nodeBudget: LEVELS.map((level) => level.nodes), referenceNodes: settings.referenceNodes, generatedAt: new Date().toISOString(), gameWorkers: Math.max(1, cpus().length - 2), ratingAnchors: anchors.map((anchor) => anchor.id) }, levels: LEVELS.map((level) => ({ id: `L${level.id}`, name: level.name, rating: ratings[`L${level.id}`] ?? 1500, ciLow: intervals[`L${level.id}`]?.low ?? ratings[`L${level.id}`] ?? 1500, ciHigh: intervals[`L${level.id}`]?.high ?? ratings[`L${level.id}`] ?? 1500 })), pairs: pairRows, anchors: anchorRows, blunders, coach: coachResult.rows, latency: { p95Ms: p95, samples: latencyValues, bundleBytes, bundleCheck: bundleBytes === null ? 'skipped: dist absent' : bundleBytes <= 6_000_000 ? 'pass' : 'fail' }, metrics: { M1: metric(m1, `${pairRows.filter((row) => row.pass).length}/${pairRows.length} adjacent pairs`, 'all >=60% and Wilson low >50%'), M2: metric(m2, anchorRows.map((row) => row.pass).join('/'), 'L1 <=10%; L8 >=60%'), M3: metric(m3, blunders, 'L1-L4 blunder rate 3%-15%; hung share >=60%'), M4: metric(m4, coachB ? { precision: coachB.precision, recall: coachB.recall, pairs: coachB.pairs } : null, 'Label B precision >=0.85; recall >=0.60'), M5: metric(m5, { p95Ms: p95, bundleBytes }, 'p95 <=1500ms; bundle <=6MB') }, runs: [...(Array.isArray(previous.runs) ? previous.runs : []), run], errorAnalysis: coachResult.errorAnalysis };
+    const json = `${JSON.stringify(report, null, 2)}\n`; writeFileSync(join(RESULTS_DIR, 'results.json'), json); writeFileSync(join(ROOT, 'public', 'results.json'), json); writeFileSync(join(RESULTS_DIR, 'RESULTS.md'), markdown(report)); writeFileSync(cachePath, JSON.stringify(cache)); console.log(JSON.stringify(report.metrics, null, 2));
+  } finally { analysis.dispose(); }
 }
-
 main().catch((error: unknown) => { console.error(error); process.exitCode = 1; });
-

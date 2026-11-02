@@ -77,7 +77,7 @@ export class NodeEngine implements Engine {
     if (line.includes('uciok')) {
       if (this.readyRequested) return this.handleReadyToken(line);
       this.readyRequested = true;
-      this.engine.processCommand('isready');
+      setImmediate(() => this.engine.processCommand('isready'));
     }
     if (line.includes('readyok')) this.handleReadyToken(line);
     const info = parseInfo(line);

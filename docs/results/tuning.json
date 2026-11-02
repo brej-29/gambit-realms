@@ -1,0 +1,38 @@
+{
+  "iterations": [
+    {
+      "iteration": 0,
+      "field": "baseline",
+      "objective": 0.6006250000000001,
+      "games": 36,
+      "seeds": "1..999"
+    },
+    {
+      "iteration": 1,
+      "field": "nodes",
+      "level": 1,
+      "value": 500,
+      "objective": 0.0006249999999999997,
+      "games": 36,
+      "seeds": "1..999"
+    },
+    {
+      "iteration": 2,
+      "field": "nodes",
+      "level": 2,
+      "value": 500,
+      "objective": 0.42250000000000004,
+      "games": 36,
+      "seeds": "1..999"
+    },
+    {
+      "iteration": 3,
+      "field": "nodes",
+      "level": 2,
+      "value": 1000,
+      "objective": 0.16000000000000003,
+      "games": 36,
+      "seeds": "1..999"
+    }
+  ]
+}
