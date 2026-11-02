@@ -20,7 +20,10 @@ const clickSq = async (sq) => {
   await page.waitForSelector('.board-wrap .piece');
   await page.waitForTimeout(500); // let the route and theme transitions settle
   const box = await page.locator('button[data-sq=' + sq + ']').boundingBox();
-  await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
+  const x = box.x + box.width / 2, y = box.y + box.height / 2;
+  const hit = await page.evaluate(([x, y]) => { const e = document.elementFromPoint(x, y); return e ? e.tagName + '.' + e.className + ' ' + (e.closest('button')?.dataset.sq ?? '') : 'none'; }, [x, y]);
+  console.log('click', sq, Math.round(x), Math.round(y), 'hit', hit, 'viewport', JSON.stringify(page.viewportSize()));
+  await page.mouse.click(x, y);
 };
 const ok = (name) => (steps.push(name), console.log('ok  ', name));
 const fail = async (name, err) => {
