@@ -28,9 +28,9 @@ export function homeView() {
       </div>
       <div class="hero-board" aria-label="A demo game playing itself"><div class="demo-cap"><span class="demo-title">Now playing</span><span class="demo-san"></span></div></div>
     </div>
-    <div class="realm-cards" role="list">
+    <div class="realm-cards">
       ${REALMS.map(
-        (r) => `<button class="realm-card" role="listitem" data-realm="${r.id}" style="--s1:${r.swatch[0]};--s2:${r.swatch[1]};--s3:${r.swatch[2]}">
+        (r) => `<button class="realm-card" data-realm="${r.id}" style="--s1:${r.swatch[0]};--s2:${r.swatch[1]};--s3:${r.swatch[2]}">
           <span class="swatch"></span><strong>${r.name}</strong><span class="tag">${r.tagline}</span><span class="duel">${r.duel}: ${r.blurb}</span>
         </button>`
       ).join('')}

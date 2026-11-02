@@ -116,6 +116,10 @@ export class Board {
     this.grid.textContent = '';
     this.sqEls.clear();
     for (let row = 0; row < 8; row++) {
+      const rowEl = document.createElement('div');
+      rowEl.className = 'row8';
+      rowEl.setAttribute('role', 'row');
+      this.grid.append(rowEl);
       for (let col = 0; col < 8; col++) {
         const f = this.orientation === 'w' ? col : 7 - col;
         const r = this.orientation === 'w' ? 7 - row : row;
@@ -134,7 +138,7 @@ export class Board {
           this.opts.onSquare?.(name);
         });
         b.addEventListener('keydown', (e) => this.onKey(e, name));
-        this.grid.append(b);
+        rowEl.append(b);
         this.sqEls.set(name, b);
       }
     }
