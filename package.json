@@ -14,7 +14,12 @@
     "typecheck": "tsc --noEmit",
     "eval:quick": "tsx eval/run.ts --profile quick",
     "eval": "tsx eval/run.ts --profile full",
-    "eval:tune": "tsx eval/tune.ts"
+    "eval:tune": "tsx eval/tune.ts",
+    "a11y": "node scripts/a11y.mjs",
+    "e2e": "node scripts/e2e.mjs",
+    "eval:calibrate": "tsx eval/calibrate.ts",
+    "eval:verify": "tsx eval/verify.ts",
+    "eval:coach": "tsx eval/tune-coach.ts"
   },
   "dependencies": {
     "@fontsource/chakra-petch": "^5.3.0",
