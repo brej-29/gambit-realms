@@ -48,6 +48,17 @@ The coach inspects a candidate move before it is confirmed and says whether it l
 - p95 time to produce one engine move at the L8 setting, measured in Node with the WASM build: **<= 1.5 s**.
 - Production bundle (JS + CSS + engine + fonts, transferred): **<= 6 MB**.
 
+### Amendments (logged before any reporting run)
+
+**Amendment 1, 2026-11-02.** The M4 label above contained the coach's own SEE term, which makes precision partly circular. It is replaced by two engine-only labels, both computed from the reference engine (300,000 nodes):
+
+- **Label A, engine blunder:** centipawn loss of the move >= 150.
+- **Label B, loses material under engine play** (the claim the coach makes): play the reference engine's principal variation from the position after the move for 4 plies; the mover is at least 100 cp of material worse off than before the move.
+
+The precision >= 0.85 and recall >= 0.60 targets apply to Label B. Label A is reported next to it. The coach and the thresholds are unchanged.
+
+**Amendment 2, 2026-11-02.** Rating intervals come from a bootstrap over games (percentile 95%), not from the Wilson bounds alone, because ratings are fitted jointly. Ratings are a maximum-likelihood logistic fit with the two Stockfish anchors fixed at their nominal values.
+
 ## 3. Method
 
 - **Games:** every match starts from a deterministic, seeded opening (4 random plies, kept only if the reference eval is within +/-150 cp so no game starts decided). Each opening is played twice with colours swapped. Draw by repetition, 50-move rule, insufficient material, or ply 300 (adjudicated by reference eval: > +300 cp counts as a win).
