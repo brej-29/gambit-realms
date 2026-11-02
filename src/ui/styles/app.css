@@ -80,8 +80,12 @@ main { padding: 0 clamp(14px, 3vw, 40px) 64px; max-width: 1480px; margin-inline:
 .hero-copy { display: grid; gap: 22px; max-width: 560px; }
 .cta { display: flex; flex-wrap: wrap; gap: 14px; }
 .fine { color: var(--muted); font-size: 0.9rem; }
-.hero-board { position: relative; display: grid; justify-items: center; --bw: min(44vw, 66vh, 640px); }
-.hero-board .board-wrap { --bw: min(44vw, 66vh, 640px); }
+.proof { display: block; max-width: 52ch; padding: 12px 14px; border-left: 4px solid var(--accent); background: color-mix(in srgb, var(--ink) 7%, transparent); border-radius: 0 var(--radius) var(--radius) 0; text-decoration: none; font-size: 0.95rem; }
+.proof[hidden] { display: none; }
+.proof u { color: var(--accent); text-underline-offset: 3px; white-space: nowrap; }
+[data-realm='anime'] .proof u { color: #b0124a; }
+.hero-board { position: relative; display: grid; justify-items: center; --bw: min(40vw, 62vh, 600px); }
+.hero-board .board-wrap { --bw: min(40vw, 62vh, 600px); }
 .demo-cap { display: flex; gap: 10px; align-items: baseline; font-size: 0.85rem; color: var(--muted); margin-top: 6px; }
 .demo-san { font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
 @media (max-width: 980px) { .hero { grid-template-columns: 1fr; } .hero-board, .hero-board .board-wrap { --bw: min(92vw, 60vh); } }
