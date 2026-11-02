@@ -183,6 +183,30 @@ html[data-realm='anime'] .feedback.ok { color: #0a8a4a; }
 /* ---------- evidence ---------- */
 .evidence-grid { display: grid; gap: 18px; }
 .empty-state { padding: 40px; text-align: center; display: grid; gap: 10px; justify-items: center; }
+.ev-block { display: grid; gap: 12px; padding: 20px; }
+.ev-metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+.metric { display: grid; gap: 6px; align-content: start; }
+.metric h3 { font-size: 1.05rem; }
+.badge { justify-self: start; font-size: 0.78rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; border: 2px solid currentColor; }
+.metric.ok .badge { color: #6ee7a0; }
+.metric.miss .badge { color: var(--danger); }
+html[data-realm='anime'] .metric.ok .badge { color: #0a7a42; }
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; font-size: 0.95rem; }
+th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid color-mix(in srgb, var(--ink) 14%, transparent); white-space: nowrap; }
+th { color: var(--muted); font-weight: 600; font-size: 0.85rem; }
+td.good { color: #6ee7a0; font-weight: 700; }
+td.bad { color: var(--danger); font-weight: 700; }
+html[data-realm='anime'] td.good { color: #0a7a42; }
+.ladder-chart { width: 100%; height: auto; max-width: 980px; }
+.ladder-chart .grid-l { stroke: color-mix(in srgb, var(--ink) 14%, transparent); stroke-width: 1; }
+.ladder-chart .tick, .ladder-chart .val { fill: var(--muted); font-size: 12px; font-family: var(--font-body); }
+.ladder-chart .lab { fill: var(--ink); font-size: 14px; font-family: var(--font-body); font-weight: 600; }
+.ladder-chart .ci { stroke: var(--accent); stroke-width: 6; stroke-linecap: round; opacity: 0.55; }
+.ladder-chart .dot { fill: var(--accent); stroke: var(--bg); stroke-width: 3; }
+.fens { padding-left: 18px; display: grid; gap: 6px; font-size: 0.85rem; overflow-wrap: anywhere; }
+code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.9em; background: color-mix(in srgb, var(--ink) 10%, transparent); padding: 1px 6px; border-radius: 4px; }
+details summary { cursor: pointer; font-weight: 600; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
