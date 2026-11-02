@@ -8,7 +8,7 @@ export interface Settings {
   sound: boolean;
   speed: 'normal' | 'fast';
 }
-const DEFAULTS: Settings = { realm: 'enchanted', level: 2, color: 'w', coach: true, sound: true, speed: 'normal' };
+const DEFAULTS: Settings = { realm: 'enchanted', level: 1, color: 'w', coach: true, sound: true, speed: 'normal' };
 const KEY = 'gambit-realms:v1';
 
 function read<T>(key: string, fallback: T): T {
