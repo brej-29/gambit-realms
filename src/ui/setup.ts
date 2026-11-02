@@ -2,6 +2,7 @@ import { LEVELS_UI } from './levels';
 import { mini } from './mini';
 import { save, settings } from './store';
 import type { GameOptions } from './game';
+import { brain } from './brain';
 import { levelStrength, loadResults } from './results';
 
 export function setupView(onStart: (o: GameOptions) => void, preset?: { first?: boolean }) {
@@ -64,5 +65,6 @@ export function setupView(onStart: (o: GameOptions) => void, preset?: { first?: 
   });
   paint();
   void loadResults().then(paint);
+  brain.warm();
   return { el, destroy() {} };
 }
