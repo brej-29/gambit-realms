@@ -212,4 +212,4 @@ details summary { cursor: pointer; font-weight: 600; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
   .world i { display: none; }
 }
-::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.45s; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.3s; }

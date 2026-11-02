@@ -8,6 +8,7 @@ const errors = [];
 page.on('pageerror', (e) => errors.push(String(e)));
 page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
 const steps = [];
+console.log('browser', browser.version());
 // Pieces sit above the square buttons, so click where a person would: the centre of the square.
 // A piece is clicked on its head, which is never covered by the piece in front of it.
 const clickPiece = async (sq) => {
@@ -50,6 +51,7 @@ await step('realm switch changes the theme', async () => {
   await page.click('.chip[data-realm=anime]');
   await page.waitForFunction(() => document.documentElement.dataset.realm === 'anime');
   await page.click('.chip[data-realm=enchanted]');
+  await page.waitForTimeout(1500); // the cross-fade ignores input until it ends
 });
 await step('lesson: click squares then advance', async () => {
   await page.goto(base + '#/learn/board');

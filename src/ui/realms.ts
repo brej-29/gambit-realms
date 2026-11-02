@@ -33,6 +33,6 @@ export function applyRealm(id: Realm) {
   if (doc.startViewTransition && !reduce) {
     const vt = doc.startViewTransition(set);
     // While a view transition runs the page ignores input; never let a stalled one trap the player.
-    setTimeout(() => vt.skipTransition(), 1200);
+    setTimeout(() => vt.skipTransition(), 800);
   } else set();
 }
