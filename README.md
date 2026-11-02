@@ -2,7 +2,7 @@
 
 Chess where every capture is a duel. Four animated realms, eight opponents whose strength was measured, and a coach that warns you before you give a piece away. It runs in your browser and costs nothing.
 
-**Play it: @@LIVE_URL@@**
+**Play it: [brej-29.github.io/gambit-realms](https://brej-29.github.io/gambit-realms/)**
 
 ![A capture in each realm: a spell bolt, a sword clash, a glitch delete and a KO](docs/img/captures.png)
 
