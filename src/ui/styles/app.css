@@ -198,7 +198,7 @@ th { color: var(--muted); font-weight: 600; font-size: 0.85rem; }
 td.good { color: #6ee7a0; font-weight: 700; }
 td.bad { color: var(--danger); font-weight: 700; }
 html[data-realm='anime'] td.good { color: #0a7a42; }
-.ladder-chart { width: 100%; height: auto; max-width: 980px; }
+.ladder-chart { width: 100%; min-width: 600px; height: auto; max-width: 980px; }
 .ladder-chart .grid-l { stroke: color-mix(in srgb, var(--ink) 14%, transparent); stroke-width: 1; }
 .ladder-chart .tick, .ladder-chart .val { fill: var(--muted); font-size: 12px; font-family: var(--font-body); }
 .ladder-chart .lab { fill: var(--ink); font-size: 14px; font-family: var(--font-body); font-weight: 600; }

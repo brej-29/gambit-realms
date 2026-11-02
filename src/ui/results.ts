@@ -1,12 +1,13 @@
 /** Shape of public/results.json, written by `npm run eval`. The UI shows these numbers verbatim; nothing is hard-coded. */
-export interface LevelRating { id: string; name: string; rating: number; ciLow: number; ciHigh: number }
+export interface LevelRating { id: string; name: string; rating: number; ciLow: number; ciHigh: number; saturated?: boolean }
 export interface PairResult { a: string; b: string; score: number; low: number; high: number; games: number; pass: boolean }
 export interface AnchorResult { match: string; score: number; low: number; high: number; pass: boolean; games?: number }
 export interface BlunderRow { player: string; games: number; moves: number; blunders: number; blunderRate: number; hangingBlunders: number; hangingShare: number }
-export interface CoachRow { name: string; pairs: number; positives: number; predicted: number; truePositives: number; precision: number; recall: number }
+export interface CoachRow { name: string; label: 'A' | 'B'; pairs: number; positives: number; predicted: number; truePositives: number; precision: number; recall: number }
 export interface MetricResult { pass: boolean; value: unknown; threshold: string }
+export interface ErrorExample { fen: string; move: string; referenceCpl?: number; referenceMaterialLoss?: number; referencePv?: string }
 export interface Results {
-  meta: { engine: string; profile: string; generatedAt: string; reportingSeedStart: number; tuningSeeds: string; nodeBudget: number; referenceNodes: number };
+  meta: { engine: string; profile: string; generatedAt: string; reportingSeedStart: number; tuningSeeds: string; referenceNodes: number };
   levels: LevelRating[];
   pairs: PairResult[];
   anchors: AnchorResult[];
@@ -14,7 +15,7 @@ export interface Results {
   coach: CoachRow[];
   latency: { p95Ms: number; bundleBytes?: number };
   metrics: Record<'M1' | 'M2' | 'M3' | 'M4' | 'M5', MetricResult>;
-  errorAnalysis?: { falsePositives: { fen: string; move: string; reason: string }[]; falseNegatives: { fen: string; move: string; reason: string }[] };
+  errorAnalysis?: { falsePositives: ErrorExample[]; falseNegatives: ErrorExample[] };
 }
 
 let cache: Results | null = null;
