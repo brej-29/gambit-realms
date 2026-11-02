@@ -28,7 +28,7 @@ export function lessonView(lesson: Lesson) {
     <div class="game-board"></div>
     <aside class="side">
       <div class="card lesson-card-main">
-        <div class="lesson-top"><a class="back" href="#/learn">All lessons</a><span class="dots" aria-label="Progress"></span></div>
+        <div class="lesson-top"><a class="back" href="#/learn">All lessons</a><span class="dots" role="img" aria-label="Lesson progress"></span></div>
         <h2>${lesson.title}</h2>
         <div class="coach-row"><div class="avatar coach-av w">${pieceSvg('p')}</div><p class="bubble" aria-live="polite"></p></div>
         <div class="feedback" role="status"></div>
