@@ -1,0 +1,92 @@
+{
+  "seeds": "1..999",
+  "referenceNodes": 20000,
+  "pairs": 3000,
+  "positives": 705,
+  "variants": [
+    {
+      "name": "any-piece, netLoss >= 100",
+      "min": 100,
+      "precision": 0.46343402225755165,
+      "recall": 0.826950354609929,
+      "tp": 583,
+      "fp": 675,
+      "fn": 122
+    },
+    {
+      "name": "moved-piece-only, netLoss >= 100",
+      "options": {
+        "movedPieceOnly": true
+      },
+      "min": 100,
+      "precision": 0.5041666666666667,
+      "recall": 0.3432624113475177,
+      "tp": 242,
+      "fp": 238,
+      "fn": 463
+    },
+    {
+      "name": "any-piece, netLoss >= 200",
+      "min": 200,
+      "precision": 0.5787401574803149,
+      "recall": 0.41702127659574467,
+      "tp": 294,
+      "fp": 214,
+      "fn": 411
+    },
+    {
+      "name": "moved-piece-only, netLoss >= 200",
+      "options": {
+        "movedPieceOnly": true
+      },
+      "min": 200,
+      "precision": 0.5587188612099644,
+      "recall": 0.2226950354609929,
+      "tp": 157,
+      "fp": 124,
+      "fn": 548
+    },
+    {
+      "name": "any-piece, netLoss >= 300",
+      "min": 300,
+      "precision": 0.5829694323144105,
+      "recall": 0.37872340425531914,
+      "tp": 267,
+      "fp": 191,
+      "fn": 438
+    },
+    {
+      "name": "moved-piece-only, netLoss >= 300",
+      "options": {
+        "movedPieceOnly": true
+      },
+      "min": 300,
+      "precision": 0.5580524344569289,
+      "recall": 0.21134751773049645,
+      "tp": 149,
+      "fp": 118,
+      "fn": 556
+    },
+    {
+      "name": "any-piece, netLoss >= 500",
+      "min": 500,
+      "precision": 0.6790123456790124,
+      "recall": 0.15602836879432624,
+      "tp": 110,
+      "fp": 52,
+      "fn": 595
+    },
+    {
+      "name": "moved-piece-only, netLoss >= 500",
+      "options": {
+        "movedPieceOnly": true
+      },
+      "min": 500,
+      "precision": 0.6521739130434783,
+      "recall": 0.0851063829787234,
+      "tp": 60,
+      "fp": 32,
+      "fn": 645
+    }
+  ]
+}

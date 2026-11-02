@@ -35,3 +35,12 @@ describe('ladder sampler', () => {
   });
 });
 
+
+describe('greedyMove', () => {
+  it('grabs the most valuable piece in reach, whatever it costs', async () => {
+    const { greedyMove } = await import('./ladder');
+    const { mulberry32 } = await import('./rng');
+    // The rook can take an undefended queen; a second option is a pawn defended by the king.
+    for (let seed = 1; seed <= 20; seed++) expect(greedyMove('4k3/8/8/3q4/8/8/3R4/4K3 w - - 0 1', mulberry32(seed))).toBe('d2d5');
+  });
+});

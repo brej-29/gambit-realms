@@ -1,6 +1,7 @@
 import { Chess } from 'chess.js';
 import { Board } from './board';
 import { applyRealm, currentRealm, REALMS } from './realms';
+import { loadResults } from './results';
 import { save } from './store';
 
 /** Morphy's Opera Game (1858): public domain, full of captures, castling and a mate in 17. */
@@ -24,6 +25,7 @@ export function homeView() {
           <a class="btn big" href="#/learn">Learn chess</a>
           <a class="btn big ghost" href="#/play">Play a game</a>
         </div>
+        <a class="proof" href="#/evidence" hidden><strong>Measured, not guessed.</strong> <span></span> <u>See the evidence</u></a>
         <p class="fine">Free, no sign-up. The opponent runs in your browser.</p>
       </div>
       <div class="hero-board" aria-label="A demo game playing itself"><div class="demo-cap"><span class="demo-title">Now playing</span><span class="demo-san"></span></div></div>
@@ -35,6 +37,17 @@ export function homeView() {
         </button>`
       ).join('')}
     </div>`;
+
+  void loadResults().then((r) => {
+    const coach = r?.coach.find((c) => c.name === 'coach-see' && c.label === 'B');
+    if (!r || !coach) return;
+    const proof = el.querySelector<HTMLElement>('.proof')!;
+    const lo = Math.round(Math.min(...r.levels.map((l) => l.rating)) / 10) * 10;
+    const top = r.levels.filter((l) => !l.saturated);
+    const hi = Math.round(Math.max(...top.map((l) => l.rating)) / 10) * 10;
+    proof.querySelector('span')!.textContent = `Eight opponents from ${lo} to ${hi}+ on the anchor scale, and a coach that flags ${Math.round(coach.recall * 100)}% of the moves that lose material.`;
+    proof.hidden = false;
+  });
 
   const board = new Board({ interactive: false });
   board.speed = 0.85;

@@ -48,6 +48,27 @@ The coach inspects a candidate move before it is confirmed and says whether it l
 - p95 time to produce one engine move at the L8 setting, measured in Node with the WASM build: **<= 1.5 s**.
 - Production bundle (JS + CSS + engine + fonts, transferred): **<= 6 MB**.
 
+### Amendments (logged before any reporting run)
+
+**Amendment 1, 2026-11-02.** The M4 label above contained the coach's own SEE term, which makes precision partly circular. It is replaced by two engine-only labels, both computed from the reference engine (300,000 nodes):
+
+- **Label A, engine blunder:** centipawn loss of the move >= 150.
+- **Label B, loses material under engine play** (the claim the coach makes): play the reference engine's principal variation from the position after the move for 4 plies; the mover is at least 100 cp of material worse off than before the move.
+
+The precision >= 0.85 and recall >= 0.60 targets apply to Label B. Label A is reported next to it. The coach and the thresholds are unchanged.
+
+**Amendment 2, 2026-11-02.** Rating intervals come from a bootstrap over games (percentile 95%), not from the Wilson bounds alone, because ratings are fitted jointly. Ratings are a maximum-likelihood logistic fit with the two Stockfish anchors fixed at their nominal values.
+
+**Amendment 3, 2026-11-02: beginner oversight.** In the first quick runs, engine-only error sources (shallow nodes plus softmax over MultiPV) produced blunders that were mostly not piece-hanging (hang share 15 to 19% against the 60% target) and the weakest level still sat near the 1320 anchor. A level can now play, with probability `oversight`, a *greedy* move: the most valuable capture available (checks and promotions nudged up, otherwise a wander), never looking at the reply. This is a deliberately simple model of a first-timer who grabs material and leaves pieces en prise. Level parameters were then chosen from sweeps on tuning seeds only (`docs/results/calibration.json`, `eval/calibrate.ts`) and checked on tuning seeds (`eval/verify.ts`) before the reporting run. The thresholds are unchanged.
+
+**Amendment 4, 2026-11-02: coach scope.** The coach now also warns when a move leaves *another* piece en prise (for example by moving its only defender). The original rule, which judged only the moved piece, stays in the results as `coach-moved-piece-only`. A threshold study on tuning games (`docs/results/coach-tuning.json`, `eval/tune-coach.ts`) found no net-loss threshold that reaches both targets; the 100 cp threshold from the design is kept.
+
+**Amendment 5, 2026-11-02: anchor scale.** Ratings are fitted against Stockfish UCI Elo 1320, 1900 and 2600, all at a 5,000-node budget (the strongest levels beat the 2200 anchor in almost every game, so a higher anchor was needed). M2 keeps its 1320 and 1900 matches. A level that scores 95% or more against the strongest anchor has no finite rating; it is reported as a lower bound and flagged `saturated`.
+
+**Amendment 6, 2026-11-02: labelling budget.** Blunder labelling uses a deterministic stride sample of at most 1,500 moves per player (reference 300,000 nodes) to bound run time. Definitions are unchanged.
+
+**Disclosure.** The `quick` profile (12 games per pair, reporting seeds from 10,000) was run several times during development to find defects in the harness. The first 12 games of each pairing in the full run use the same seeds, so they overlap with games already seen. Ladder and coach parameters were not tuned on them.
+
 ## 3. Method
 
 - **Games:** every match starts from a deterministic, seeded opening (4 random plies, kept only if the reference eval is within +/-150 cp so no game starts decided). Each opening is played twice with colours swapped. Draw by repetition, 50-move rule, insufficient material, or ply 300 (adjudicated by reference eval: > +300 cp counts as a win).

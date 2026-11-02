@@ -8,6 +8,7 @@ export interface PairResult {
   b: string;
   scoreA: number;
   games: number;
+  outcomes?: readonly number[];
 }
 
 export interface Anchor {
@@ -40,7 +41,26 @@ export function eloConfidence(value: number, games: number): Interval {
   return { low: eloFromScore(interval.low), high: eloFromScore(interval.high) };
 }
 
-/** Fit ratings to observed score differences while keeping anchor ratings fixed. */
+function probability(ratingA: number, ratingB: number): number {
+  const x = (ratingA - ratingB) * Math.LN10 / 400;
+  if (x >= 0) return 1 / (1 + Math.exp(-x));
+  const exp = Math.exp(x);
+  return exp / (1 + exp);
+}
+
+function outcomeCounts(pairing: PairResult): { wins: number; losses: number; draws: number } {
+  if (pairing.outcomes?.length) {
+    return {
+      wins: pairing.outcomes.filter((outcome) => outcome === 1).length,
+      losses: pairing.outcomes.filter((outcome) => outcome === 0).length,
+      draws: pairing.outcomes.filter((outcome) => outcome === 0.5).length,
+    };
+  }
+  const wins = Math.round(pairing.scoreA * pairing.games);
+  return { wins, losses: Math.max(0, pairing.games - wins), draws: 0 };
+}
+
+/** Maximum-likelihood logistic fit with the supplied anchor ratings held fixed. */
 export function fitLadder(pairings: readonly PairResult[], anchors: readonly Anchor[]): Record<string, number> {
   const fixed = new Map(anchors.map((anchor) => [anchor.id, anchor.rating]));
   const ids = new Set<string>();
@@ -51,44 +71,114 @@ export function fitLadder(pairings: readonly PairResult[], anchors: readonly Anc
   const unknown = [...ids].filter((id) => !fixed.has(id));
   const index = new Map(unknown.map((id, i) => [id, i]));
   const n = unknown.length;
-  const matrix = Array.from({ length: n }, () => Array<number>(n + 1).fill(0));
-  for (const pairing of pairings) {
-    const difference = eloFromScore(pairing.scoreA);
-    const ia = index.get(pairing.a);
-    const ib = index.get(pairing.b);
-    const weight = Math.max(1, pairing.games);
-    if (ia !== undefined) {
-      const rowA = matrix[ia]!;
-      rowA[ia] = (rowA[ia] ?? 0) + weight;
-      rowA[n] = (rowA[n] ?? 0) + weight * difference;
-      if (ib !== undefined) rowA[ib] = (rowA[ib] ?? 0) - weight;
-      else rowA[n] = (rowA[n] ?? 0) + weight * (fixed.get(pairing.b) ?? 0);
+  const ratings = new Map<string, number>(anchors.map((anchor) => [anchor.id, anchor.rating]));
+  unknown.forEach((id, i) => ratings.set(id, 1500 + i * 10));
+  for (let iteration = 0; iteration < 80; iteration++) {
+    const gradient = Array<number>(n).fill(0);
+    const hessian = Array.from({ length: n }, () => Array<number>(n).fill(0));
+    for (const pairing of pairings) {
+      const a = ratings.get(pairing.a) ?? fixed.get(pairing.a) ?? 1500;
+      const b = ratings.get(pairing.b) ?? fixed.get(pairing.b) ?? 1500;
+      const p = probability(a, b);
+      const counts = outcomeCounts(pairing);
+      const observed = counts.wins + counts.draws / 2;
+      const total = counts.wins + counts.draws + counts.losses;
+      const scale = Math.LN10 / 400;
+      const residual = observed - total * p;
+      const ia = index.get(pairing.a);
+      const ib = index.get(pairing.b);
+      if (ia !== undefined) gradient[ia] = (gradient[ia] ?? 0) + scale * residual;
+      if (ib !== undefined) gradient[ib] = (gradient[ib] ?? 0) - scale * residual;
+      const curvature = total * p * (1 - p) * scale * scale;
+      if (ia !== undefined) hessian[ia]![ia] = (hessian[ia]![ia] ?? 0) + curvature;
+      if (ib !== undefined) hessian[ib]![ib] = (hessian[ib]![ib] ?? 0) + curvature;
+      if (ia !== undefined && ib !== undefined) {
+        hessian[ia]![ib] = (hessian[ia]![ib] ?? 0) - curvature;
+        hessian[ib]![ia] = (hessian[ib]![ia] ?? 0) - curvature;
+      }
     }
-    if (ib !== undefined) {
-      const rowB = matrix[ib]!;
-      rowB[ib] = (rowB[ib] ?? 0) + weight;
-      rowB[n] = (rowB[n] ?? 0) - weight * difference;
-      if (ia !== undefined) rowB[ia] = (rowB[ia] ?? 0) - weight;
-      else rowB[n] = (rowB[n] ?? 0) + weight * (fixed.get(pairing.a) ?? 0);
+    const delta = solveLinearSystem(hessian, gradient);
+    let largest = 0;
+    for (let i = 0; i < n; i++) {
+      const change = Math.max(-250, Math.min(250, delta[i] ?? 0));
+      const id = unknown[i]!;
+      ratings.set(id, (ratings.get(id) ?? 1500) + change);
+      largest = Math.max(largest, Math.abs(change));
     }
+    if (largest < 0.01) break;
   }
+  const result: Record<string, number> = Object.fromEntries(anchors.map((anchor) => [anchor.id, anchor.rating]));
+  unknown.forEach((id) => { result[id] = ratings.get(id) ?? 1500; });
+  return result;
+}
+
+function solveLinearSystem(matrix: number[][], rhs: number[]): number[] {
+  const n = rhs.length;
+  if (n === 0) return [];
+  const a = matrix.map((row, i) => [...row, rhs[i] ?? 0]);
   for (let column = 0; column < n; column++) {
     let pivot = column;
-    for (let row = column + 1; row < n; row++) if (Math.abs(matrix[row]![column] ?? 0) > Math.abs(matrix[pivot]![column] ?? 0)) pivot = row;
-    if (Math.abs(matrix[pivot]![column] ?? 0) < 1e-9) continue;
-    [matrix[column], matrix[pivot]] = [matrix[pivot]!, matrix[column]!];
-    const pivotRow = matrix[column]!;
-    const divisor = pivotRow[column]!;
-    for (let c = column; c <= n; c++) pivotRow[c] = (pivotRow[c] ?? 0) / divisor;
+    for (let row = column + 1; row < n; row++) if (Math.abs(a[row]![column] ?? 0) > Math.abs(a[pivot]![column] ?? 0)) pivot = row;
+    if (Math.abs(a[pivot]![column] ?? 0) < 1e-12) continue;
+    [a[column], a[pivot]] = [a[pivot]!, a[column]!];
+    const divisor = a[column]![column]!;
+    for (let c = column; c <= n; c++) a[column]![c] = (a[column]![c] ?? 0) / divisor;
     for (let row = 0; row < n; row++) {
       if (row === column) continue;
-      const currentRow = matrix[row]!;
-      const factor = currentRow[column] ?? 0;
-      for (let c = column; c <= n; c++) currentRow[c] = (currentRow[c] ?? 0) - factor * (pivotRow[c] ?? 0);
+      const factor = a[row]![column] ?? 0;
+      for (let c = column; c <= n; c++) a[row]![c] = (a[row]![c] ?? 0) - factor * (a[column]![c] ?? 0);
     }
   }
-  const ratings: Record<string, number> = Object.fromEntries(anchors.map((anchor) => [anchor.id, anchor.rating]));
-  unknown.forEach((id, i) => { ratings[id] = matrix[i]?.[n] ?? 1500; });
-  return ratings;
+  return a.map((row) => row[n] ?? 0);
+}
+
+export function bootstrapLadderIntervals(
+  pairings: readonly PairResult[],
+  anchors: readonly Anchor[],
+  resamples = 400,
+  seed = 1,
+): Record<string, Interval> {
+  if (resamples < 400) throw new Error('rating bootstrap requires at least 400 resamples');
+  const samples = new Map<string, number[]>();
+  const rng = mulberry32(seed);
+  for (let sample = 0; sample < resamples; sample++) {
+    const resampled = pairings.map((pairing) => {
+      const outcomes = pairing.outcomes?.length ? Array.from({ length: pairing.outcomes.length }, () => pairing.outcomes![Math.floor(rng() * pairing.outcomes!.length)]!) : undefined;
+      return { ...pairing, outcomes, games: outcomes?.length ?? pairing.games };
+    });
+    const ratings = fitLadder(resampled, anchors);
+    for (const [id, rating] of Object.entries(ratings)) {
+      const values = samples.get(id) ?? [];
+      values.push(rating);
+      samples.set(id, values);
+    }
+  }
+  const result: Record<string, Interval> = {};
+  for (const [id, values] of samples) {
+    values.sort((a, b) => a - b);
+    result[id] = { low: percentile(values, 0.025), high: percentile(values, 0.975) };
+  }
+  return result;
+}
+
+function percentile(values: readonly number[], fraction: number): number {
+  if (!values.length) return 0;
+  const position = (values.length - 1) * fraction;
+  const lower = Math.floor(position);
+  const upper = Math.ceil(position);
+  if (lower === upper) return values[lower]!;
+  const weight = position - lower;
+  return values[lower]! * (1 - weight) + values[upper]! * weight;
+}
+
+function mulberry32(seed: number): () => number {
+  let value = seed >>> 0;
+  return () => {
+    value += 0x6D2B79F5;
+    let t = value;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
 }
 

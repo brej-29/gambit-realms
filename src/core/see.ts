@@ -26,24 +26,29 @@ function legalCapturesTo(chess: Chess, square: Square, color: Color): Move[] {
   return (chess.moves({ verbose: true }) as Move[]).filter((move) => move.to === square && move.isCapture());
 }
 
+export interface StaticExchangeOptions {
+  includeDefenders?: boolean;
+}
+
 /** Best material gain available by a legal exchange on one square. */
-export function staticExchange(chess: Chess, square: Square, side: Color = chess.turn()): number {
+export function staticExchange(chess: Chess, square: Square, side: Color = chess.turn(), options: StaticExchangeOptions = {}): number {
   if (chess.turn() !== side) {
     const fields = chess.fen({ forceEnpassantSquare: true }).split(' ');
     fields[1] = side;
     fields[3] = '-';
-    return staticExchange(new Chess(fields.join(' ')), square, side);
+    return staticExchange(new Chess(fields.join(' ')), square, side, options);
   }
   const target = chess.get(square);
   if (!target || target.color === side) return 0;
   const captures = legalCapturesTo(chess, square, side);
   if (!captures.length) return 0;
+  if (options.includeDefenders === false) return PIECE_VALUES[target.type];
   let best = 0;
   for (const capture of captures) {
     const capturedValue = PIECE_VALUES[target.type];
     const next = new Chess(chess.fen({ forceEnpassantSquare: true }));
     next.move(moveConfig(capture));
-    const gain = capturedValue - staticExchange(next, square, opposite(side));
+    const gain = capturedValue - staticExchange(next, square, opposite(side), options);
     if (gain > best) best = gain;
   }
   return best;

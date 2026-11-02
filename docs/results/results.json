@@ -1,0 +1,1214 @@
+{
+  "meta": {
+    "version": 2,
+    "engine": "Stockfish 19 lite single",
+    "profile": "full",
+    "status": "completed",
+    "reportingSeedStart": 10000,
+    "tuningSeeds": "1..999",
+    "nodeBudget": [
+      100,
+      3000,
+      1000,
+      1000,
+      1000,
+      2000,
+      6000,
+      256000
+    ],
+    "referenceNodes": 300000,
+    "generatedAt": "2026-11-02T13:54:06.547Z",
+    "gameWorkers": 14,
+    "ratingAnchors": [
+      "UCI Elo 1320",
+      "UCI Elo 1900",
+      "UCI Elo 2600"
+    ]
+  },
+  "levels": [
+    {
+      "id": "L1",
+      "name": "Sleepy Pawn",
+      "rating": 950.3632620644127,
+      "ciLow": 912.3047000384311,
+      "ciHigh": 986.4286273592559,
+      "saturated": false,
+      "scoreVsTopAnchor": 0.0125
+    },
+    {
+      "id": "L2",
+      "name": "Eager Squire",
+      "rating": 1137.5853150730234,
+      "ciLow": 1088.913110692286,
+      "ciHigh": 1183.0718236242635,
+      "saturated": false,
+      "scoreVsTopAnchor": 0.0375
+    },
+    {
+      "id": "L3",
+      "name": "Clever Knight",
+      "rating": 1338.2120360435717,
+      "ciLow": 1293.961647077848,
+      "ciHigh": 1390.652833393372,
+      "saturated": false,
+      "scoreVsTopAnchor": 0.025
+    },
+    {
+      "id": "L4",
+      "name": "Wily Bishop",
+      "rating": 1640.722804075262,
+      "ciLow": 1589.4889375101843,
+      "ciHigh": 1687.3231960549772,
+      "saturated": false,
+      "scoreVsTopAnchor": 0.0375
+    },
+    {
+      "id": "L5",
+      "name": "Stern Rook",
+      "rating": 1834.9281659244714,
+      "ciLow": 1782.1612148974007,
+      "ciHigh": 1886.3879613129554,
+      "saturated": false,
+      "scoreVsTopAnchor": 0.0125
+    },
+    {
+      "id": "L6",
+      "name": "Sharp Queen",
+      "rating": 2016.8067577347613,
+      "ciLow": 1959.491703899043,
+      "ciHigh": 2070.2245805840184,
+      "saturated": false,
+      "scoreVsTopAnchor": 0.075
+    },
+    {
+      "id": "L7",
+      "name": "Old Master",
+      "rating": 2253.080627732979,
+      "ciLow": 2176.568336295974,
+      "ciHigh": 2324.8717628738063,
+      "saturated": false,
+      "scoreVsTopAnchor": 0.3
+    },
+    {
+      "id": "L8",
+      "name": "Archmage",
+      "rating": 2600,
+      "ciLow": 2600,
+      "ciHigh": 2600,
+      "saturated": true,
+      "scoreVsTopAnchor": 0.9875
+    }
+  ],
+  "pairs": [
+    {
+      "a": "L2",
+      "b": "L1",
+      "score": 0.7075,
+      "low": 0.6410166521001258,
+      "high": 0.7661622554437711,
+      "games": 200,
+      "pass": true
+    },
+    {
+      "a": "L3",
+      "b": "L2",
+      "score": 0.7325,
+      "low": 0.6671924771192188,
+      "high": 0.7890441301287621,
+      "games": 200,
+      "pass": true
+    },
+    {
+      "a": "L4",
+      "b": "L3",
+      "score": 0.835,
+      "low": 0.7773410172613647,
+      "high": 0.8800321587733603,
+      "games": 200,
+      "pass": true
+    },
+    {
+      "a": "L5",
+      "b": "L4",
+      "score": 0.735,
+      "low": 0.6698229773344888,
+      "high": 0.7913193998839003,
+      "games": 200,
+      "pass": true
+    },
+    {
+      "a": "L6",
+      "b": "L5",
+      "score": 0.725,
+      "low": 0.6593153404748533,
+      "high": 0.7822039568619024,
+      "games": 200,
+      "pass": true
+    },
+    {
+      "a": "L7",
+      "b": "L6",
+      "score": 0.78,
+      "low": 0.7176107720803744,
+      "high": 0.8318354646053661,
+      "games": 200,
+      "pass": true
+    },
+    {
+      "a": "L8",
+      "b": "L7",
+      "score": 0.9975,
+      "low": 0.9765092723234612,
+      "high": 0.9997389517878097,
+      "games": 200,
+      "pass": true
+    }
+  ],
+  "anchors": [
+    {
+      "match": "L1 vs UCI Elo 1320",
+      "score": 0.075,
+      "low": 0.04597450705725241,
+      "high": 0.12004459797332036,
+      "pass": true
+    },
+    {
+      "match": "L8 vs UCI Elo 1900",
+      "score": 1,
+      "low": 0.9811539940816791,
+      "high": 1,
+      "pass": true
+    }
+  ],
+  "blunders": [
+    {
+      "player": "L2",
+      "games": 503,
+      "moves": 1485,
+      "blunders": 138,
+      "blunderRate": 0.09292929292929293,
+      "hangingBlunders": 89,
+      "hangingShare": 0.644927536231884
+    },
+    {
+      "player": "L1",
+      "games": 1017,
+      "moves": 1485,
+      "blunders": 171,
+      "blunderRate": 0.11515151515151516,
+      "hangingBlunders": 128,
+      "hangingShare": 0.7485380116959064
+    },
+    {
+      "player": "L3",
+      "games": 515,
+      "moves": 1440,
+      "blunders": 133,
+      "blunderRate": 0.09236111111111112,
+      "hangingBlunders": 75,
+      "hangingShare": 0.5639097744360902
+    },
+    {
+      "player": "L4",
+      "games": 516,
+      "moves": 1455,
+      "blunders": 145,
+      "blunderRate": 0.09965635738831616,
+      "hangingBlunders": 68,
+      "hangingShare": 0.4689655172413793
+    },
+    {
+      "player": "elo1320",
+      "games": 674,
+      "moves": 1440,
+      "blunders": 149,
+      "blunderRate": 0.10347222222222222,
+      "hangingBlunders": 43,
+      "hangingShare": 0.28859060402684567
+    },
+    {
+      "player": "random",
+      "games": 198,
+      "moves": 1331,
+      "blunders": 121,
+      "blunderRate": 0.09090909090909091,
+      "hangingBlunders": 74,
+      "hangingShare": 0.6115702479338843
+    },
+    {
+      "player": "minimax",
+      "games": 198,
+      "moves": 1492,
+      "blunders": 117,
+      "blunderRate": 0.07841823056300268,
+      "hangingBlunders": 35,
+      "hangingShare": 0.29914529914529914
+    },
+    {
+      "player": "skill0",
+      "games": 199,
+      "moves": 1428,
+      "blunders": 155,
+      "blunderRate": 0.10854341736694678,
+      "hangingBlunders": 36,
+      "hangingShare": 0.23225806451612904
+    }
+  ],
+  "coach": [
+    {
+      "name": "coach-see",
+      "label": "B",
+      "pairs": 5000,
+      "positives": 1684,
+      "predicted": 1959,
+      "truePositives": 1270,
+      "precision": 0.6482899438489025,
+      "recall": 0.7541567695961995
+    },
+    {
+      "name": "coach-moved-piece-only",
+      "label": "B",
+      "pairs": 5000,
+      "positives": 1684,
+      "predicted": 839,
+      "truePositives": 610,
+      "precision": 0.7270560190703218,
+      "recall": 0.36223277909738716
+    },
+    {
+      "name": "coach-see-without-defender-count",
+      "label": "B",
+      "pairs": 5000,
+      "positives": 1684,
+      "predicted": 2198,
+      "truePositives": 1302,
+      "precision": 0.5923566878980892,
+      "recall": 0.7731591448931117
+    },
+    {
+      "name": "coach-without-pinned-piece-rule",
+      "label": "B",
+      "pairs": 5000,
+      "positives": 1684,
+      "predicted": 1959,
+      "truePositives": 1270,
+      "precision": 0.6482899438489025,
+      "recall": 0.7541567695961995
+    },
+    {
+      "name": "warn-if-attacked",
+      "label": "B",
+      "pairs": 5000,
+      "positives": 1684,
+      "predicted": 1289,
+      "truePositives": 730,
+      "precision": 0.5663304887509697,
+      "recall": 0.4334916864608076
+    },
+    {
+      "name": "never-warn",
+      "label": "B",
+      "pairs": 5000,
+      "positives": 1684,
+      "predicted": 0,
+      "truePositives": 0,
+      "precision": 0,
+      "recall": 0
+    },
+    {
+      "name": "coach-see",
+      "label": "A",
+      "pairs": 5000,
+      "positives": 759,
+      "predicted": 1959,
+      "truePositives": 479,
+      "precision": 0.24451250638080654,
+      "recall": 0.6310935441370223
+    },
+    {
+      "name": "coach-moved-piece-only",
+      "label": "A",
+      "pairs": 5000,
+      "positives": 759,
+      "predicted": 839,
+      "truePositives": 316,
+      "precision": 0.3766388557806913,
+      "recall": 0.4163372859025033
+    },
+    {
+      "name": "coach-see-without-defender-count",
+      "label": "A",
+      "pairs": 5000,
+      "positives": 759,
+      "predicted": 2198,
+      "truePositives": 499,
+      "precision": 0.227024567788899,
+      "recall": 0.6574440052700923
+    },
+    {
+      "name": "coach-without-pinned-piece-rule",
+      "label": "A",
+      "pairs": 5000,
+      "positives": 759,
+      "predicted": 1959,
+      "truePositives": 479,
+      "precision": 0.24451250638080654,
+      "recall": 0.6310935441370223
+    },
+    {
+      "name": "warn-if-attacked",
+      "label": "A",
+      "pairs": 5000,
+      "positives": 759,
+      "predicted": 1289,
+      "truePositives": 378,
+      "precision": 0.2932505818463926,
+      "recall": 0.4980237154150198
+    },
+    {
+      "name": "never-warn",
+      "label": "A",
+      "pairs": 5000,
+      "positives": 759,
+      "predicted": 0,
+      "truePositives": 0,
+      "precision": 0,
+      "recall": 0
+    }
+  ],
+  "latency": {
+    "p95Ms": 1282.7601000000723,
+    "samples": [
+      1006.6334000001661,
+      1043.031299999915,
+      1069.260200000368,
+      1104.5696999998763,
+      1123.1384000000544,
+      1134.0906000002287,
+      1142.1033000000753,
+      1152.7991000004113,
+      1159.6440000003204,
+      1161.9546999996528,
+      1163.8339999997988,
+      1167.3260999997146,
+      1181.3675000001676,
+      1197.8318999996409,
+      1205.476200000383,
+      1214.2444000001997,
+      1220.4717999999411,
+      1223.909500000067,
+      1282.7601000000723,
+      1312.8935000002384
+    ],
+    "bundleBytes": 2479733,
+    "bundleCheck": "pass"
+  },
+  "metrics": {
+    "M1": {
+      "pass": true,
+      "value": "7/7 adjacent pairs",
+      "threshold": "all >=60% and Wilson low >50%"
+    },
+    "M2": {
+      "pass": true,
+      "value": "true/true",
+      "threshold": "L1 <=10%; L8 >=60%"
+    },
+    "M3": {
+      "pass": false,
+      "value": [
+        {
+          "player": "L2",
+          "games": 503,
+          "moves": 1485,
+          "blunders": 138,
+          "blunderRate": 0.09292929292929293,
+          "hangingBlunders": 89,
+          "hangingShare": 0.644927536231884
+        },
+        {
+          "player": "L1",
+          "games": 1017,
+          "moves": 1485,
+          "blunders": 171,
+          "blunderRate": 0.11515151515151516,
+          "hangingBlunders": 128,
+          "hangingShare": 0.7485380116959064
+        },
+        {
+          "player": "L3",
+          "games": 515,
+          "moves": 1440,
+          "blunders": 133,
+          "blunderRate": 0.09236111111111112,
+          "hangingBlunders": 75,
+          "hangingShare": 0.5639097744360902
+        },
+        {
+          "player": "L4",
+          "games": 516,
+          "moves": 1455,
+          "blunders": 145,
+          "blunderRate": 0.09965635738831616,
+          "hangingBlunders": 68,
+          "hangingShare": 0.4689655172413793
+        },
+        {
+          "player": "elo1320",
+          "games": 674,
+          "moves": 1440,
+          "blunders": 149,
+          "blunderRate": 0.10347222222222222,
+          "hangingBlunders": 43,
+          "hangingShare": 0.28859060402684567
+        },
+        {
+          "player": "random",
+          "games": 198,
+          "moves": 1331,
+          "blunders": 121,
+          "blunderRate": 0.09090909090909091,
+          "hangingBlunders": 74,
+          "hangingShare": 0.6115702479338843
+        },
+        {
+          "player": "minimax",
+          "games": 198,
+          "moves": 1492,
+          "blunders": 117,
+          "blunderRate": 0.07841823056300268,
+          "hangingBlunders": 35,
+          "hangingShare": 0.29914529914529914
+        },
+        {
+          "player": "skill0",
+          "games": 199,
+          "moves": 1428,
+          "blunders": 155,
+          "blunderRate": 0.10854341736694678,
+          "hangingBlunders": 36,
+          "hangingShare": 0.23225806451612904
+        }
+      ],
+      "threshold": "L1-L4 blunder rate 3%-15%; hung share >=60%"
+    },
+    "M4": {
+      "pass": false,
+      "value": {
+        "precision": 0.6482899438489025,
+        "recall": 0.7541567695961995,
+        "pairs": 5000
+      },
+      "threshold": "Label B precision >=0.85; recall >=0.60"
+    },
+    "M5": {
+      "pass": true,
+      "value": {
+        "p95Ms": 1282.7601000000723,
+        "bundleBytes": 2479733
+      },
+      "threshold": "p95 <=1500ms; bundle <=6MB"
+    }
+  },
+  "runs": [
+    {
+      "profile": "quick",
+      "generatedAt": "2026-11-02T06:42:22.128Z",
+      "metrics": {
+        "M1": false,
+        "M2": false,
+        "M3": false,
+        "M4": false,
+        "M5": true
+      }
+    },
+    {
+      "profile": "quick",
+      "generatedAt": "2026-11-02T07:09:47.438Z",
+      "tuningIteration": null,
+      "params": [
+        {
+          "id": 1,
+          "name": "Sleepy Pawn",
+          "nodes": 1500,
+          "multipv": 5,
+          "temperature": 260
+        },
+        {
+          "id": 2,
+          "name": "Eager Squire",
+          "nodes": 3500,
+          "multipv": 5,
+          "temperature": 190
+        },
+        {
+          "id": 3,
+          "name": "Clever Knight",
+          "nodes": 8000,
+          "multipv": 4,
+          "temperature": 130
+        },
+        {
+          "id": 4,
+          "name": "Wily Bishop",
+          "nodes": 16000,
+          "multipv": 4,
+          "temperature": 90
+        },
+        {
+          "id": 5,
+          "name": "Stern Rook",
+          "nodes": 32000,
+          "multipv": 3,
+          "temperature": 55
+        },
+        {
+          "id": 6,
+          "name": "Sharp Queen",
+          "nodes": 64000,
+          "multipv": 3,
+          "temperature": 28
+        },
+        {
+          "id": 7,
+          "name": "Old Master",
+          "nodes": 128000,
+          "multipv": 2,
+          "temperature": 10
+        },
+        {
+          "id": 8,
+          "name": "Archmage",
+          "nodes": 256000,
+          "multipv": 1,
+          "temperature": 0
+        }
+      ],
+      "metricPassFlags": {
+        "M1": true,
+        "M2": false,
+        "M3": false,
+        "M4": false,
+        "M5": true
+      }
+    },
+    {
+      "profile": "quick",
+      "generatedAt": "2026-11-02T07:23:44.569Z",
+      "tuningIteration": null,
+      "params": [
+        {
+          "id": 1,
+          "name": "Sleepy Pawn",
+          "nodes": 500,
+          "multipv": 5,
+          "temperature": 260
+        },
+        {
+          "id": 2,
+          "name": "Eager Squire",
+          "nodes": 3500,
+          "multipv": 5,
+          "temperature": 190
+        },
+        {
+          "id": 3,
+          "name": "Clever Knight",
+          "nodes": 8000,
+          "multipv": 4,
+          "temperature": 130
+        },
+        {
+          "id": 4,
+          "name": "Wily Bishop",
+          "nodes": 16000,
+          "multipv": 4,
+          "temperature": 90
+        },
+        {
+          "id": 5,
+          "name": "Stern Rook",
+          "nodes": 32000,
+          "multipv": 3,
+          "temperature": 55
+        },
+        {
+          "id": 6,
+          "name": "Sharp Queen",
+          "nodes": 64000,
+          "multipv": 3,
+          "temperature": 28
+        },
+        {
+          "id": 7,
+          "name": "Old Master",
+          "nodes": 128000,
+          "multipv": 2,
+          "temperature": 10
+        },
+        {
+          "id": 8,
+          "name": "Archmage",
+          "nodes": 256000,
+          "multipv": 1,
+          "temperature": 0
+        }
+      ],
+      "metricPassFlags": {
+        "M1": true,
+        "M2": false,
+        "M3": false,
+        "M4": false,
+        "M5": true
+      }
+    },
+    {
+      "profile": "quick",
+      "generatedAt": "2026-11-02T07:25:23.880Z",
+      "tuningIteration": 3,
+      "params": [
+        {
+          "id": 1,
+          "name": "Sleepy Pawn",
+          "nodes": 500,
+          "multipv": 5,
+          "temperature": 260
+        },
+        {
+          "id": 2,
+          "name": "Eager Squire",
+          "nodes": 3500,
+          "multipv": 5,
+          "temperature": 190
+        },
+        {
+          "id": 3,
+          "name": "Clever Knight",
+          "nodes": 8000,
+          "multipv": 4,
+          "temperature": 130
+        },
+        {
+          "id": 4,
+          "name": "Wily Bishop",
+          "nodes": 16000,
+          "multipv": 4,
+          "temperature": 90
+        },
+        {
+          "id": 5,
+          "name": "Stern Rook",
+          "nodes": 32000,
+          "multipv": 3,
+          "temperature": 55
+        },
+        {
+          "id": 6,
+          "name": "Sharp Queen",
+          "nodes": 64000,
+          "multipv": 3,
+          "temperature": 28
+        },
+        {
+          "id": 7,
+          "name": "Old Master",
+          "nodes": 128000,
+          "multipv": 2,
+          "temperature": 10
+        },
+        {
+          "id": 8,
+          "name": "Archmage",
+          "nodes": 256000,
+          "multipv": 1,
+          "temperature": 0
+        }
+      ],
+      "metricPassFlags": {
+        "M1": true,
+        "M2": false,
+        "M3": false,
+        "M4": false,
+        "M5": true
+      }
+    },
+    {
+      "profile": "quick",
+      "generatedAt": "2026-11-02T07:26:44.013Z",
+      "tuningIteration": 3,
+      "params": [
+        {
+          "id": 1,
+          "name": "Sleepy Pawn",
+          "nodes": 500,
+          "multipv": 5,
+          "temperature": 260
+        },
+        {
+          "id": 2,
+          "name": "Eager Squire",
+          "nodes": 3500,
+          "multipv": 5,
+          "temperature": 190
+        },
+        {
+          "id": 3,
+          "name": "Clever Knight",
+          "nodes": 8000,
+          "multipv": 4,
+          "temperature": 130
+        },
+        {
+          "id": 4,
+          "name": "Wily Bishop",
+          "nodes": 16000,
+          "multipv": 4,
+          "temperature": 90
+        },
+        {
+          "id": 5,
+          "name": "Stern Rook",
+          "nodes": 32000,
+          "multipv": 3,
+          "temperature": 55
+        },
+        {
+          "id": 6,
+          "name": "Sharp Queen",
+          "nodes": 64000,
+          "multipv": 3,
+          "temperature": 28
+        },
+        {
+          "id": 7,
+          "name": "Old Master",
+          "nodes": 128000,
+          "multipv": 2,
+          "temperature": 10
+        },
+        {
+          "id": 8,
+          "name": "Archmage",
+          "nodes": 256000,
+          "multipv": 1,
+          "temperature": 0
+        }
+      ],
+      "metricPassFlags": {
+        "M1": true,
+        "M2": false,
+        "M3": false,
+        "M4": false,
+        "M5": true
+      }
+    },
+    {
+      "profile": "quick",
+      "generatedAt": "2026-11-02T09:08:24.841Z",
+      "tuningIteration": 3,
+      "params": [
+        {
+          "id": 1,
+          "name": "Sleepy Pawn",
+          "nodes": 100,
+          "multipv": 4,
+          "temperature": 160,
+          "oversight": 0.45
+        },
+        {
+          "id": 2,
+          "name": "Eager Squire",
+          "nodes": 3000,
+          "multipv": 4,
+          "temperature": 160,
+          "oversight": 0.3
+        },
+        {
+          "id": 3,
+          "name": "Clever Knight",
+          "nodes": 1000,
+          "multipv": 4,
+          "temperature": 160,
+          "oversight": 0.1
+        },
+        {
+          "id": 4,
+          "name": "Wily Bishop",
+          "nodes": 1000,
+          "multipv": 4,
+          "temperature": 70,
+          "oversight": 0.05
+        },
+        {
+          "id": 5,
+          "name": "Stern Rook",
+          "nodes": 1000,
+          "multipv": 4,
+          "temperature": 70
+        },
+        {
+          "id": 6,
+          "name": "Sharp Queen",
+          "nodes": 2000,
+          "multipv": 4,
+          "temperature": 70
+        },
+        {
+          "id": 7,
+          "name": "Old Master",
+          "nodes": 6000,
+          "multipv": 4,
+          "temperature": 70
+        },
+        {
+          "id": 8,
+          "name": "Archmage",
+          "nodes": 256000,
+          "multipv": 1,
+          "temperature": 0
+        }
+      ],
+      "metricPassFlags": {
+        "M1": false,
+        "M2": false,
+        "M3": true,
+        "M4": false,
+        "M5": true
+      }
+    },
+    {
+      "profile": "full",
+      "generatedAt": "2026-11-02T13:11:07.170Z",
+      "tuningIteration": 3,
+      "params": [
+        {
+          "id": 1,
+          "name": "Sleepy Pawn",
+          "nodes": 100,
+          "multipv": 4,
+          "temperature": 160,
+          "oversight": 0.45
+        },
+        {
+          "id": 2,
+          "name": "Eager Squire",
+          "nodes": 3000,
+          "multipv": 4,
+          "temperature": 160,
+          "oversight": 0.3
+        },
+        {
+          "id": 3,
+          "name": "Clever Knight",
+          "nodes": 1000,
+          "multipv": 4,
+          "temperature": 160,
+          "oversight": 0.1
+        },
+        {
+          "id": 4,
+          "name": "Wily Bishop",
+          "nodes": 1000,
+          "multipv": 4,
+          "temperature": 70,
+          "oversight": 0.05
+        },
+        {
+          "id": 5,
+          "name": "Stern Rook",
+          "nodes": 1000,
+          "multipv": 4,
+          "temperature": 70
+        },
+        {
+          "id": 6,
+          "name": "Sharp Queen",
+          "nodes": 2000,
+          "multipv": 4,
+          "temperature": 70
+        },
+        {
+          "id": 7,
+          "name": "Old Master",
+          "nodes": 6000,
+          "multipv": 4,
+          "temperature": 70
+        },
+        {
+          "id": 8,
+          "name": "Archmage",
+          "nodes": 256000,
+          "multipv": 1,
+          "temperature": 0
+        }
+      ],
+      "metricPassFlags": {
+        "M1": true,
+        "M2": true,
+        "M3": false,
+        "M4": false,
+        "M5": false
+      }
+    },
+    {
+      "profile": "full",
+      "generatedAt": "2026-11-02T13:54:06.544Z",
+      "tuningIteration": 3,
+      "params": [
+        {
+          "id": 1,
+          "name": "Sleepy Pawn",
+          "nodes": 100,
+          "multipv": 4,
+          "temperature": 160,
+          "oversight": 0.45
+        },
+        {
+          "id": 2,
+          "name": "Eager Squire",
+          "nodes": 3000,
+          "multipv": 4,
+          "temperature": 160,
+          "oversight": 0.3
+        },
+        {
+          "id": 3,
+          "name": "Clever Knight",
+          "nodes": 1000,
+          "multipv": 4,
+          "temperature": 160,
+          "oversight": 0.1
+        },
+        {
+          "id": 4,
+          "name": "Wily Bishop",
+          "nodes": 1000,
+          "multipv": 4,
+          "temperature": 70,
+          "oversight": 0.05
+        },
+        {
+          "id": 5,
+          "name": "Stern Rook",
+          "nodes": 1000,
+          "multipv": 4,
+          "temperature": 70
+        },
+        {
+          "id": 6,
+          "name": "Sharp Queen",
+          "nodes": 2000,
+          "multipv": 4,
+          "temperature": 70
+        },
+        {
+          "id": 7,
+          "name": "Old Master",
+          "nodes": 6000,
+          "multipv": 4,
+          "temperature": 70
+        },
+        {
+          "id": 8,
+          "name": "Archmage",
+          "nodes": 256000,
+          "multipv": 1,
+          "temperature": 0
+        }
+      ],
+      "metricPassFlags": {
+        "M1": true,
+        "M2": true,
+        "M3": false,
+        "M4": false,
+        "M5": true
+      }
+    }
+  ],
+  "errorAnalysis": {
+    "falsePositives": [
+      {
+        "fen": "qk6/8/6p1/Pp6/5p1p/8/5K2/8 w - - 14 69",
+        "move": "f2f1",
+        "referenceCpl": 0,
+        "referenceMaterialLoss": 0,
+        "referencePv": "a8e4 a5a6 f4f3 a6a7 b8a7 f1g1 e4e2 g1h1 e2g2",
+        "labelA": false,
+        "labelB": false
+      },
+      {
+        "fen": "1nbqk2r/r3p1pp/1p1p3n/pp1PP3/P7/1P3N2/2P3P1/R1B1KB1R b KQ - 0 16",
+        "move": "d6e5",
+        "referenceCpl": 0,
+        "referenceMaterialLoss": -100,
+        "referencePv": "c1b2 b5a4 a1a4 h8f8 a4c4 h6f7 c4c8 d8c8 f1b5 e8d8",
+        "labelA": false,
+        "labelB": false
+      },
+      {
+        "fen": "r1b1kb1r/pp3ppp/2n5/3pp2P/P3B3/2Ppn3/4PK2/qN4NR b kq - 1 16",
+        "move": "a1b1",
+        "referenceCpl": 0,
+        "referenceMaterialLoss": -200,
+        "referencePv": "g1h3 b1b6 e4d3 e5e4 d3b5 f8e7 b5c6 b7c6 h5h6 e7h4 f2g1 g7g6 h3f4 e3f5 g1g2",
+        "labelA": false,
+        "labelB": false
+      },
+      {
+        "fen": "4k3/2N5/3K4/2p5/2P5/8/7R/8 b - - 44 102",
+        "move": "e8d8",
+        "referenceCpl": 64,
+        "referenceMaterialLoss": 0,
+        "referencePv": "h2h8",
+        "labelA": false,
+        "labelB": false
+      },
+      {
+        "fen": "8/Q3B1p1/4p3/7p/p1P5/P5P1/1P1k1R2/5K2 b - - 12 40",
+        "move": "d2d3",
+        "referenceCpl": 0,
+        "referenceMaterialLoss": 0,
+        "referencePv": "a7d7 d3e4 f2f4 e4e3 e7c5",
+        "labelA": false,
+        "labelB": false
+      },
+      {
+        "fen": "r3k3/1Q3pp1/p2Bp3/8/8/8/P6r/3RKB1R b Kq - 0 22",
+        "move": "a8a7",
+        "referenceCpl": 0,
+        "referenceMaterialLoss": 0,
+        "referencePv": "b7c8",
+        "labelA": false,
+        "labelB": false
+      },
+      {
+        "fen": "r3k2r/p1p1bp1p/2p2n2/q7/2P3PP/3P4/P3NP2/R3KB1R w kq - 10 22",
+        "move": "e1d1",
+        "referenceCpl": 0,
+        "referenceMaterialLoss": -300,
+        "referencePv": "f6e4 d3e4 e8c8 e2d4 d8d4 d1e2 a5c3 h1h3 c3a1 h3d3 d4d3 e2d3 h8d8 d3c2 a1d1 c2c3 d1f1 c4c5 d8d3 c3c4",
+        "labelA": false,
+        "labelB": false
+      },
+      {
+        "fen": "rnb1k1nr/ppq2ppp/2pb4/P2pp3/2P5/1Q2P2N/1B1P1PPP/RN2KB1R b KQkq - 0 8",
+        "move": "d5c4",
+        "referenceCpl": 0,
+        "referenceMaterialLoss": -300,
+        "referencePv": "f1c4 c8h3",
+        "labelA": false,
+        "labelB": false
+      },
+      {
+        "fen": "r2qkb1r/1pp2ppp/p1n1b1n1/P3p1P1/3p4/1PP5/3PPP1P/RNBQKBNR w KQkq - 0 10",
+        "move": "c3d4",
+        "referenceCpl": 163,
+        "referenceMaterialLoss": -300,
+        "referencePv": "c6d4 a1a4 f8d6 a4d4 e5d4 g1f3 e6d5 e2e3 d8e7 f1c4 d5c4 f3d4 c4d5",
+        "labelA": true,
+        "labelB": false
+      },
+      {
+        "fen": "rnb1kb1r/pp3p2/2p2n1p/2pq2p1/3P3N/1Q2P3/PP1B1PPP/R3KB1R w KQkq - 2 13",
+        "move": "f1c4",
+        "referenceCpl": 0,
+        "referenceMaterialLoss": 0,
+        "referencePv": "d5d7 h4f3 b7b5 f3e5 b5c4 e5d7 c4b3 d7f6 e8e7 f6e4 c5d4 a2b3 f7f5 e4g3 e7f7 f2f4",
+        "labelA": false,
+        "labelB": false
+      }
+    ],
+    "falseNegatives": [
+      {
+        "fen": "8/5k2/8/8/3K4/p7/8/3r4 w - - 4 68",
+        "move": "d4e3",
+        "referenceCpl": 0,
+        "referenceMaterialLoss": 800,
+        "referencePv": "a3a2 e3e2 a2a1q e2e3 a1c3 e3f4 d1d4 f4g5 c3c5 g5h6 d4h4",
+        "labelA": false,
+        "labelB": true
+      },
+      {
+        "fen": "8/k1PK4/8/8/8/8/8/8 b - - 4 87",
+        "move": "a7a6",
+        "referenceCpl": 0,
+        "referenceMaterialLoss": 800,
+        "referencePv": "c7c8q a6b5 c8c2 b5b4 d7c6 b4a3 c2b1 a3a4 b1b2 a4a5 b2b5",
+        "labelA": false,
+        "labelB": true
+      },
+      {
+        "fen": "7K/2k5/8/3n4/2n5/1p6/8/8 w - - 7 104",
+        "move": "h8h7",
+        "referenceCpl": 0,
+        "referenceMaterialLoss": 800,
+        "referencePv": "b3b2 h7h6 b2b1q h6h5 b1e4 h5g5 c4e5 g5h5 e4g6 h5h4 g6g4",
+        "labelA": false,
+        "labelB": true
+      },
+      {
+        "fen": "2k1r3/p1b5/8/1p5p/7P/PK2p3/8/8 w - - 0 44",
+        "move": "b3c3",
+        "referenceCpl": 0,
+        "referenceMaterialLoss": 700,
+        "referencePv": "e3e2 c3b4 e2e1q b4b5 e1e4 a3a4 e8e5 b5a6 e4a4",
+        "labelA": false,
+        "labelB": true
+      },
+      {
+        "fen": "8/4K1P1/8/8/8/8/8/1B2k3 b - - 56 115",
+        "move": "e1d1",
+        "referenceCpl": 0,
+        "referenceMaterialLoss": 800,
+        "referencePv": "g7g8q d1d2 g8b3 d2e1 e7e6 e1e2 e6e5 e2f2 b3d3 f2g2 e5d4 g2f2 d3h3 f2e2 h3g2 e2d1 d4d3 d1e1 g2e2",
+        "labelA": false,
+        "labelB": true
+      },
+      {
+        "fen": "1R6/2P5/8/2K5/8/4k3/8/8 b - - 20 103",
+        "move": "e3d3",
+        "referenceCpl": 0,
+        "referenceMaterialLoss": 800,
+        "referencePv": "b8e8 d3c3 c7c8q c3c2 c5b4 c2b2 e8e1 b2a2 c8c2",
+        "labelA": false,
+        "labelB": true
+      },
+      {
+        "fen": "r1b1k1nr/pppp1ppp/n3p3/6q1/1bP5/8/P2PPP1P/RNBQKBNR w KQkq - 0 5",
+        "move": "e2e4",
+        "referenceCpl": 254,
+        "referenceMaterialLoss": 500,
+        "referencePv": "g5e5 g1e2 e5a1 e2c3 b4c3 b1c3 a6b4 c3b5 b4a2 c1a3 a1d1 e1d1 e8d8 h1g1 d7d6 b5d6 c7d6 g1g7",
+        "labelA": true,
+        "labelB": true
+      },
+      {
+        "fen": "8/5k2/5p2/b5p1/5p2/5P1p/6r1/2K5 w - - 6 88",
+        "move": "c1d1",
+        "referenceCpl": 0,
+        "referenceMaterialLoss": 800,
+        "referencePv": "h3h2 d1c1 h2h1q",
+        "labelA": false,
+        "labelB": true
+      },
+      {
+        "fen": "8/8/p7/5Qp1/1P5k/5p2/3P1K2/8 b - - 3 40",
+        "move": "g5g4",
+        "referenceCpl": 0,
+        "referenceMaterialLoss": 100,
+        "referencePv": "f5g6 g4g3 f2f3 h4h3 g6g3",
+        "labelA": false,
+        "labelB": true
+      },
+      {
+        "fen": "8/1P6/1B3P2/2K5/8/8/2k5/8 b - - 4 77",
+        "move": "c2b2",
+        "referenceCpl": 0,
+        "referenceMaterialLoss": 800,
+        "referencePv": "c5c4 b2c1 b7b8q c1d2 b8h2 d2d1 c4d3 d1c1 h2c2",
+        "labelA": false,
+        "labelB": true
+      }
+    ]
+  }
+}
