@@ -1,0 +1,29 @@
+{
+  "name": "gambit-realms",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Animated chess with themed realms, a calibrated opponent ladder and a beginner coach.",
+  "license": "GPL-3.0-only",
+  "scripts": {
+    "postinstall": "node scripts/copy-engine.mjs",
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "eval:quick": "tsx eval/run.ts --profile quick",
+    "eval": "tsx eval/run.ts --profile full"
+  },
+  "dependencies": {
+    "chess.js": "^1.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "stockfish": "19.0.1",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "vite": "^6.0.0",
+    "vitest": "^3.0.0"
+  }
+}
