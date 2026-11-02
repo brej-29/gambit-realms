@@ -1,10 +1,9 @@
-# Python-generated files
-__pycache__/
-*.py[oc]
-build/
+node_modules/
 dist/
-wheels/
-*.egg-info
-
-# Virtual environments
-.venv
+public/engine/
+eval/out/
+*.log
+.DS_Store
+# local, untracked copy of the original vendored Stockfish checkout
+stockfish/
+.codex-last.md
