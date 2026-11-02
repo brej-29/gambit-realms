@@ -1,5 +1,6 @@
 // Regenerates the README screenshots. Needs `npm run dev` on the given URL (the debug hook is dev-only).
 // Usage: E2E_CHANNEL=msedge node scripts/shots.mjs http://localhost:5173/
+import { readFileSync } from 'node:fs';
 import { chromium } from 'playwright-core';
 
 const base = process.argv[2] ?? 'http://localhost:5173/';
@@ -25,6 +26,13 @@ for (const realm of ['enchanted', 'medieval', 'cyberpunk', 'anime']) {
   await page.screenshot({ path: out(`capture-${realm}`) });
   await page.close();
 }
+
+// 2x2 collage of the four capture frames, cropped to the board area
+const imgs = ['enchanted', 'medieval', 'cyberpunk', 'anime'].map((r) => 'data:image/png;base64,' + readFileSync(out('capture-' + r)).toString('base64'));
+const col = await browser.newPage({ viewport: { width: 1280, height: 780 } });
+await col.setContent('<body style="margin:0;display:grid;grid-template-columns:1fr 1fr;gap:6px;background:#111">' + imgs.map((i) => '<div style="height:387px;overflow:hidden"><img src="' + i + '" style="width:1280px;margin:-215px 0 0 -120px;display:block"></div>').join('') + '</body>');
+await col.screenshot({ path: out('captures') });
+await col.close();
 
 const page = await browser.newPage({ viewport: { width: 1280, height: 780 } });
 await page.goto(base, { waitUntil: 'networkidle' });
