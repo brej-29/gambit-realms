@@ -285,7 +285,14 @@ export class GameView {
   private async hint() {
     if (this.busy || this.over || this.chess.turn() !== this.o.human) return;
     this.q('.status').textContent = 'Pip is thinking…';
-    const h = await brain.hint(this.chess.fen());
+    let h: { uci: string; text: string };
+    try {
+      h = await brain.hint(this.chess.fen());
+    } catch {
+      this.say('I could not find a hint just now. Try looking for a capture or a piece to develop.');
+      this.refresh();
+      return;
+    }
     if (this.gone) return;
     this.hintMark = [h.uci.slice(0, 2) as Square, h.uci.slice(2, 4) as Square];
     this.selected = null;

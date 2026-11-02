@@ -1,4 +1,7 @@
-import { Chess } from 'chess.js';
+import { describeMove, explainThreats, assessMove } from '../core/coach';
+import { pickOpponentMove } from '../core/opponent';
+import { mulberry32 } from '../core/rng';
+import { BrowserEngine } from '../engine/browser';
 
 export interface Assessment {
   hangs: boolean;
@@ -16,21 +19,27 @@ export interface Brain {
   hint(fen: string): Promise<{ uci: string; text: string }>;
 }
 
-const toUci = (m: { from: string; to: string; promotion?: string }) => m.from + m.to + (m.promotion ?? '');
+let engine: BrowserEngine | null = null;
+const rng = mulberry32((Date.now() ^ (Math.random() * 2 ** 32)) >>> 0);
+const getEngine = () => (engine ??= new BrowserEngine());
 
-/** Placeholder brain until the engine layer is wired in. */
+/** Opponent and coach for the app: the engine runs in a worker, the coach is pure chess.js logic. */
 export const brain: Brain = {
-  async opponentMove(fen) {
-    const c = new Chess(fen);
-    const moves = c.moves({ verbose: true });
-    const caps = moves.filter((m) => m.captured);
-    const pool = caps.length ? caps : moves;
-    return toUci(pool[(Math.random() * pool.length) | 0]!);
+  opponentMove: (fen, level) => pickOpponentMove(getEngine(), fen, level, rng),
+  assess: (fen, uci) => {
+    const a = assessMove(fen, uci);
+    return { hangs: a.hangs, message: a.hangs ? `${a.message} Move something else, or go ahead if you meant it.` : a.message };
   },
-  assess: () => ({ hangs: false, message: '' }),
-  threats: () => [],
+  threats: (fen, color) =>
+    explainThreats(fen, color).map((t) => ({
+      square: t.square,
+      piece: t.piece,
+      message: `your ${t.piece} on ${t.square} can be taken by ${t.attackedBy[0] ?? 'a piece'} ${t.defendedBy.length ? 'and the trade would cost you material' : 'and nothing protects it'}.`,
+    })),
   async hint(fen) {
-    const m = new Chess(fen).moves({ verbose: true })[0]!;
-    return { uci: toUci(m), text: 'Try this move.' };
+    const lines = await getEngine().analyse(fen, { nodes: 120_000, multipv: 1 });
+    const uci = lines[0]?.uci;
+    if (!uci) throw new Error('no hint available');
+    return { uci, text: describeMove(fen, uci) };
   },
 };
