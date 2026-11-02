@@ -1,0 +1,438 @@
+{
+  "meta": {
+    "version": 1,
+    "engine": "Stockfish 19 lite single",
+    "profile": "quick",
+    "reportingSeedStart": 10000,
+    "tuningSeeds": "1..999",
+    "nodeBudget": 500,
+    "referenceNodes": 1000,
+    "generatedAt": "2026-11-02T06:42:22.127Z",
+    "cpuWorkers": 4,
+    "cpuAvailableWorkers": 14,
+    "fullProfileStatus": "attempted; Stockfish lite WASM aborts at the registered 300000-node reference limit on this Node 24 environment"
+  },
+  "levels": [
+    {
+      "id": "L1",
+      "name": "Sleepy Pawn",
+      "rating": 2273.3236818622736,
+      "ciLow": 2213.3236818622736,
+      "ciHigh": 2333.3236818622736
+    },
+    {
+      "id": "L2",
+      "name": "Eager Squire",
+      "rating": 26.682109020374128,
+      "ciLow": -33.31789097962587,
+      "ciHigh": 86.68210902037413
+    },
+    {
+      "id": "L3",
+      "name": "Clever Knight",
+      "rating": 980.005790882648,
+      "ciLow": 920.005790882648,
+      "ciHigh": 1040.005790882648
+    },
+    {
+      "id": "L4",
+      "name": "Wily Bishop",
+      "rating": 1933.329472744921,
+      "ciLow": 1873.329472744921,
+      "ciHigh": 1993.329472744921
+    },
+    {
+      "id": "L5",
+      "name": "Stern Rook",
+      "rating": 2886.653154607195,
+      "ciLow": 2826.653154607195,
+      "ciHigh": 2946.653154607195
+    },
+    {
+      "id": "L6",
+      "name": "Sharp Queen",
+      "rating": 3839.976836469468,
+      "ciLow": 3779.976836469468,
+      "ciHigh": 3899.976836469468
+    },
+    {
+      "id": "L7",
+      "name": "Old Master",
+      "rating": 4793.300518331742,
+      "ciLow": 4733.300518331742,
+      "ciHigh": 4853.300518331742
+    },
+    {
+      "id": "L8",
+      "name": "Archmage",
+      "rating": 4146.641572841919,
+      "ciLow": 4086.641572841919,
+      "ciHigh": 4206.641572841919
+    }
+  ],
+  "pairs": [
+    {
+      "a": "L2",
+      "b": "L1",
+      "score": 0,
+      "low": 0,
+      "high": 0.7934567085261071,
+      "games": 1,
+      "pass": false
+    },
+    {
+      "a": "L3",
+      "b": "L2",
+      "score": 1,
+      "low": 0.2065432914738929,
+      "high": 1,
+      "games": 1,
+      "pass": false
+    },
+    {
+      "a": "L4",
+      "b": "L3",
+      "score": 1,
+      "low": 0.2065432914738929,
+      "high": 1,
+      "games": 1,
+      "pass": false
+    },
+    {
+      "a": "L5",
+      "b": "L4",
+      "score": 1,
+      "low": 0.2065432914738929,
+      "high": 1,
+      "games": 1,
+      "pass": false
+    },
+    {
+      "a": "L6",
+      "b": "L5",
+      "score": 1,
+      "low": 0.2065432914738929,
+      "high": 1,
+      "games": 1,
+      "pass": false
+    },
+    {
+      "a": "L7",
+      "b": "L6",
+      "score": 1,
+      "low": 0.2065432914738929,
+      "high": 1,
+      "games": 1,
+      "pass": false
+    },
+    {
+      "a": "L8",
+      "b": "L7",
+      "score": 0.5,
+      "low": 0.054619065145883494,
+      "high": 0.9453809348541165,
+      "games": 1,
+      "pass": false
+    }
+  ],
+  "anchors": [
+    {
+      "match": "L1 vs UCI Elo 1320",
+      "score": 1,
+      "low": 0.2065432914738929,
+      "high": 1,
+      "pass": false
+    },
+    {
+      "match": "L8 vs UCI Elo 1900",
+      "score": 1,
+      "low": 0.2065432914738929,
+      "high": 1,
+      "pass": true
+    }
+  ],
+  "blunders": [
+    {
+      "player": "L1",
+      "games": 10,
+      "moves": 576,
+      "blunders": 62,
+      "blunderRate": 0.1076388888888889,
+      "hangingBlunders": 7,
+      "hangingShare": 0.11290322580645161
+    },
+    {
+      "player": "L2",
+      "games": 2,
+      "moves": 145,
+      "blunders": 11,
+      "blunderRate": 0.07586206896551724,
+      "hangingBlunders": 3,
+      "hangingShare": 0.2727272727272727
+    },
+    {
+      "player": "L3",
+      "games": 2,
+      "moves": 76,
+      "blunders": 3,
+      "blunderRate": 0.039473684210526314,
+      "hangingBlunders": 0,
+      "hangingShare": 0
+    },
+    {
+      "player": "L4",
+      "games": 2,
+      "moves": 107,
+      "blunders": 4,
+      "blunderRate": 0.037383177570093455,
+      "hangingBlunders": 1,
+      "hangingShare": 0.25
+    },
+    {
+      "player": "elo1320",
+      "games": 3,
+      "moves": 225,
+      "blunders": 26,
+      "blunderRate": 0.11555555555555555,
+      "hangingBlunders": 7,
+      "hangingShare": 0.2692307692307692
+    },
+    {
+      "player": "random",
+      "games": 2,
+      "moves": 64,
+      "blunders": 6,
+      "blunderRate": 0.09375,
+      "hangingBlunders": 3,
+      "hangingShare": 0.5
+    },
+    {
+      "player": "minimax",
+      "games": 2,
+      "moves": 56,
+      "blunders": 18,
+      "blunderRate": 0.32142857142857145,
+      "hangingBlunders": 3,
+      "hangingShare": 0.16666666666666666
+    },
+    {
+      "player": "skill0",
+      "games": 2,
+      "moves": 125,
+      "blunders": 20,
+      "blunderRate": 0.16,
+      "hangingBlunders": 5,
+      "hangingShare": 0.25
+    }
+  ],
+  "coach": [
+    {
+      "name": "coach-see",
+      "pairs": 100,
+      "positives": 0,
+      "predicted": 9,
+      "truePositives": 0,
+      "precision": 0,
+      "recall": 0
+    },
+    {
+      "name": "warn-if-attacked",
+      "pairs": 100,
+      "positives": 0,
+      "predicted": 25,
+      "truePositives": 0,
+      "precision": 0,
+      "recall": 0
+    },
+    {
+      "name": "never-warn",
+      "pairs": 100,
+      "positives": 0,
+      "predicted": 0,
+      "truePositives": 0,
+      "precision": 0,
+      "recall": 0
+    }
+  ],
+  "latency": {
+    "p95Ms": 652.8367000000144,
+    "samples": [
+      580.9244000000181,
+      621.4500999999873,
+      633.1349000000046,
+      652.8367000000144
+    ],
+    "bundleBytes": 1885306,
+    "bundleCheck": "pass"
+  },
+  "metrics": {
+    "M1": {
+      "pass": false,
+      "value": "0/7 adjacent pairs",
+      "threshold": "all >=60% and Wilson low >50%"
+    },
+    "M2": {
+      "pass": false,
+      "value": "false/true",
+      "threshold": "L1 <=10%; L8 >=60%"
+    },
+    "M3": {
+      "pass": false,
+      "value": [
+        {
+          "player": "L1",
+          "games": 10,
+          "moves": 576,
+          "blunders": 62,
+          "blunderRate": 0.1076388888888889,
+          "hangingBlunders": 7,
+          "hangingShare": 0.11290322580645161
+        },
+        {
+          "player": "L2",
+          "games": 2,
+          "moves": 145,
+          "blunders": 11,
+          "blunderRate": 0.07586206896551724,
+          "hangingBlunders": 3,
+          "hangingShare": 0.2727272727272727
+        },
+        {
+          "player": "L3",
+          "games": 2,
+          "moves": 76,
+          "blunders": 3,
+          "blunderRate": 0.039473684210526314,
+          "hangingBlunders": 0,
+          "hangingShare": 0
+        },
+        {
+          "player": "L4",
+          "games": 2,
+          "moves": 107,
+          "blunders": 4,
+          "blunderRate": 0.037383177570093455,
+          "hangingBlunders": 1,
+          "hangingShare": 0.25
+        },
+        {
+          "player": "elo1320",
+          "games": 3,
+          "moves": 225,
+          "blunders": 26,
+          "blunderRate": 0.11555555555555555,
+          "hangingBlunders": 7,
+          "hangingShare": 0.2692307692307692
+        },
+        {
+          "player": "random",
+          "games": 2,
+          "moves": 64,
+          "blunders": 6,
+          "blunderRate": 0.09375,
+          "hangingBlunders": 3,
+          "hangingShare": 0.5
+        },
+        {
+          "player": "minimax",
+          "games": 2,
+          "moves": 56,
+          "blunders": 18,
+          "blunderRate": 0.32142857142857145,
+          "hangingBlunders": 3,
+          "hangingShare": 0.16666666666666666
+        },
+        {
+          "player": "skill0",
+          "games": 2,
+          "moves": 125,
+          "blunders": 20,
+          "blunderRate": 0.16,
+          "hangingBlunders": 5,
+          "hangingShare": 0.25
+        }
+      ],
+      "threshold": "L1-L4 blunder rate 3%-15%; hung share >=60%"
+    },
+    "M4": {
+      "pass": false,
+      "value": {
+        "precision": 0,
+        "recall": 0,
+        "pairs": 100
+      },
+      "threshold": "precision >=0.85; recall >=0.60; pairs >=5000"
+    },
+    "M5": {
+      "pass": true,
+      "value": {
+        "p95Ms": 652.8367000000144,
+        "bundleBytes": 1885306
+      },
+      "threshold": "p95 <=1500ms; bundle <=6MB"
+    }
+  },
+  "runs": [
+    {
+      "profile": "quick",
+      "generatedAt": "2026-11-02T06:42:22.128Z",
+      "metrics": {
+        "M1": false,
+        "M2": false,
+        "M3": false,
+        "M4": false,
+        "M5": true
+      }
+    }
+  ],
+  "errorAnalysis": {
+    "falsePositives": [
+      {
+        "fen": "rn1qkbnr/1bpppppp/8/pp6/P3P3/5NP1/1PPP1P1P/RNBQKB1R b KQkq - 0 4",
+        "move": "b5a4",
+        "reason": "SEE warned, reference label was negative"
+      },
+      {
+        "fen": "rn1qkb1r/1bpppppp/5n2/p7/R3P3/3P1NP1/1PP2P1P/1NBQKB1R b Kkq - 0 6",
+        "move": "e7e5",
+        "reason": "SEE warned, reference label was negative"
+      },
+      {
+        "fen": "r2qk2r/2p1bpp1/1nnpb2p/BN2p3/R3P3/3P1NP1/1PP2PBP/Q1R3K1 b kq - 0 15",
+        "move": "c6a5",
+        "reason": "SEE warned, reference label was negative"
+      },
+      {
+        "fen": "r2qk2r/4bpp1/1nppb2p/RN2p3/4P3/3P1NP1/1PP2PBP/Q1R3K1 w kq - 0 17",
+        "move": "a5a8",
+        "reason": "SEE warned, reference label was negative"
+      },
+      {
+        "fen": "R1bqk2r/4bpp1/1npp3p/1N2p3/4P3/3P1NP1/1PP2PBP/Q1R3K1 w k - 1 18",
+        "move": "b5d6",
+        "reason": "SEE warned, reference label was negative"
+      },
+      {
+        "fen": "7r/2q1bp1k/1np1b2p/R3p3/2P1P1p1/3P2PP/5PB1/Q2R2NK w - - 1 31",
+        "move": "h3g4",
+        "reason": "SEE warned, reference label was negative"
+      },
+      {
+        "fen": "7r/5p1k/1Pp1b2p/4p2q/4P3/2Q2PP1/6B1/5RNK w - - 1 45",
+        "move": "g2h3",
+        "reason": "SEE warned, reference label was negative"
+      },
+      {
+        "fen": "1B6/5pk1/2p4p/4Q2q/4P3/5PPb/5R2/4r1NK b - - 0 50",
+        "move": "h5e5",
+        "reason": "SEE warned, reference label was negative"
+      },
+      {
+        "fen": "6k1/5p2/2p4p/4B3/4P3/5PPb/5R1K/4r1N1 b - - 2 52",
+        "move": "h3g4",
+        "reason": "SEE warned, reference label was negative"
+      }
+    ],
+    "falseNegatives": []
+  }
+}
