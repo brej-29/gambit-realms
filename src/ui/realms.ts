@@ -29,7 +29,10 @@ export function applyRealm(id: Realm) {
     document.dispatchEvent(new CustomEvent('realmchange', { detail: id }));
   };
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const doc = document as Document & { startViewTransition?: (cb: () => void) => unknown };
-  if (doc.startViewTransition && !reduce) doc.startViewTransition(set);
-  else set();
+  const doc = document as Document & { startViewTransition?: (cb: () => void) => { skipTransition(): void } };
+  if (doc.startViewTransition && !reduce) {
+    const vt = doc.startViewTransition(set);
+    // While a view transition runs the page ignores input; never let a stalled one trap the player.
+    setTimeout(() => vt.skipTransition(), 1200);
+  } else set();
 }
