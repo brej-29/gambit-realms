@@ -1,0 +1,116 @@
+/* Realm tokens. Every realm re-skins the same rig through these variables. */
+:root {
+  --font-body: 'Instrument Sans', system-ui, sans-serif;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-realm='enchanted'] {
+  --font-display: 'IM Fell English', Georgia, serif;
+  --bg: #0d0a1c;
+  --bg-glow: #2a1b57;
+  --panel: rgba(28, 21, 56, 0.72);
+  --panel-line: rgba(232, 182, 76, 0.28);
+  --ink: #f3ead4;
+  --muted: #a99fc8;
+  --accent: #e8b64c;
+  --accent-ink: #1b1233;
+  --magic: #a68bff;
+  --sq-light: #d8cdb2;
+  --sq-dark: #4b3b73;
+  --board-edge: #231943;
+  --w-body: #efe6d0;  --w-trim: #d9a93f;  --w-shade: rgba(120, 96, 60, 0.28);
+  --b-body: #2c2345;  --b-trim: #8f78e8;  --b-shade: rgba(0, 0, 0, 0.38);
+  --line: rgba(17, 10, 36, 0.85);  --lw: 1.4;
+  --w-eye: #fff2b8; --b-eye: #c9b8ff; --pupil: #21163f;
+  --w-aura: rgba(255, 214, 120, 0.55); --b-aura: rgba(150, 120, 255, 0.6);
+  --danger: #ff5d73;
+}
+
+[data-realm='medieval'] {
+  --font-display: 'Pirata One', 'IM Fell English', serif;
+  --bg: #17130d;
+  --bg-glow: #4a2c14;
+  --panel: rgba(38, 29, 19, 0.82);
+  --panel-line: rgba(201, 164, 107, 0.3);
+  --ink: #f1e6cc;
+  --muted: #b5a283;
+  --accent: #c5412f;
+  --accent-ink: #fff4de;
+  --magic: #e0a64a;
+  --sq-light: #cfab72;
+  --sq-dark: #6e4a2a;
+  --board-edge: #3a2615;
+  --w-body: #ddd6c2;  --w-trim: #a3281f;  --w-shade: rgba(90, 70, 40, 0.3);
+  --b-body: #3d3b40;  --b-trim: #c19a3f;  --b-shade: rgba(0, 0, 0, 0.4);
+  --line: rgba(30, 18, 8, 0.95);  --lw: 1.8;
+  --w-eye: #f7ecd0; --b-eye: #f0d9a0; --pupil: #1c120a;
+  --w-aura: rgba(0, 0, 0, 0); --b-aura: rgba(0, 0, 0, 0);
+  --danger: #ff6a3d;
+}
+
+[data-realm='cyberpunk'] {
+  --font-display: 'Chakra Petch', 'Segoe UI', sans-serif;
+  --bg: #06060f;
+  --bg-glow: #3a0b4d;
+  --panel: rgba(14, 14, 36, 0.78);
+  --panel-line: rgba(25, 243, 255, 0.35);
+  --ink: #e6f6ff;
+  --muted: #8da3c9;
+  --accent: #19f3ff;
+  --accent-ink: #04121a;
+  --magic: #ff35d1;
+  --sq-light: #1a1c45;
+  --sq-dark: #0d0e29;
+  --board-edge: #0a0a1f;
+  --w-body: rgba(10, 30, 50, 0.9);  --w-trim: #19f3ff;  --w-shade: rgba(0, 0, 0, 0);
+  --b-body: rgba(40, 8, 40, 0.9);   --b-trim: #ff35d1;  --b-shade: rgba(0, 0, 0, 0);
+  --w-line: #19f3ff; --b-line: #ff35d1;  --lw: 1.6;
+  --w-eye: #eaffff; --b-eye: #ffe8fa; --pupil: #06060f;
+  --w-aura: rgba(25, 243, 255, 0.65); --b-aura: rgba(255, 53, 209, 0.65);
+  --danger: #ffe14a;
+}
+
+[data-realm='anime'] {
+  --font-display: 'Dela Gothic One', 'Chakra Petch', sans-serif;
+  --bg: #ffd9ea;
+  --bg-glow: #bfe3ff;
+  --panel: rgba(255, 255, 255, 0.82);
+  --panel-line: rgba(28, 18, 51, 0.9);
+  --ink: #1c1233;
+  --muted: #5f4f86;
+  --accent: #d81b60;
+  --accent-ink: #ffffff;
+  --magic: #5aa8ff;
+  --sq-light: #fff3f8;
+  --sq-dark: #f4a9c8;
+  --board-edge: #1c1233;
+  --w-body: #ffffff;  --w-trim: #ff5c9e;  --w-shade: rgba(120, 160, 255, 0.4);
+  --b-body: #5a46b0;  --b-trim: #ffd35c;  --b-shade: rgba(20, 8, 70, 0.4);
+  --line: #1c1233;  --lw: 2.6;
+  --w-eye: #ffffff; --b-eye: #ffffff; --pupil: #1c1233;
+  --w-aura: rgba(0, 0, 0, 0); --b-aura: rgba(0, 0, 0, 0);
+  --danger: #e8174f;
+}
+
+/* ---- piece art ---- */
+.art { width: 100%; height: 100%; overflow: visible; }
+.art .k { fill: rgba(0, 0, 0, 0.32); }
+.art .b, .art .t { stroke: var(--line); stroke-width: var(--lw); stroke-linejoin: round; }
+.art .t { stroke-width: calc(var(--lw) * 0.55); }
+.art .s { stroke: none; }
+.art .p { fill: var(--pupil); }
+
+.w { --body: var(--w-body); --trim: var(--w-trim); --shade: var(--w-shade); --eye: var(--w-eye); --aura: var(--w-aura); --line-c: var(--w-line, var(--line)); }
+.bk { --body: var(--b-body); --trim: var(--b-trim); --shade: var(--b-shade); --eye: var(--b-eye); --aura: var(--b-aura); --line-c: var(--b-line, var(--line)); }
+.art .b { fill: var(--body); stroke: var(--line-c); }
+.art .t { fill: var(--trim); stroke: var(--line-c); }
+.art .s { fill: var(--shade); }
+.art .e { fill: var(--eye); }
+
+[data-realm='cyberpunk'] .art .t { fill-opacity: 0.85; }
+[data-realm='cyberpunk'] .art .b, [data-realm='cyberpunk'] .art .t { filter: drop-shadow(0 0 2.5px var(--aura)); }
+[data-realm='cyberpunk'] .art .k { fill: var(--aura); opacity: 0.4; }
+[data-realm='anime'] .art .e { transform-box: fill-box; transform-origin: center; transform: scale(1.35); }
+[data-realm='anime'] .art .p { transform-box: fill-box; transform-origin: center; transform: scale(1.5); }
+[data-realm='enchanted'] .art .e { filter: drop-shadow(0 0 2px var(--eye)); }
