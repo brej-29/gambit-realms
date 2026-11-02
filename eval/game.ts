@@ -109,8 +109,7 @@ async function choosePlayerMove(spec: PlayerSpec, chess: Chess, rng: () => numbe
   const options = spec.kind === 'level' ? { nodes: spec.config.nodes, multipv: spec.config.multipv } : spec.options;
   const lines = await engine.analyse(chess.fen({ forceEnpassantSquare: true }), options);
   if (spec.kind === 'level') {
-    const legal = (chess.moves({ verbose: true }) as Move[]).map((move) => `${move.from}${move.to}${move.promotion ?? ''}`);
-    return chooseMove(lines, spec.config, rng, legal);
+    return chooseMove(lines, spec.config, rng, chess.fen({ forceEnpassantSquare: true }));
   }
   return lines[0]?.uci ?? uciFromMove(chess, chooseRandom(chess, rng));
 }

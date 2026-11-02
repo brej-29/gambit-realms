@@ -23,6 +23,8 @@ export interface CoachOptions {
   countDefenders?: boolean;
   /** Ablation: treat geometrically attacking pinned pieces as attackers. */
   pinnedPieceRule?: boolean;
+  /** Original behaviour: only judge the piece that moved. Default is to also catch any other piece the move leaves en prise. */
+  movedPieceOnly?: boolean;
 }
 
 function other(color: Color): Color {
@@ -62,6 +64,12 @@ export function assessMove(fen: string, uci: string, options: CoachOptions = {})
     message = `${piece[0]?.toUpperCase() ?? ''}${piece.slice(1)} on ${config.to} can be taken by ${attacker ? pieceName(attacker.piece) + ' from ' + attacker.from : 'the opponent'} and cannot be recovered without losing material.`;
   } else if (attackers) {
     message = `${piece[0]?.toUpperCase() ?? ''}${piece.slice(1)} on ${config.to} is attacked, but your pieces can defend or recapture it.`;
+  }
+  if (!hangs && options.movedPieceOnly !== true) {
+    const worst = explainThreats(after.fen({ forceEnpassantSquare: true }), movedPiece.color).sort((a, b) => b.netLoss - a.netLoss)[0];
+    if (worst) {
+      return { hangs: true, piece: worst.piece, attackers: worst.attackedBy.length, defenders: worst.defendedBy.length, netLoss: worst.netLoss, message: `After this move your ${worst.piece} on ${worst.square} can be taken by ${worst.attackedBy[0] ?? 'a piece'} and nothing makes up for it.` };
+    }
   }
   return { hangs, piece, attackers, defenders, netLoss, message };
 }

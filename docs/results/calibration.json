@@ -1,0 +1,3490 @@
+{
+  "low": {
+    "generatedAt": "2026-11-02T07:49:48.957Z",
+    "seeds": "1..999",
+    "anchorNodes": 5000,
+    "referenceNodes": 20000,
+    "gamesPerAnchor": 12,
+    "rows": [
+      {
+        "candidate": 0,
+        "nodes": 100,
+        "multipv": 4,
+        "temperature": 60,
+        "oversight": 0.1,
+        "rating": 1374,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.5833333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.08333333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.08333333333333333,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.016666666666666666,
+        "hangShare": 1
+      },
+      {
+        "candidate": 1,
+        "nodes": 100,
+        "multipv": 4,
+        "temperature": 160,
+        "oversight": 0.1,
+        "rating": 1402,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.625,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.08333333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.125,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.11666666666666667,
+        "hangShare": 0.5714285714285714
+      },
+      {
+        "candidate": 2,
+        "nodes": 100,
+        "multipv": 4,
+        "temperature": 60,
+        "oversight": 0.2,
+        "rating": 1314,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.5,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.041666666666666664,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.041666666666666664,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.11666666666666667,
+        "hangShare": 0.8571428571428571
+      },
+      {
+        "candidate": 3,
+        "nodes": 100,
+        "multipv": 4,
+        "temperature": 160,
+        "oversight": 0.2,
+        "rating": 1282,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.4583333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.041666666666666664,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.08333333333333333,
+        "hangShare": 0.8
+      },
+      {
+        "candidate": 4,
+        "nodes": 100,
+        "multipv": 4,
+        "temperature": 60,
+        "oversight": 0.3,
+        "rating": 1142,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.16666666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.041666666666666664,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.15,
+        "hangShare": 0.6666666666666666
+      },
+      {
+        "candidate": 5,
+        "nodes": 100,
+        "multipv": 4,
+        "temperature": 160,
+        "oversight": 0.3,
+        "rating": 1142,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.125,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.08333333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.11666666666666667,
+        "hangShare": 0.8571428571428571
+      },
+      {
+        "candidate": 6,
+        "nodes": 100,
+        "multipv": 4,
+        "temperature": 60,
+        "oversight": 0.4,
+        "rating": 1056,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.041666666666666664,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.041666666666666664,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.15,
+        "hangShare": 0.8888888888888888
+      },
+      {
+        "candidate": 7,
+        "nodes": 100,
+        "multipv": 4,
+        "temperature": 160,
+        "oversight": 0.4,
+        "rating": 1056,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.08333333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.11666666666666667,
+        "hangShare": 1
+      },
+      {
+        "candidate": 8,
+        "nodes": 100,
+        "multipv": 4,
+        "temperature": 60,
+        "oversight": 0.5,
+        "rating": 1088,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.125,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.13333333333333333,
+        "hangShare": 0.875
+      },
+      {
+        "candidate": 9,
+        "nodes": 100,
+        "multipv": 4,
+        "temperature": 160,
+        "oversight": 0.5,
+        "rating": 1020,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.041666666666666664,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.16666666666666666,
+        "hangShare": 0.9
+      },
+      {
+        "candidate": 10,
+        "nodes": 300,
+        "multipv": 4,
+        "temperature": 60,
+        "oversight": 0.1,
+        "rating": 1416,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.625,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.25,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.1,
+        "hangShare": 0.6666666666666666
+      },
+      {
+        "candidate": 11,
+        "nodes": 300,
+        "multipv": 4,
+        "temperature": 160,
+        "oversight": 0.1,
+        "rating": 1298,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.375,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.125,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.041666666666666664,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.2,
+        "hangShare": 0.75
+      },
+      {
+        "candidate": 12,
+        "nodes": 300,
+        "multipv": 4,
+        "temperature": 60,
+        "oversight": 0.2,
+        "rating": 1188,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.2916666666666667,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.16666666666666666,
+        "hangShare": 0.8
+      },
+      {
+        "candidate": 13,
+        "nodes": 300,
+        "multipv": 4,
+        "temperature": 160,
+        "oversight": 0.2,
+        "rating": 1228,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.3333333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.041666666666666664,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.15,
+        "hangShare": 0.6666666666666666
+      },
+      {
+        "candidate": 14,
+        "nodes": 300,
+        "multipv": 4,
+        "temperature": 60,
+        "oversight": 0.3,
+        "rating": 1209,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.2916666666666667,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.041666666666666664,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.18333333333333332,
+        "hangShare": 0.9090909090909091
+      },
+      {
+        "candidate": 15,
+        "nodes": 300,
+        "multipv": 4,
+        "temperature": 160,
+        "oversight": 0.3,
+        "rating": 1056,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.08333333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.08333333333333333,
+        "hangShare": 1
+      },
+      {
+        "candidate": 16,
+        "nodes": 300,
+        "multipv": 4,
+        "temperature": 60,
+        "oversight": 0.4,
+        "rating": 1142,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.20833333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.16666666666666666,
+        "hangShare": 1
+      },
+      {
+        "candidate": 17,
+        "nodes": 300,
+        "multipv": 4,
+        "temperature": 160,
+        "oversight": 0.4,
+        "rating": 1117,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.16666666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.16666666666666666,
+        "hangShare": 1
+      },
+      {
+        "candidate": 18,
+        "nodes": 300,
+        "multipv": 4,
+        "temperature": 60,
+        "oversight": 0.5,
+        "rating": 1142,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.16666666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.041666666666666664,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.16666666666666666,
+        "hangShare": 0.9
+      },
+      {
+        "candidate": 19,
+        "nodes": 300,
+        "multipv": 4,
+        "temperature": 160,
+        "oversight": 0.5,
+        "rating": 1056,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.08333333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.13333333333333333,
+        "hangShare": 0.75
+      },
+      {
+        "candidate": 20,
+        "nodes": 1000,
+        "multipv": 4,
+        "temperature": 60,
+        "oversight": 0.1,
+        "rating": 1583,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.7083333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.375,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.25,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.08333333333333333,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.1,
+        "hangShare": 1
+      },
+      {
+        "candidate": 21,
+        "nodes": 1000,
+        "multipv": 4,
+        "temperature": 160,
+        "oversight": 0.1,
+        "rating": 1374,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.4583333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.25,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.041666666666666664,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.11666666666666667,
+        "hangShare": 0.8571428571428571
+      },
+      {
+        "candidate": 22,
+        "nodes": 1000,
+        "multipv": 4,
+        "temperature": 60,
+        "oversight": 0.2,
+        "rating": 1314,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.5,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.041666666666666664,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.041666666666666664,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.1,
+        "hangShare": 0.8333333333333334
+      },
+      {
+        "candidate": 23,
+        "nodes": 1000,
+        "multipv": 4,
+        "temperature": 160,
+        "oversight": 0.2,
+        "rating": 1264,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.4583333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.11666666666666667,
+        "hangShare": 0.8571428571428571
+      },
+      {
+        "candidate": 24,
+        "nodes": 1000,
+        "multipv": 4,
+        "temperature": 60,
+        "oversight": 0.3,
+        "rating": 1209,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.2916666666666667,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.041666666666666664,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.13333333333333333,
+        "hangShare": 0.75
+      },
+      {
+        "candidate": 25,
+        "nodes": 1000,
+        "multipv": 4,
+        "temperature": 160,
+        "oversight": 0.3,
+        "rating": 1117,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.125,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.041666666666666664,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.18333333333333332,
+        "hangShare": 0.9090909090909091
+      },
+      {
+        "candidate": 26,
+        "nodes": 1000,
+        "multipv": 4,
+        "temperature": 60,
+        "oversight": 0.4,
+        "rating": 1166,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.25,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.08333333333333333,
+        "hangShare": 1
+      },
+      {
+        "candidate": 27,
+        "nodes": 1000,
+        "multipv": 4,
+        "temperature": 160,
+        "oversight": 0.4,
+        "rating": 1088,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.125,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.1,
+        "hangShare": 1
+      },
+      {
+        "candidate": 28,
+        "nodes": 1000,
+        "multipv": 4,
+        "temperature": 60,
+        "oversight": 0.5,
+        "rating": 1088,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.125,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.1,
+        "hangShare": 0.8333333333333334
+      },
+      {
+        "candidate": 29,
+        "nodes": 1000,
+        "multipv": 4,
+        "temperature": 160,
+        "oversight": 0.5,
+        "rating": 1056,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.08333333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.16666666666666666,
+        "hangShare": 0.8
+      },
+      {
+        "candidate": 30,
+        "nodes": 3000,
+        "multipv": 4,
+        "temperature": 60,
+        "oversight": 0.1,
+        "rating": 1607,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.875,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.20833333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.375,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.041666666666666664,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.08333333333333333,
+        "hangShare": 0.8
+      },
+      {
+        "candidate": 31,
+        "nodes": 3000,
+        "multipv": 4,
+        "temperature": 160,
+        "oversight": 0.1,
+        "rating": 1402,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.5416666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.2916666666666667,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.05,
+        "hangShare": 0
+      },
+      {
+        "candidate": 32,
+        "nodes": 3000,
+        "multipv": 4,
+        "temperature": 60,
+        "oversight": 0.2,
+        "rating": 1430,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.5833333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.125,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.16666666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.041666666666666664,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.11666666666666667,
+        "hangShare": 0.7142857142857143
+      },
+      {
+        "candidate": 33,
+        "nodes": 3000,
+        "multipv": 4,
+        "temperature": 160,
+        "oversight": 0.2,
+        "rating": 1298,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.3333333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.16666666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.041666666666666664,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.08333333333333333,
+        "hangShare": 0.8
+      },
+      {
+        "candidate": 34,
+        "nodes": 3000,
+        "multipv": 4,
+        "temperature": 60,
+        "oversight": 0.3,
+        "rating": 1247,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.375,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.041666666666666664,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.06666666666666667,
+        "hangShare": 0.75
+      },
+      {
+        "candidate": 35,
+        "nodes": 3000,
+        "multipv": 4,
+        "temperature": 160,
+        "oversight": 0.3,
+        "rating": 1209,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.2916666666666667,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.041666666666666664,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.13333333333333333,
+        "hangShare": 0.75
+      },
+      {
+        "candidate": 36,
+        "nodes": 3000,
+        "multipv": 4,
+        "temperature": 60,
+        "oversight": 0.4,
+        "rating": 1209,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.3333333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.15,
+        "hangShare": 0.7777777777777778
+      },
+      {
+        "candidate": 37,
+        "nodes": 3000,
+        "multipv": 4,
+        "temperature": 160,
+        "oversight": 0.4,
+        "rating": 1117,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.16666666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.08333333333333333,
+        "hangShare": 1
+      },
+      {
+        "candidate": 38,
+        "nodes": 3000,
+        "multipv": 4,
+        "temperature": 60,
+        "oversight": 0.5,
+        "rating": 1166,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.16666666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.041666666666666664,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.041666666666666664,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.13333333333333333,
+        "hangShare": 0.75
+      },
+      {
+        "candidate": 39,
+        "nodes": 3000,
+        "multipv": 4,
+        "temperature": 160,
+        "oversight": 0.5,
+        "rating": 1020,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.041666666666666664,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.08333333333333333,
+        "hangShare": 1
+      }
+    ]
+  },
+  "high": {
+    "generatedAt": "2026-11-02T08:26:34.819Z",
+    "seeds": "1..999",
+    "anchorNodes": 5000,
+    "referenceNodes": 20000,
+    "gamesPerAnchor": 12,
+    "rows": [
+      {
+        "candidate": 0,
+        "nodes": 2000,
+        "multipv": 1,
+        "temperature": 0,
+        "rating": 2956,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.9583333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.875,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0.75,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0.6666666666666666,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.03333333333333333,
+        "hangShare": 0.5
+      },
+      {
+        "candidate": 1,
+        "nodes": 2000,
+        "multipv": 3,
+        "temperature": 40,
+        "rating": 2332,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.9583333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.8333333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.4583333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0.2916666666666667,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0.2916666666666667,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.016666666666666666,
+        "hangShare": 1
+      },
+      {
+        "candidate": 2,
+        "nodes": 2000,
+        "multipv": 3,
+        "temperature": 90,
+        "rating": 2127,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.5833333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.875,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.4583333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0.20833333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0.08333333333333333,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0,
+        "hangShare": null
+      },
+      {
+        "candidate": 3,
+        "nodes": 6000,
+        "multipv": 1,
+        "temperature": 0,
+        "rating": 3410,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 1,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0,
+        "hangShare": null
+      },
+      {
+        "candidate": 4,
+        "nodes": 6000,
+        "multipv": 3,
+        "temperature": 40,
+        "rating": 2956,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.875,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0.8333333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0.5416666666666666,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0,
+        "hangShare": null
+      },
+      {
+        "candidate": 5,
+        "nodes": 6000,
+        "multipv": 3,
+        "temperature": 90,
+        "rating": 2501,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.9583333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.9166666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.625,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0.5,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0.2916666666666667,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0,
+        "hangShare": null
+      },
+      {
+        "candidate": 6,
+        "nodes": 15000,
+        "multipv": 1,
+        "temperature": 0,
+        "rating": 3410,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 1,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0,
+        "hangShare": null
+      },
+      {
+        "candidate": 7,
+        "nodes": 15000,
+        "multipv": 3,
+        "temperature": 40,
+        "rating": 2980,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.9166666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.9583333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0.875,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0.5416666666666666,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.016666666666666666,
+        "hangShare": 1
+      },
+      {
+        "candidate": 8,
+        "nodes": 15000,
+        "multipv": 3,
+        "temperature": 90,
+        "rating": 2517,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.9583333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.9583333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.75,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0.4166666666666667,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0.25,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0,
+        "hangShare": null
+      },
+      {
+        "candidate": 9,
+        "nodes": 40000,
+        "multipv": 1,
+        "temperature": 0,
+        "rating": 3375,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0.9583333333333334,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0,
+        "hangShare": null
+      },
+      {
+        "candidate": 10,
+        "nodes": 40000,
+        "multipv": 3,
+        "temperature": 40,
+        "rating": 3315,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.9583333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0.9583333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0.9583333333333334,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0,
+        "hangShare": null
+      },
+      {
+        "candidate": 11,
+        "nodes": 40000,
+        "multipv": 3,
+        "temperature": 90,
+        "rating": 2839,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.9583333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.9166666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.75,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0.75,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0.6666666666666666,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.016666666666666666,
+        "hangShare": 0
+      },
+      {
+        "candidate": 12,
+        "nodes": 100000,
+        "multipv": 1,
+        "temperature": 0,
+        "rating": 3410,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 1,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0,
+        "hangShare": null
+      },
+      {
+        "candidate": 13,
+        "nodes": 100000,
+        "multipv": 3,
+        "temperature": 40,
+        "rating": 3261,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.9583333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.9583333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0.875,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0,
+        "hangShare": null
+      },
+      {
+        "candidate": 14,
+        "nodes": 100000,
+        "multipv": 3,
+        "temperature": 90,
+        "rating": 3143,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.9166666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0.9166666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0.75,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.016666666666666666,
+        "hangShare": 1
+      },
+      {
+        "candidate": 15,
+        "nodes": 256000,
+        "multipv": 1,
+        "temperature": 0,
+        "rating": 3410,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 1,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0,
+        "hangShare": null
+      },
+      {
+        "candidate": 16,
+        "nodes": 256000,
+        "multipv": 3,
+        "temperature": 40,
+        "rating": 3344,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.9583333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.9583333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 1,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.016666666666666666,
+        "hangShare": 1
+      },
+      {
+        "candidate": 17,
+        "nodes": 256000,
+        "multipv": 3,
+        "temperature": 90,
+        "rating": 3143,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0.8333333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0.75,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0,
+        "hangShare": null
+      }
+    ]
+  },
+  "mid": {
+    "generatedAt": "2026-11-02T08:08:52.208Z",
+    "seeds": "1..999",
+    "anchorNodes": 5000,
+    "referenceNodes": 20000,
+    "gamesPerAnchor": 12,
+    "rows": [
+      {
+        "candidate": 0,
+        "nodes": 1000,
+        "multipv": 4,
+        "temperature": 70,
+        "oversight": 0,
+        "rating": 1833,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.75,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.375,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0.08333333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.05,
+        "hangShare": 0.3333333333333333
+      },
+      {
+        "candidate": 1,
+        "nodes": 1000,
+        "multipv": 4,
+        "temperature": 70,
+        "oversight": 0.05,
+        "rating": 1655,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.9166666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.4166666666666667,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.25,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.08333333333333333,
+        "hangShare": 0.8
+      },
+      {
+        "candidate": 2,
+        "nodes": 1000,
+        "multipv": 4,
+        "temperature": 110,
+        "oversight": 0,
+        "rating": 1594,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.8333333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.2916666666666667,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.20833333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0.041666666666666664,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.08333333333333333,
+        "hangShare": 0.8
+      },
+      {
+        "candidate": 3,
+        "nodes": 1000,
+        "multipv": 4,
+        "temperature": 110,
+        "oversight": 0.05,
+        "rating": 1545,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.9583333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.16666666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.08333333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.05,
+        "hangShare": 0.3333333333333333
+      },
+      {
+        "candidate": 4,
+        "nodes": 1000,
+        "multipv": 4,
+        "temperature": 150,
+        "oversight": 0,
+        "rating": 1618,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.7083333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.5,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.16666666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.08333333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.03333333333333333,
+        "hangShare": 0.5
+      },
+      {
+        "candidate": 5,
+        "nodes": 1000,
+        "multipv": 4,
+        "temperature": 150,
+        "oversight": 0.05,
+        "rating": 1606,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.7083333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.4583333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.16666666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.041666666666666664,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0.041666666666666664,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.1,
+        "hangShare": 0.5
+      },
+      {
+        "candidate": 6,
+        "nodes": 2000,
+        "multipv": 4,
+        "temperature": 70,
+        "oversight": 0,
+        "rating": 1990,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.7916666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.5833333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.25,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0.08333333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0.041666666666666664,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.05,
+        "hangShare": 0.3333333333333333
+      },
+      {
+        "candidate": 7,
+        "nodes": 2000,
+        "multipv": 4,
+        "temperature": 70,
+        "oversight": 0.05,
+        "rating": 1726,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.875,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.375,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.4166666666666667,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.125,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0.041666666666666664,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.05,
+        "hangShare": 0.6666666666666666
+      },
+      {
+        "candidate": 8,
+        "nodes": 2000,
+        "multipv": 4,
+        "temperature": 110,
+        "oversight": 0,
+        "rating": 1905,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.9583333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.7916666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.5,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.08333333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0.125,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.016666666666666666,
+        "hangShare": 1
+      },
+      {
+        "candidate": 9,
+        "nodes": 2000,
+        "multipv": 4,
+        "temperature": 110,
+        "oversight": 0.05,
+        "rating": 1726,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.875,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.5833333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.20833333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.16666666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0,
+        "hangShare": null
+      },
+      {
+        "candidate": 10,
+        "nodes": 2000,
+        "multipv": 4,
+        "temperature": 150,
+        "oversight": 0,
+        "rating": 1643,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.8333333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.4166666666666667,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.16666666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.125,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.03333333333333333,
+        "hangShare": 0
+      },
+      {
+        "candidate": 11,
+        "nodes": 2000,
+        "multipv": 4,
+        "temperature": 150,
+        "oversight": 0.05,
+        "rating": 1533,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.7083333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.375,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.08333333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.13333333333333333,
+        "hangShare": 0.625
+      },
+      {
+        "candidate": 12,
+        "nodes": 4000,
+        "multipv": 4,
+        "temperature": 70,
+        "oversight": 0,
+        "rating": 2192,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.875,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.6666666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.3333333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0.5416666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.016666666666666666,
+        "hangShare": 0
+      },
+      {
+        "candidate": 13,
+        "nodes": 4000,
+        "multipv": 4,
+        "temperature": 70,
+        "oversight": 0.05,
+        "rating": 1893,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.6666666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.4166666666666667,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.2916666666666667,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0.041666666666666664,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.08333333333333333,
+        "hangShare": 0.8
+      },
+      {
+        "candidate": 14,
+        "nodes": 4000,
+        "multipv": 4,
+        "temperature": 110,
+        "oversight": 0,
+        "rating": 1845,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.5416666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.5833333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.08333333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0.041666666666666664,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.03333333333333333,
+        "hangShare": 0.5
+      },
+      {
+        "candidate": 15,
+        "nodes": 4000,
+        "multipv": 4,
+        "temperature": 110,
+        "oversight": 0.05,
+        "rating": 1726,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.9166666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.4583333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.375,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0.041666666666666664,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0.041666666666666664,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.06666666666666667,
+        "hangShare": 0.5
+      },
+      {
+        "candidate": 16,
+        "nodes": 4000,
+        "multipv": 4,
+        "temperature": 150,
+        "oversight": 0,
+        "rating": 1786,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.9583333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.4583333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.4166666666666667,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.08333333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0.125,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.06666666666666667,
+        "hangShare": 0.5
+      },
+      {
+        "candidate": 17,
+        "nodes": 4000,
+        "multipv": 4,
+        "temperature": 150,
+        "oversight": 0.05,
+        "rating": 1655,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.5833333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.4583333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.4166666666666667,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.08333333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0.041666666666666664,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.11666666666666667,
+        "hangShare": 0.5714285714285714
+      },
+      {
+        "candidate": 18,
+        "nodes": 8000,
+        "multipv": 4,
+        "temperature": 70,
+        "oversight": 0,
+        "rating": 2361,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.7083333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.375,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0.625,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0.20833333333333334,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.03333333333333333,
+        "hangShare": 0.5
+      },
+      {
+        "candidate": 19,
+        "nodes": 8000,
+        "multipv": 4,
+        "temperature": 70,
+        "oversight": 0.05,
+        "rating": 1905,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.5833333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.5,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.25,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0.041666666666666664,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0.08333333333333333,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.016666666666666666,
+        "hangShare": 0
+      },
+      {
+        "candidate": 20,
+        "nodes": 8000,
+        "multipv": 4,
+        "temperature": 110,
+        "oversight": 0,
+        "rating": 2076,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 1,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.8333333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.625,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.20833333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0.375,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.016666666666666666,
+        "hangShare": 0
+      },
+      {
+        "candidate": 21,
+        "nodes": 8000,
+        "multipv": 4,
+        "temperature": 110,
+        "oversight": 0.05,
+        "rating": 1857,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.9583333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.5416666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.3333333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.25,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0.125,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0.08333333333333333,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.03333333333333333,
+        "hangShare": 1
+      },
+      {
+        "candidate": 22,
+        "nodes": 8000,
+        "multipv": 4,
+        "temperature": 150,
+        "oversight": 0,
+        "rating": 1905,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.9166666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.8333333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.375,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.25,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0.08333333333333333,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.016666666666666666,
+        "hangShare": 0
+      },
+      {
+        "candidate": 23,
+        "nodes": 8000,
+        "multipv": 4,
+        "temperature": 150,
+        "oversight": 0.05,
+        "rating": 1750,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.7916666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 1600,
+            "score": 0.5833333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 1900,
+            "score": 0.20833333333333334,
+            "games": 12
+          },
+          {
+            "anchor": 2200,
+            "score": 0.16666666666666666,
+            "games": 12
+          },
+          {
+            "anchor": 2600,
+            "score": 0.125,
+            "games": 12
+          },
+          {
+            "anchor": 3190,
+            "score": 0.041666666666666664,
+            "games": 12
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.08333333333333333,
+        "hangShare": 0.6
+      }
+    ]
+  },
+  "l1": {
+    "generatedAt": "2026-11-02T08:50:33.804Z",
+    "seeds": "1..999",
+    "anchorNodes": 5000,
+    "referenceNodes": 20000,
+    "gamesPerAnchor": 30,
+    "rows": [
+      {
+        "candidate": 0,
+        "nodes": 100,
+        "multipv": 4,
+        "temperature": 160,
+        "oversight": 0.35,
+        "rating": 1104,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.16666666666666666,
+            "games": 30
+          },
+          {
+            "anchor": 1600,
+            "score": 0.03333333333333333,
+            "games": 30
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 30
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 30
+          },
+          {
+            "anchor": 2600,
+            "score": 0,
+            "games": 30
+          },
+          {
+            "anchor": 3190,
+            "score": 0,
+            "games": 30
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.18333333333333332,
+        "hangShare": 0.9090909090909091
+      },
+      {
+        "candidate": 1,
+        "nodes": 300,
+        "multipv": 4,
+        "temperature": 160,
+        "oversight": 0.35,
+        "rating": 985,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.06666666666666667,
+            "games": 30
+          },
+          {
+            "anchor": 1600,
+            "score": 0,
+            "games": 30
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 30
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 30
+          },
+          {
+            "anchor": 2600,
+            "score": 0,
+            "games": 30
+          },
+          {
+            "anchor": 3190,
+            "score": 0,
+            "games": 30
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.15,
+        "hangShare": 0.7777777777777778
+      },
+      {
+        "candidate": 2,
+        "nodes": 100,
+        "multipv": 4,
+        "temperature": 160,
+        "oversight": 0.4,
+        "rating": 985,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.05,
+            "games": 30
+          },
+          {
+            "anchor": 1600,
+            "score": 0,
+            "games": 30
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 30
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 30
+          },
+          {
+            "anchor": 2600,
+            "score": 0.016666666666666666,
+            "games": 30
+          },
+          {
+            "anchor": 3190,
+            "score": 0,
+            "games": 30
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.13333333333333333,
+        "hangShare": 1
+      },
+      {
+        "candidate": 3,
+        "nodes": 300,
+        "multipv": 4,
+        "temperature": 160,
+        "oversight": 0.4,
+        "rating": 1092,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.15,
+            "games": 30
+          },
+          {
+            "anchor": 1600,
+            "score": 0,
+            "games": 30
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 30
+          },
+          {
+            "anchor": 2200,
+            "score": 0.016666666666666666,
+            "games": 30
+          },
+          {
+            "anchor": 2600,
+            "score": 0,
+            "games": 30
+          },
+          {
+            "anchor": 3190,
+            "score": 0.016666666666666666,
+            "games": 30
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.18333333333333332,
+        "hangShare": 0.8181818181818182
+      },
+      {
+        "candidate": 4,
+        "nodes": 100,
+        "multipv": 4,
+        "temperature": 160,
+        "oversight": 0.45,
+        "rating": 1079,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.08333333333333333,
+            "games": 30
+          },
+          {
+            "anchor": 1600,
+            "score": 0.016666666666666666,
+            "games": 30
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 30
+          },
+          {
+            "anchor": 2200,
+            "score": 0.016666666666666666,
+            "games": 30
+          },
+          {
+            "anchor": 2600,
+            "score": 0.03333333333333333,
+            "games": 30
+          },
+          {
+            "anchor": 3190,
+            "score": 0.016666666666666666,
+            "games": 30
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.13333333333333333,
+        "hangShare": 0.875
+      },
+      {
+        "candidate": 5,
+        "nodes": 300,
+        "multipv": 4,
+        "temperature": 160,
+        "oversight": 0.45,
+        "rating": 1052,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.08333333333333333,
+            "games": 30
+          },
+          {
+            "anchor": 1600,
+            "score": 0,
+            "games": 30
+          },
+          {
+            "anchor": 1900,
+            "score": 0.016666666666666666,
+            "games": 30
+          },
+          {
+            "anchor": 2200,
+            "score": 0.016666666666666666,
+            "games": 30
+          },
+          {
+            "anchor": 2600,
+            "score": 0,
+            "games": 30
+          },
+          {
+            "anchor": 3190,
+            "score": 0.016666666666666666,
+            "games": 30
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.15,
+        "hangShare": 0.8888888888888888
+      },
+      {
+        "candidate": 6,
+        "nodes": 100,
+        "multipv": 4,
+        "temperature": 160,
+        "oversight": 0.5,
+        "rating": 1052,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.1,
+            "games": 30
+          },
+          {
+            "anchor": 1600,
+            "score": 0.016666666666666666,
+            "games": 30
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 30
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 30
+          },
+          {
+            "anchor": 2600,
+            "score": 0,
+            "games": 30
+          },
+          {
+            "anchor": 3190,
+            "score": 0.016666666666666666,
+            "games": 30
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.16666666666666666,
+        "hangShare": 0.9
+      },
+      {
+        "candidate": 7,
+        "nodes": 300,
+        "multipv": 4,
+        "temperature": 160,
+        "oversight": 0.5,
+        "rating": 1037,
+        "perAnchor": [
+          {
+            "anchor": 1320,
+            "score": 0.08333333333333333,
+            "games": 30
+          },
+          {
+            "anchor": 1600,
+            "score": 0.016666666666666666,
+            "games": 30
+          },
+          {
+            "anchor": 1900,
+            "score": 0,
+            "games": 30
+          },
+          {
+            "anchor": 2200,
+            "score": 0,
+            "games": 30
+          },
+          {
+            "anchor": 2600,
+            "score": 0,
+            "games": 30
+          },
+          {
+            "anchor": 3190,
+            "score": 0.016666666666666666,
+            "games": 30
+          }
+        ],
+        "sampledMoves": 60,
+        "blunderRate": 0.15,
+        "hangShare": 0.8888888888888888
+      }
+    ]
+  }
+}

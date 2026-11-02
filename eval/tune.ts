@@ -50,10 +50,10 @@ async function evaluate(levels: readonly LevelConfig[], iteration: number): Prom
   try { const games = await pool.run(planned); return { value: objective(games), games: games.length }; } finally { pool.dispose(); }
 }
 
-function candidate(config: LevelConfig, field: 'nodes' | 'multipv' | 'temperature' | 'slipProb', value: number): LevelConfig {
+function candidate(config: LevelConfig, field: 'nodes' | 'multipv' | 'temperature' | 'oversight', value: number): LevelConfig {
   return { ...config, [field]: value } as LevelConfig;
 }
-function values(field: 'nodes' | 'multipv' | 'temperature' | 'slipProb'): number[] {
+function values(field: 'nodes' | 'multipv' | 'temperature' | 'oversight'): number[] {
   if (field === 'nodes') return [500, 1_000, 2_000, 5_000, 10_000, 20_000, 40_000, 80_000, 160_000, 300_000];
   if (field === 'multipv') return Array.from({ length: 10 }, (_, i) => i + 1);
   if (field === 'temperature') return Array.from({ length: 31 }, (_, i) => i * 20);
@@ -61,7 +61,7 @@ function values(field: 'nodes' | 'multipv' | 'temperature' | 'slipProb'): number
 }
 function writeLevels(levels: readonly LevelConfig[]): void {
   const path = join(process.cwd(), 'src', 'core', 'ladder.ts'); const source = readFileSync(path, 'utf8');
-  const literal = levels.map((level) => `  { id: ${level.id}, name: '${level.name}', nodes: ${level.nodes}, multipv: ${level.multipv}, temperature: ${level.temperature}${level.slipProb ? `, slipProb: ${level.slipProb}` : ''} },`).join('\n');
+  const literal = levels.map((level) => `  { id: ${level.id}, name: '${level.name}', nodes: ${level.nodes}, multipv: ${level.multipv}, temperature: ${level.temperature}${level.oversight ? `, oversight: ${level.oversight}` : ''} },`).join('\n');
   const updated = source.replace(/export const LEVELS: readonly LevelConfig\[\] = \[[\s\S]*?\n\] as const;/, `export const LEVELS: readonly LevelConfig[] = [\n${literal}\n] as const;`);
   if (updated === source) throw new Error('could not locate LEVELS declaration'); writeFileSync(path, updated);
 }
@@ -72,7 +72,7 @@ export async function runTuning(deadlineMs = 75 * 60_000): Promise<readonly Leve
   const history: unknown[] = existsSync(logPath) ? ((JSON.parse(readFileSync(logPath, 'utf8')) as { iterations?: unknown[] }).iterations ?? []) : [];
   history.push({ iteration: 0, field: 'baseline', objective: best.value, games: best.games, seeds: '1..999' });
   writeFileSync(logPath, JSON.stringify({ iterations: history }, null, 2) + '\n');
-  const fields: Array<'nodes' | 'multipv' | 'temperature' | 'slipProb'> = ['nodes', 'multipv', 'temperature', 'slipProb'];
+  const fields: Array<'nodes' | 'multipv' | 'temperature' | 'oversight'> = ['nodes', 'multipv', 'temperature', 'oversight'];
   outer: while (Date.now() - started < deadlineMs) {
     let changed = false;
     for (const field of fields) for (let index = 0; index < current.length; index++) {

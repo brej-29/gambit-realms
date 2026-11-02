@@ -7,142 +7,143 @@
     "reportingSeedStart": 10000,
     "tuningSeeds": "1..999",
     "nodeBudget": [
-      500,
-      3500,
-      8000,
-      16000,
-      32000,
-      64000,
-      128000,
+      100,
+      3000,
+      1000,
+      1000,
+      1000,
+      2000,
+      6000,
       256000
     ],
     "referenceNodes": 20000,
-    "generatedAt": "2026-11-02T07:26:44.015Z",
+    "generatedAt": "2026-11-02T09:08:24.843Z",
     "gameWorkers": 14,
     "ratingAnchors": [
       "UCI Elo 1320",
-      "UCI Elo 1900"
+      "UCI Elo 1900",
+      "UCI Elo 2600"
     ]
   },
   "levels": [
     {
       "id": "L1",
       "name": "Sleepy Pawn",
-      "rating": 1231.2784769108036,
-      "ciLow": 1040.4119958926651,
-      "ciHigh": 1408.7394950613418
+      "rating": 1047.675867839932,
+      "ciLow": 878.7904971048849,
+      "ciHigh": 1157.0857438099551
     },
     {
       "id": "L2",
       "name": "Eager Squire",
-      "rating": 1569.3562182414485,
-      "ciLow": 1319.9999963662228,
-      "ciHigh": 4748.940606327301
+      "rating": 1145.7983913550427,
+      "ciLow": 1006.34393800029,
+      "ciHigh": 1250.6517649657646
     },
     {
       "id": "L3",
       "name": "Clever Knight",
-      "rating": 1907.4339595720935,
-      "ciLow": 1572.4521244865057,
-      "ciHigh": 5266.724224229899
+      "rating": 1324.482518380256,
+      "ciLow": 1154.0698915814658,
+      "ciHigh": 1463.6207776416227
     },
     {
       "id": "L4",
       "name": "Wily Bishop",
-      "rating": 2245.511700902738,
-      "ciLow": 1821.2659160274281,
-      "ciHigh": 8209.129772252734
+      "rating": 1564.6801523095078,
+      "ciLow": 1420.1390467529159,
+      "ciHigh": 1720.3341516684102
     },
     {
       "id": "L5",
       "name": "Stern Rook",
-      "rating": 2790.3083818109894,
-      "ciLow": 2356.2318276786154,
-      "ciHigh": 8958.451428610955
+      "rating": 1770.5249702340018,
+      "ciLow": 1600.1203726509589,
+      "ciHigh": 1950.5814597600165
     },
     {
       "id": "L6",
       "name": "Sharp Queen",
-      "rating": 3128.3861231416345,
-      "ciLow": 2727.844739690915,
-      "ciHigh": 11608.751834721941
+      "rating": 2144.93114733378,
+      "ciLow": 1942.3162151631277,
+      "ciHigh": 2390.690189283708
     },
     {
       "id": "L7",
       "name": "Old Master",
-      "rating": 3466.4638644722795,
-      "ciLow": 3057.731457683731,
-      "ciHigh": 12153.442939054066
+      "rating": 2330.5867973738386,
+      "ciLow": 2107.048755994125,
+      "ciHigh": 2583.846930988886
     },
     {
       "id": "L8",
       "name": "Archmage",
-      "rating": 3746.0822041278147,
-      "ciLow": 3303.060696475883,
-      "ciHigh": 12570.000000008753
+      "rating": 6152.366945772374,
+      "ciLow": 5979.5429180794545,
+      "ciHigh": 6189.389203903598
     }
   ],
   "pairs": [
     {
       "a": "L2",
       "b": "L1",
-      "score": 0.875,
-      "low": 0.5975328592090752,
-      "high": 0.9705915726664927,
+      "score": 0.6666666666666666,
+      "low": 0.3906175873976138,
+      "high": 0.8618821601026385,
       "games": 12,
-      "pass": true
+      "pass": false
     },
     {
       "a": "L3",
       "b": "L2",
-      "score": 0.875,
-      "low": 0.5975328592090752,
-      "high": 0.9705915726664927,
+      "score": 0.6666666666666666,
+      "low": 0.3906175873976138,
+      "high": 0.8618821601026385,
       "games": 12,
-      "pass": true
+      "pass": false
     },
     {
       "a": "L4",
       "b": "L3",
-      "score": 0.875,
-      "low": 0.5975328592090752,
-      "high": 0.9705915726664927,
+      "score": 0.8333333333333334,
+      "low": 0.5519636426153274,
+      "high": 0.9530358523851776,
       "games": 12,
       "pass": true
     },
     {
       "a": "L5",
       "b": "L4",
-      "score": 0.9583333333333334,
-      "low": 0.6987396421773358,
-      "high": 0.9956346634483586,
+      "score": 0.7083333333333334,
+      "low": 0.4283513358435087,
+      "high": 0.887273348531807,
       "games": 12,
-      "pass": true
+      "pass": false
     },
     {
       "a": "L6",
       "b": "L5",
-      "score": 0.875,
-      "low": 0.5975328592090752,
-      "high": 0.9705915726664927,
+      "score": 0.7916666666666666,
+      "low": 0.5088089430775858,
+      "high": 0.9330656150478559,
       "games": 12,
       "pass": true
     },
     {
       "a": "L7",
       "b": "L6",
-      "score": 0.875,
-      "low": 0.5975328592090752,
-      "high": 0.9705915726664927,
+      "score": 0.75,
+      "low": 0.46768966087934005,
+      "high": 0.9110599603710386,
       "games": 12,
-      "pass": true
+      "pass": false
     },
     {
       "a": "L8",
       "b": "L7",
-      "score": 0.8333333333333334,
-      "low": 0.5519636426153274,
-      "high": 0.9530358523851776,
+      "score": 1,
+      "low": 0.7574992425007574,
+      "high": 1,
       "games": 12,
       "pass": true
     }
@@ -150,9 +151,9 @@
   "anchors": [
     {
       "match": "L1 vs UCI Elo 1320",
-      "score": 0.375,
-      "low": 0.16498996063982363,
-      "high": 0.645635228734987,
+      "score": 0.16666666666666666,
+      "low": 0.04696414761482223,
+      "high": 0.44803635738467273,
       "pass": false
     },
     {
@@ -165,76 +166,76 @@
   ],
   "blunders": [
     {
-      "player": "L1",
-      "games": 72,
-      "moves": 3991,
-      "blunders": 503,
-      "blunderRate": 0.12603357554497618,
-      "hangingBlunders": 79,
-      "hangingShare": 0.15705765407554673
+      "player": "L2",
+      "games": 42,
+      "moves": 268,
+      "blunders": 29,
+      "blunderRate": 0.10820895522388059,
+      "hangingBlunders": 18,
+      "hangingShare": 0.6206896551724138
     },
     {
-      "player": "L2",
-      "games": 24,
-      "moves": 1425,
-      "blunders": 129,
-      "blunderRate": 0.09052631578947369,
-      "hangingBlunders": 24,
-      "hangingShare": 0.18604651162790697
+      "player": "L1",
+      "games": 87,
+      "moves": 290,
+      "blunders": 31,
+      "blunderRate": 0.10689655172413794,
+      "hangingBlunders": 22,
+      "hangingShare": 0.7096774193548387
     },
     {
       "player": "L3",
-      "games": 24,
-      "moves": 1345,
-      "blunders": 65,
-      "blunderRate": 0.048327137546468404,
-      "hangingBlunders": 10,
-      "hangingShare": 0.15384615384615385
+      "games": 42,
+      "moves": 271,
+      "blunders": 25,
+      "blunderRate": 0.09225092250922509,
+      "hangingBlunders": 19,
+      "hangingShare": 0.76
     },
     {
       "player": "L4",
-      "games": 24,
-      "moves": 1424,
-      "blunders": 38,
-      "blunderRate": 0.026685393258426966,
-      "hangingBlunders": 6,
-      "hangingShare": 0.15789473684210525
+      "games": 42,
+      "moves": 287,
+      "blunders": 31,
+      "blunderRate": 0.10801393728222997,
+      "hangingBlunders": 22,
+      "hangingShare": 0.7096774193548387
     },
     {
       "player": "elo1320",
-      "games": 24,
-      "moves": 1448,
-      "blunders": 196,
-      "blunderRate": 0.13535911602209943,
-      "hangingBlunders": 29,
-      "hangingShare": 0.14795918367346939
+      "games": 72,
+      "moves": 286,
+      "blunders": 24,
+      "blunderRate": 0.08391608391608392,
+      "hangingBlunders": 9,
+      "hangingShare": 0.375
     },
     {
       "player": "random",
       "games": 12,
-      "moves": 325,
-      "blunders": 28,
-      "blunderRate": 0.08615384615384615,
-      "hangingBlunders": 19,
-      "hangingShare": 0.6785714285714286
+      "moves": 227,
+      "blunders": 15,
+      "blunderRate": 0.06607929515418502,
+      "hangingBlunders": 8,
+      "hangingShare": 0.5333333333333333
     },
     {
       "player": "minimax",
       "games": 12,
-      "moves": 434,
-      "blunders": 89,
-      "blunderRate": 0.20506912442396313,
-      "hangingBlunders": 14,
-      "hangingShare": 0.15730337078651685
+      "moves": 209,
+      "blunders": 20,
+      "blunderRate": 0.09569377990430622,
+      "hangingBlunders": 8,
+      "hangingShare": 0.4
     },
     {
       "player": "skill0",
       "games": 12,
-      "moves": 968,
-      "blunders": 114,
-      "blunderRate": 0.11776859504132231,
-      "hangingBlunders": 21,
-      "hangingShare": 0.18421052631578946
+      "moves": 235,
+      "blunders": 26,
+      "blunderRate": 0.11063829787234042,
+      "hangingBlunders": 10,
+      "hangingShare": 0.38461538461538464
     }
   ],
   "coach": [
@@ -242,47 +243,57 @@
       "name": "coach-see",
       "label": "B",
       "pairs": 400,
-      "positives": 152,
-      "predicted": 48,
-      "truePositives": 30,
-      "precision": 0.625,
-      "recall": 0.19736842105263158
+      "positives": 157,
+      "predicted": 160,
+      "truePositives": 118,
+      "precision": 0.7375,
+      "recall": 0.7515923566878981
+    },
+    {
+      "name": "coach-moved-piece-only",
+      "label": "B",
+      "pairs": 400,
+      "positives": 157,
+      "predicted": 71,
+      "truePositives": 57,
+      "precision": 0.8028169014084507,
+      "recall": 0.3630573248407643
     },
     {
       "name": "coach-see-without-defender-count",
       "label": "B",
       "pairs": 400,
-      "positives": 152,
-      "predicted": 107,
-      "truePositives": 48,
-      "precision": 0.4485981308411215,
-      "recall": 0.3157894736842105
+      "positives": 157,
+      "predicted": 176,
+      "truePositives": 122,
+      "precision": 0.6931818181818182,
+      "recall": 0.7770700636942676
     },
     {
       "name": "coach-without-pinned-piece-rule",
       "label": "B",
       "pairs": 400,
-      "positives": 152,
-      "predicted": 48,
-      "truePositives": 30,
-      "precision": 0.625,
-      "recall": 0.19736842105263158
+      "positives": 157,
+      "predicted": 160,
+      "truePositives": 118,
+      "precision": 0.7375,
+      "recall": 0.7515923566878981
     },
     {
       "name": "warn-if-attacked",
       "label": "B",
       "pairs": 400,
-      "positives": 152,
-      "predicted": 112,
-      "truePositives": 49,
-      "precision": 0.4375,
-      "recall": 0.3223684210526316
+      "positives": 157,
+      "predicted": 108,
+      "truePositives": 73,
+      "precision": 0.6759259259259259,
+      "recall": 0.46496815286624205
     },
     {
       "name": "never-warn",
       "label": "B",
       "pairs": 400,
-      "positives": 152,
+      "positives": 157,
       "predicted": 0,
       "truePositives": 0,
       "precision": 0,
@@ -292,47 +303,57 @@
       "name": "coach-see",
       "label": "A",
       "pairs": 400,
-      "positives": 79,
-      "predicted": 48,
-      "truePositives": 14,
-      "precision": 0.2916666666666667,
-      "recall": 0.17721518987341772
+      "positives": 51,
+      "predicted": 160,
+      "truePositives": 29,
+      "precision": 0.18125,
+      "recall": 0.5686274509803921
+    },
+    {
+      "name": "coach-moved-piece-only",
+      "label": "A",
+      "pairs": 400,
+      "positives": 51,
+      "predicted": 71,
+      "truePositives": 17,
+      "precision": 0.23943661971830985,
+      "recall": 0.3333333333333333
     },
     {
       "name": "coach-see-without-defender-count",
       "label": "A",
       "pairs": 400,
-      "positives": 79,
-      "predicted": 107,
+      "positives": 51,
+      "predicted": 176,
       "truePositives": 31,
-      "precision": 0.2897196261682243,
-      "recall": 0.3924050632911392
+      "precision": 0.17613636363636365,
+      "recall": 0.6078431372549019
     },
     {
       "name": "coach-without-pinned-piece-rule",
       "label": "A",
       "pairs": 400,
-      "positives": 79,
-      "predicted": 48,
-      "truePositives": 14,
-      "precision": 0.2916666666666667,
-      "recall": 0.17721518987341772
+      "positives": 51,
+      "predicted": 160,
+      "truePositives": 29,
+      "precision": 0.18125,
+      "recall": 0.5686274509803921
     },
     {
       "name": "warn-if-attacked",
       "label": "A",
       "pairs": 400,
-      "positives": 79,
-      "predicted": 112,
-      "truePositives": 32,
-      "precision": 0.2857142857142857,
-      "recall": 0.4050632911392405
+      "positives": 51,
+      "predicted": 108,
+      "truePositives": 23,
+      "precision": 0.21296296296296297,
+      "recall": 0.45098039215686275
     },
     {
       "name": "never-warn",
       "label": "A",
       "pairs": 400,
-      "positives": 79,
+      "positives": 51,
       "predicted": 0,
       "truePositives": 0,
       "precision": 0,
@@ -340,24 +361,24 @@
     }
   ],
   "latency": {
-    "p95Ms": 655.2710000000006,
+    "p95Ms": 1210.9363000000594,
     "samples": [
-      554.3912000000055,
-      565.045299999998,
-      575.4697999999989,
-      578.7862000000023,
-      588.3187000000034,
-      608.0152999999991,
-      637.2571000000025,
-      655.2710000000006
+      1044.3867999999784,
+      1108.9964000000618,
+      1125.1846999999834,
+      1159.4477999999654,
+      1183.4120000000112,
+      1203.0596000000369,
+      1210.5105000000913,
+      1210.9363000000594
     ],
     "bundleBytes": 1885306,
     "bundleCheck": "pass"
   },
   "metrics": {
     "M1": {
-      "pass": true,
-      "value": "7/7 adjacent pairs",
+      "pass": false,
+      "value": "3/7 adjacent pairs",
       "threshold": "all >=60% and Wilson low >50%"
     },
     "M2": {
@@ -366,79 +387,79 @@
       "threshold": "L1 <=10%; L8 >=60%"
     },
     "M3": {
-      "pass": false,
+      "pass": true,
       "value": [
         {
-          "player": "L1",
-          "games": 72,
-          "moves": 3991,
-          "blunders": 503,
-          "blunderRate": 0.12603357554497618,
-          "hangingBlunders": 79,
-          "hangingShare": 0.15705765407554673
+          "player": "L2",
+          "games": 42,
+          "moves": 268,
+          "blunders": 29,
+          "blunderRate": 0.10820895522388059,
+          "hangingBlunders": 18,
+          "hangingShare": 0.6206896551724138
         },
         {
-          "player": "L2",
-          "games": 24,
-          "moves": 1425,
-          "blunders": 129,
-          "blunderRate": 0.09052631578947369,
-          "hangingBlunders": 24,
-          "hangingShare": 0.18604651162790697
+          "player": "L1",
+          "games": 87,
+          "moves": 290,
+          "blunders": 31,
+          "blunderRate": 0.10689655172413794,
+          "hangingBlunders": 22,
+          "hangingShare": 0.7096774193548387
         },
         {
           "player": "L3",
-          "games": 24,
-          "moves": 1345,
-          "blunders": 65,
-          "blunderRate": 0.048327137546468404,
-          "hangingBlunders": 10,
-          "hangingShare": 0.15384615384615385
+          "games": 42,
+          "moves": 271,
+          "blunders": 25,
+          "blunderRate": 0.09225092250922509,
+          "hangingBlunders": 19,
+          "hangingShare": 0.76
         },
         {
           "player": "L4",
-          "games": 24,
-          "moves": 1424,
-          "blunders": 38,
-          "blunderRate": 0.026685393258426966,
-          "hangingBlunders": 6,
-          "hangingShare": 0.15789473684210525
+          "games": 42,
+          "moves": 287,
+          "blunders": 31,
+          "blunderRate": 0.10801393728222997,
+          "hangingBlunders": 22,
+          "hangingShare": 0.7096774193548387
         },
         {
           "player": "elo1320",
-          "games": 24,
-          "moves": 1448,
-          "blunders": 196,
-          "blunderRate": 0.13535911602209943,
-          "hangingBlunders": 29,
-          "hangingShare": 0.14795918367346939
+          "games": 72,
+          "moves": 286,
+          "blunders": 24,
+          "blunderRate": 0.08391608391608392,
+          "hangingBlunders": 9,
+          "hangingShare": 0.375
         },
         {
           "player": "random",
           "games": 12,
-          "moves": 325,
-          "blunders": 28,
-          "blunderRate": 0.08615384615384615,
-          "hangingBlunders": 19,
-          "hangingShare": 0.6785714285714286
+          "moves": 227,
+          "blunders": 15,
+          "blunderRate": 0.06607929515418502,
+          "hangingBlunders": 8,
+          "hangingShare": 0.5333333333333333
         },
         {
           "player": "minimax",
           "games": 12,
-          "moves": 434,
-          "blunders": 89,
-          "blunderRate": 0.20506912442396313,
-          "hangingBlunders": 14,
-          "hangingShare": 0.15730337078651685
+          "moves": 209,
+          "blunders": 20,
+          "blunderRate": 0.09569377990430622,
+          "hangingBlunders": 8,
+          "hangingShare": 0.4
         },
         {
           "player": "skill0",
           "games": 12,
-          "moves": 968,
-          "blunders": 114,
-          "blunderRate": 0.11776859504132231,
-          "hangingBlunders": 21,
-          "hangingShare": 0.18421052631578946
+          "moves": 235,
+          "blunders": 26,
+          "blunderRate": 0.11063829787234042,
+          "hangingBlunders": 10,
+          "hangingShare": 0.38461538461538464
         }
       ],
       "threshold": "L1-L4 blunder rate 3%-15%; hung share >=60%"
@@ -446,8 +467,8 @@
     "M4": {
       "pass": false,
       "value": {
-        "precision": 0.625,
-        "recall": 0.19736842105263158,
+        "precision": 0.7375,
+        "recall": 0.7515923566878981,
         "pairs": 400
       },
       "threshold": "Label B precision >=0.85; recall >=0.60"
@@ -455,7 +476,7 @@
     "M5": {
       "pass": true,
       "value": {
-        "p95Ms": 655.2710000000006,
+        "p95Ms": 1210.9363000000594,
         "bundleBytes": 1885306
       },
       "threshold": "p95 <=1500ms; bundle <=6MB"
@@ -752,189 +773,263 @@
         "M4": false,
         "M5": true
       }
+    },
+    {
+      "profile": "quick",
+      "generatedAt": "2026-11-02T09:08:24.841Z",
+      "tuningIteration": 3,
+      "params": [
+        {
+          "id": 1,
+          "name": "Sleepy Pawn",
+          "nodes": 100,
+          "multipv": 4,
+          "temperature": 160,
+          "oversight": 0.45
+        },
+        {
+          "id": 2,
+          "name": "Eager Squire",
+          "nodes": 3000,
+          "multipv": 4,
+          "temperature": 160,
+          "oversight": 0.3
+        },
+        {
+          "id": 3,
+          "name": "Clever Knight",
+          "nodes": 1000,
+          "multipv": 4,
+          "temperature": 160,
+          "oversight": 0.1
+        },
+        {
+          "id": 4,
+          "name": "Wily Bishop",
+          "nodes": 1000,
+          "multipv": 4,
+          "temperature": 70,
+          "oversight": 0.05
+        },
+        {
+          "id": 5,
+          "name": "Stern Rook",
+          "nodes": 1000,
+          "multipv": 4,
+          "temperature": 70
+        },
+        {
+          "id": 6,
+          "name": "Sharp Queen",
+          "nodes": 2000,
+          "multipv": 4,
+          "temperature": 70
+        },
+        {
+          "id": 7,
+          "name": "Old Master",
+          "nodes": 6000,
+          "multipv": 4,
+          "temperature": 70
+        },
+        {
+          "id": 8,
+          "name": "Archmage",
+          "nodes": 256000,
+          "multipv": 1,
+          "temperature": 0
+        }
+      ],
+      "metricPassFlags": {
+        "M1": false,
+        "M2": false,
+        "M3": true,
+        "M4": false,
+        "M5": true
+      }
     }
   ],
   "errorAnalysis": {
     "falsePositives": [
       {
-        "fen": "r3kb1r/pbpq2pp/1p1pp2n/n3PpN1/2PP1P2/P5P1/1P3KBP/RNBQ3R w kq - 4 12",
-        "move": "g2b7",
-        "referenceCpl": 0,
+        "fen": "r2qkbr1/2p1np2/p2p1n2/1p1Pp1pp/4P3/NPP1BPPB/P3N3/1R1Q1RK1 b q - 1 17",
+        "move": "e7g6",
+        "referenceCpl": 165,
         "referenceMaterialLoss": 0,
-        "referencePv": "a5b7 b1c3",
-        "labelA": false,
-        "labelB": false
-      },
-      {
-        "fen": "2r1kb1r/5pp1/p1b1p3/1pp1B2p/2P4q/P2P4/1P3PPP/RN1QKBNR w KQk - 0 15",
-        "move": "c4b5",
-        "referenceCpl": 117,
-        "referenceMaterialLoss": 0,
-        "referencePv": "a6b5 b1d2 f8d6 e5g3 d6g3 f2g3 h4d4 g1f3 c6f3 d2f3",
-        "labelA": false,
-        "labelB": false
-      },
-      {
-        "fen": "r2k3r/qbp3pp/p4p2/1B1np3/1nP1N3/1P3P2/1B3RPP/R2Q2K1 w - - 3 19",
-        "move": "c4d5",
-        "referenceCpl": 18,
-        "referenceMaterialLoss": -500,
-        "referencePv": "d8c8 b5c4 b7d5 c4d5 h8d8 g1h1 d8d5 d1f1 b4d3 f2d2 f6f5 d2d3 d5d3 f1d3",
-        "labelA": false,
-        "labelB": false
-      },
-      {
-        "fen": "r4q1k/7p/2p1b1p1/4p3/p2n4/P2Q1P2/1P2NPBP/2b1R2K w - - 0 28",
-        "move": "e2d4",
-        "referenceCpl": 90,
-        "referenceMaterialLoss": -300,
-        "referencePv": "f8d6 g2f1",
-        "labelA": false,
-        "labelB": false
-      },
-      {
-        "fen": "2kr4/pp3ppn/2p4r/P2p1P2/2PPp2p/4P2P/3nBP2/1qRK2NR w - - 4 24",
-        "move": "g1f3",
-        "referenceCpl": 357,
-        "referenceMaterialLoss": -300,
-        "referencePv": "b1b3 d1d2 b3a2 d2d1 e4f3 e2d3 a2a4 c1c2 a4a1 c2c1 a1a5 c4c5 a5c7 c1a1",
+        "referencePv": "e3g5 f8e7 g1h2 f6e4 f3e4 e7g5",
         "labelA": true,
         "labelB": false
       },
       {
-        "fen": "3r1r2/pk5p/1p1N4/1Pp1BbPB/P4p2/nR4bP/3P4/3K2R1 b - - 3 37",
-        "move": "d8d6",
-        "referenceCpl": 20,
-        "referenceMaterialLoss": -300,
-        "referencePv": "e5d6 f5c2 d1e2 c2b3 h5f3 b7c8 d6f8 b3a4 f3g4 c8d8 g1a1 a4b5 e2d1 d8e8 f8g7 b5a4 d1c1",
-        "labelA": false,
-        "labelB": false
-      },
-      {
-        "fen": "2rqkb1r/1b1pnpp1/Bpn5/4p1Pp/P4P1P/1p2P2N/1PPP4/RNBQK3 b Qk - 0 13",
-        "move": "b3c2",
-        "referenceCpl": 24,
-        "referenceMaterialLoss": -600,
-        "referencePv": "a6b7 c2d1r e1d1 c8c7 b7a6 c6b4 a6f1 d8a8 b1a3 a8f3 d1e1",
-        "labelA": false,
-        "labelB": false
-      },
-      {
-        "fen": "5r1r/4k1p1/n1pp2n1/1p3bP1/p4P2/P2BB2p/1PPR3P/2K3R1 w - - 2 24",
-        "move": "d3f5",
-        "referenceCpl": 48,
+        "fen": "r3k1nr/3n1ppp/3p4/3Pp3/P1b5/4qN1P/1P6/1RK1b3 w kq - 0 22",
+        "move": "c1c2",
+        "referenceCpl": 0,
         "referenceMaterialLoss": 0,
-        "referencePv": "f8f5 e3b6 e7d7 g1d1",
+        "referencePv": "c4b3",
         "labelA": false,
         "labelB": false
       },
       {
-        "fen": "2r1kbnr/p1pqpppp/8/6B1/1P2B2P/P1N3P1/2Q1NP2/3RK2R w Kk - 0 25",
-        "move": "d1d7",
+        "fen": "8/3pk3/2b4p/1BP4P/4p3/R3P3/3K4/2q3r1 w - - 2 63",
+        "move": "d2e2",
         "referenceCpl": 0,
-        "referenceMaterialLoss": -900,
-        "referencePv": "g8f6 g5f6 g7f6 e4c6 e7e6 d7d2 e8e7 d2d1 f6f5",
+        "referenceMaterialLoss": 0,
+        "referencePv": "g1g2",
         "labelA": false,
         "labelB": false
       },
       {
-        "fen": "7R/1B1bkpp1/1Rnr4/2r1p1P1/7p/P1pPP3/2P1KP2/8 b - - 3 39",
-        "move": "e5e4",
+        "fen": "r6k/7r/P6P/4P2P/8/2P4n/8/3K4 w - - 11 61",
+        "move": "d1c1",
+        "referenceCpl": 53,
+        "referenceMaterialLoss": 0,
+        "referencePv": "h3f4 c1b2 h7a7 c3c4",
+        "labelA": false,
+        "labelB": false
+      },
+      {
+        "fen": "r2r2k1/pb2bppp/1p2p3/PPp1n3/2P1Pq2/2N2N1P/R1Q1BPP1/4K2R w K - 1 19",
+        "move": "f3e5",
+        "referenceCpl": 16,
+        "referenceMaterialLoss": 0,
+        "referencePv": "f4e5 a5a6",
+        "labelA": false,
+        "labelB": false
+      },
+      {
+        "fen": "B1b4r/p1pp1k2/4p2p/3n4/8/BP2P1P1/P1qP1P1P/RN2K2R w Q - 1 15",
+        "move": "a8d5",
         "referenceCpl": 0,
-        "referenceMaterialLoss": -100,
-        "referencePv": "b7a6 h4h3 h8h4 c5g5 a6b5 e4d3 c2d3",
+        "referenceMaterialLoss": 0,
+        "referencePv": "e6d5 b1c3",
+        "labelA": false,
+        "labelB": false
+      },
+      {
+        "fen": "r3kb1r/pb1p1pQp/4pn2/2p5/4P3/2q5/PPPP1PPP/R1B1K1NR w KQkq - 0 8",
+        "move": "g7h8",
+        "referenceCpl": 0,
+        "referenceMaterialLoss": -500,
+        "referencePv": "c3e5 d2d3",
+        "labelA": false,
+        "labelB": false
+      },
+      {
+        "fen": "8/R7/3B1R2/1p2k1P1/1P5p/1KN3P1/5P2/8 b - - 0 35",
+        "move": "e5d4",
+        "referenceCpl": 0,
+        "referenceMaterialLoss": 0,
+        "referencePv": "d6c5 d4d3 a7d7",
+        "labelA": false,
+        "labelB": false
+      },
+      {
+        "fen": "r3k2r/p2nn3/2p2p2/7p/3PN3/2P3BP/p5P1/R5K1 b - - 2 26",
+        "move": "h5h4",
+        "referenceCpl": 15,
+        "referenceMaterialLoss": 0,
+        "referencePv": "g3h2 e8f7 c3c4 f7g6 e4c3 a7a5 c3a4 c6c5 a4c5 d7c5 d4c5 e7c6",
+        "labelA": false,
+        "labelB": false
+      },
+      {
+        "fen": "rn2k1nr/1p2pp1p/3p2p1/2p5/p3PP2/2P3P1/R1PQN1BP/2B1K2R b Kkq - 0 12",
+        "move": "a4a3",
+        "referenceCpl": 0,
+        "referenceMaterialLoss": 0,
+        "referencePv": "d2d1 g8h6 e1g1 b8d7 e4e5 h6f5 e5d6 h7h5",
         "labelA": false,
         "labelB": false
       }
     ],
     "falseNegatives": [
       {
-        "fen": "r3k3/2Bn2pr/p1q1pb2/Qp1b4/8/P6P/1PP1BP2/1K1R2R1 w q - 0 30",
-        "move": "c7f4",
-        "referenceCpl": 0,
-        "referenceMaterialLoss": 100,
-        "referencePv": "h7h3 f4g5 e8f7 a5d2 a8h8 g1g3 h3g3",
-        "labelA": false,
-        "labelB": true
-      },
-      {
-        "fen": "8/3k4/3p4/2pP4/7p/2BK3P/p5P1/3rr3 w - - 2 71",
-        "move": "c3d2",
-        "referenceCpl": 0,
-        "referenceMaterialLoss": 600,
-        "referencePv": "a2a1q d3c2 d1d2 c2d2 a1c1 d2d3 e1e3",
-        "labelA": false,
-        "labelB": true
-      },
-      {
-        "fen": "2n2br1/1rpkp1p1/1p6/3q1N1Q/P3NB1P/4R1P1/5P2/4R1K1 b - - 2 36",
-        "move": "c8a7",
-        "referenceCpl": 0,
-        "referenceMaterialLoss": 400,
-        "referencePv": "e1d1 d5d1 h5d1 d7c8 e3c3 e7e6 f5d6 c8b8",
-        "labelA": false,
-        "labelB": true
-      },
-      {
-        "fen": "r1br2k1/pp3p2/2n3p1/1qp5/4pp2/P2pnP2/2P3PP/b1KR4 b - - 1 25",
-        "move": "a1c3",
-        "referenceCpl": 0,
-        "referenceMaterialLoss": 100,
-        "referencePv": "f3e4 b5b2",
-        "labelA": false,
-        "labelB": true
-      },
-      {
-        "fen": "1k6/7P/8/p2P4/P3p2R/2R1B1P1/1P3P2/5K2 b - - 0 44",
-        "move": "b8b7",
-        "referenceCpl": 0,
-        "referenceMaterialLoss": 800,
-        "referencePv": "h7h8q b7a6 h8a8",
-        "labelA": false,
-        "labelB": true
-      },
-      {
-        "fen": "4r1k1/p1b1P2p/2P3p1/4n3/7P/6P1/3r2K1/2R5 w - - 1 38",
-        "move": "g2h3",
-        "referenceCpl": 0,
-        "referenceMaterialLoss": 100,
-        "referencePv": "e8e7 c1c3 d2d3 c3c1 d3d4 c1a1 e5c6 a1c1 c6e5",
-        "labelA": false,
-        "labelB": true
-      },
-      {
-        "fen": "7q/5k1P/8/1p1b2K1/8/8/n7/8 w - - 3 95",
-        "move": "g5h4",
-        "referenceCpl": 0,
-        "referenceMaterialLoss": 100,
-        "referencePv": "h8h7 h4g3 h7g7 g3h4 g7f6 h4g3 f6c3 g3h4",
-        "labelA": false,
-        "labelB": true
-      },
-      {
-        "fen": "rq3k1r/p1Npbpp1/2b1pn1p/2p5/P1P5/1P2PP2/1B2N1PP/R3KB1R w - - 0 19",
-        "move": "b2e5",
+        "fen": "6nr/2p1qkpp/3pp3/8/Np3B2/2P3P1/1P2PPbP/3K4 w - - 0 18",
+        "move": "d1e1",
         "referenceCpl": 0,
         "referenceMaterialLoss": 300,
-        "referencePv": "d7d6 e5b2 b8c7 e2c3 c7b8 e3e4 c6d7 b2c1 d7e8 c1d2",
+        "referencePv": "g2c6 a4c5 d6c5 f4e5 g8f6 e5f6 e7f6 f2f3 e6e5 c3b4 c5b4 f3f4",
         "labelA": false,
         "labelB": true
       },
       {
-        "fen": "8/pk5p/1p1B4/1Pp3PB/P7/n5RP/2bP2p1/4Kr2 w - - 2 42",
-        "move": "e1e2",
-        "referenceCpl": 20,
-        "referenceMaterialLoss": 200,
-        "referencePv": "c2d1 e2d3 d1h5 g3g2 h5g6 d3e2 f1f7 e2d1 a3c4 d6g3 c4b2 d1c1 b2d3 c1d1 g6h5 d1c2",
+        "fen": "2q5/2P3kp/5p2/1P4p1/K1Q1P3/1B3PP1/7P/5r2 b - - 6 52",
+        "move": "f1b1",
+        "referenceCpl": 432,
+        "referenceMaterialLoss": 100,
+        "referencePv": "c4f7 g7h6 f7f6 h6h5 b3f7",
+        "labelA": true,
+        "labelB": true
+      },
+      {
+        "fen": "8/8/3k4/r5p1/7p/1K5P/8/8 w - - 48 91",
+        "move": "b3c2",
+        "referenceCpl": 14,
+        "referenceMaterialLoss": 100,
+        "referencePv": "g5g4 c2d1 g4h3 d1c2 a5d5",
         "labelA": false,
         "labelB": true
       },
       {
-        "fen": "2q1kbnr/3Nppp1/1Bp1P3/p6p/Q7/2P3P1/PP1N1P1P/2KR1B1R w k - 1 19",
-        "move": "f1e2",
+        "fen": "2b1kbnr/2q2ppp/BPpp4/4n1N1/3pPB2/1Q6/1P3PPP/R2K3R b k - 0 16",
+        "move": "c7d8",
+        "referenceCpl": 0,
+        "referenceMaterialLoss": 300,
+        "referencePv": "a6c8 f8e7 f4e5 e7g5 a1a7 d8c8",
+        "labelA": false,
+        "labelB": true
+      },
+      {
+        "fen": "3k1b2/8/8/8/K7/p7/8/5b2 w - - 8 97",
+        "move": "a4a5",
+        "referenceCpl": 409,
+        "referenceMaterialLoss": 800,
+        "referencePv": "a3a2 a5a4 a2a1q a4b3 a1b1 b3c3 f8h6 c3d4 h6g7 d4d5",
+        "labelA": true,
+        "labelB": true
+      },
+      {
+        "fen": "4n3/8/2kb2P1/4r1K1/Pp6/8/1P6/8 w - - 1 43",
+        "move": "g5h6",
+        "referenceCpl": 123,
+        "referenceMaterialLoss": 100,
+        "referencePv": "d6f8 g6g7 f8g7 h6g6 g7f8 b2b3 f8d6 g6f7 e5f5 f7g6 f5f8 a4a5 f8f6 g6g5",
+        "labelA": false,
+        "labelB": true
+      },
+      {
+        "fen": "5bnr/3kpppp/3n4/p2P2P1/P3P3/3K1P1N/1q5P/7R w - - 5 30",
+        "move": "f3f4",
         "referenceCpl": 0,
         "referenceMaterialLoss": 100,
-        "referencePv": "f7e6 d7e5 g8f6 e2d3 h8h6 b6e3 f6d7 e3h6 d7e5",
+        "referencePv": "b2b3 d3d2 d6e4 d2e2 e4c3 e2f2 b3b6 f2g3 b6e3 g3g4 h7h5 g4h4 e3b6 h4g3 h5h4 g3g4",
+        "labelA": false,
+        "labelB": true
+      },
+      {
+        "fen": "8/8/7P/4Bp2/8/p2k1KP1/5P2/8 b - - 3 66",
+        "move": "d3c2",
+        "referenceCpl": 78,
+        "referenceMaterialLoss": 400,
+        "referencePv": "h6h7 f5f4 h7h8r c2d2 h8h1 f4g3 f3g3",
+        "labelA": false,
+        "labelB": true
+      },
+      {
+        "fen": "r4k2/1p5r/2b2q1p/5p1p/5P2/pPN1RP2/P5P1/4KB2 w - - 0 28",
+        "move": "e3e5",
+        "referenceCpl": 0,
+        "referenceMaterialLoss": 100,
+        "referencePv": "f6h4 e1e2 h4f4 e5e6 f4d4 c3e4 f5e4 f3e4 d4b2 e2e1",
+        "labelA": false,
+        "labelB": true
+      },
+      {
+        "fen": "r3k1r1/1p3ppp/pP2p3/2n5/b1N5/3P1N1P/4P3/2K2B1n w q - 0 21",
+        "move": "f3e5",
+        "referenceCpl": 91,
+        "referenceMaterialLoss": 100,
+        "referencePv": "h1g3 f1g2 g3e2 c1b2 f7f6 c4a5 f6e5 g2b7 c5b7 a5b7 e8e7 b7a5 g8d8",
         "labelA": false,
         "labelB": true
       }

@@ -13,7 +13,7 @@ type Message = GameRecord | { seed: number; error: string };
 export class GamePool {
   private readonly slots: Slot[];
   private readonly queue: GameTask[] = [];
-  private readonly results = new Map<number, GameRecord>();
+  private results: GameRecord[] = [];
   private disposed = false;
   private completed = 0;
   private resolveAll?: (results: GameRecord[]) => void;
@@ -35,7 +35,7 @@ export class GamePool {
   run(tasks: readonly GameTask[], onComplete?: (completed: number, total: number, result?: GameRecord) => void): Promise<GameRecord[]> {
     if (this.disposed) return Promise.reject(new Error('game pool has been disposed'));
     if (!tasks.length) return Promise.resolve([]);
-    this.results.clear();
+    this.results = [];
     this.completed = 0;
     this.total = tasks.length;
     this.onComplete = onComplete;
@@ -70,7 +70,7 @@ export class GamePool {
       const resolve = this.resolveAll;
       this.resolveAll = undefined;
       this.rejectAll = undefined;
-      resolve([...this.results.values()]);
+      resolve([...this.results]);
     }
   }
 
@@ -82,7 +82,7 @@ export class GamePool {
       this.fail(new Error(`game ${message.seed}: ${message.error}`));
       return;
     }
-    this.results.set(message.seed, message);
+    this.results.push(message);
     this.completed++;
     this.onComplete?.(this.completed, this.total, message);
     this.pump();
@@ -91,7 +91,7 @@ export class GamePool {
       this.resolveAll = undefined;
       this.rejectAll = undefined;
       this.onComplete = undefined;
-      resolve([...this.results.values()]);
+      resolve([...this.results]);
     }
   }
 
