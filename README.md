@@ -4,7 +4,24 @@ Chess where every capture is a duel. Four animated realms, eight opponents whose
 
 **Play it: [brej-29.github.io/gambit-realms](https://brej-29.github.io/gambit-realms/)**
 
-![A capture in each realm: a spell bolt, a sword clash, a glitch delete and a KO](docs/img/captures.png)
+
+<p align="center">
+  <a href="https://brej-29.github.io/gambit-realms/"><img src="docs/img/home-demo.gif" alt="The home screen playing Morphy's Opera Game by itself" width="760"></a><br>
+  <a href="https://brej-29.github.io/gambit-realms/"><b>Play now</b></a> &middot; <a href="https://brej-29.github.io/gambit-realms/#/learn">Learn chess</a> &middot; <a href="https://brej-29.github.io/gambit-realms/#/evidence">See the evidence</a> &middot; <a href="HANDOFF.md">Handoff notes</a>
+</p>
+
+## Four realms, four fights
+
+| Enchanted Hall | Iron Keep |
+|:--:|:--:|
+| <img src="docs/img/realm-enchanted.gif" width="380"> | <img src="docs/img/realm-medieval.gif" width="380"> |
+| **Neon Grid** | **Sakura Arena** |
+| <img src="docs/img/realm-cyberpunk.gif" width="380"> | <img src="docs/img/realm-anime.gif" width="380"> |
+
+| Switching realms | Coach warning | A lesson |
+|:--:|:--:|:--:|
+| <img src="docs/img/realm-switch.gif" width="250"> | <img src="docs/img/coach-warning.gif" width="250"> | <img src="docs/img/lesson.gif" width="250"> |
+
 
 ## The problem
 
