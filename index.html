@@ -3,17 +3,76 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Gambit Realms</title>
-    <meta name="description" content="Animated chess with themed realms, a calibrated opponent ladder and a beginner coach. Free, runs in your browser." />
-    <meta property="og:title" content="Gambit Realms" />
-    <meta property="og:description" content="Chess where every capture is a duel. Four animated realms, eight opponents and a beginner coach. Free, runs in your browser." />
+    <title>Gambit Realms: free animated chess to learn and play in your browser</title>
+    <meta name="description" content="Free animated chess where every capture is a duel. Learn chess from scratch with a coach that warns before you lose a piece, then play eight measured opponents in four themed realms: wizard, medieval, cyberpunk and anime. No sign-up." />
+    <meta name="keywords" content="animated chess, learn chess, chess for beginners, chess coach, play chess online free, wizard chess, cyberpunk chess, anime chess, medieval chess, chess against computer, Stockfish in browser" />
+    <meta name="author" content="Brejesh Balakrishnan" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="google-site-verification" content="oh5E78cO9NVbC8Bl5yeGIQkNuHgm99lZIPLD5XGksSc" />
+    <link rel="canonical" href="https://brej-29.github.io/gambit-realms/" />
+    <meta property="og:site_name" content="Gambit Realms" />
+    <meta property="og:title" content="Gambit Realms: animated chess where every capture is a duel" />
+    <meta property="og:description" content="Learn chess with a coach that warns before you give a piece away. Eight measured opponents, four animated realms. Free, runs in your browser." />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://brej-29.github.io/gambit-realms/" />
+    <meta property="og:image" content="https://brej-29.github.io/gambit-realms/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="A wizard-style chess board with animated pieces" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Gambit Realms: animated chess where every capture is a duel" />
+    <meta name="twitter:description" content="Free animated chess for beginners: four realms, eight measured opponents, a coach that warns before you blunder." />
+    <meta name="twitter:image" content="https://brej-29.github.io/gambit-realms/og.png" />
     <meta name="theme-color" content="#0d0a1c" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebApplication",
+            "name": "Gambit Realms",
+            "url": "https://brej-29.github.io/gambit-realms/",
+            "applicationCategory": "GameApplication",
+            "genre": ["Chess", "Educational game", "Board game"],
+            "operatingSystem": "Any (modern web browser)",
+            "browserRequirements": "Requires JavaScript and WebAssembly",
+            "description": "Free animated chess for beginners. Pieces fight when they capture, in four themed realms. Eight opponents with measured strength and a coach that warns before a move loses material.",
+            "inLanguage": "en",
+            "isAccessibleForFree": true,
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+            "image": "https://brej-29.github.io/gambit-realms/og.png",
+            "author": { "@type": "Person", "name": "Brejesh Balakrishnan", "url": "https://github.com/brej-29" },
+            "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+            "codeRepository": "https://github.com/brej-29/gambit-realms"
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              { "@type": "Question", "name": "Is Gambit Realms free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. It is free, needs no sign-up and runs entirely in your browser." } },
+              { "@type": "Question", "name": "Can a complete beginner learn chess here?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Eight short interactive lessons teach the board, each piece, checkmate and special moves, and a coach warns you before a move that would lose a piece." } },
+              { "@type": "Question", "name": "What opponents can I play?", "acceptedAnswer": { "@type": "Answer", "text": "Eight opponents from Sleepy Pawn to Archmage, built on Stockfish and rated on the Stockfish Elo scale from about 950 to above 2600, with results published on the Evidence page." } },
+              { "@type": "Question", "name": "What are the realms?", "acceptedAnswer": { "@type": "Answer", "text": "Four themes with their own boards, sounds and capture animations: Enchanted Hall (wizard chess), Iron Keep (medieval), Neon Grid (cyberpunk) and Sakura Arena (anime)." } }
+            ]
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
-    <div id="app"></div>
-    <noscript><p style="padding:24px;font-family:sans-serif">Gambit Realms is an interactive chess game and needs JavaScript. Please enable it and reload.</p></noscript>
+    <!-- Crawlable fallback; the app replaces it as soon as it starts. -->
+    <div id="app">
+      <main style="max-width:44rem;margin:0 auto;padding:24px;font-family:system-ui,sans-serif;line-height:1.6;color:#f3ead4;background:#0d0a1c;min-height:100vh">
+        <h1>Gambit Realms: animated chess where every capture is a duel</h1>
+        <p>Free chess game for beginners that runs in your browser. Pieces move and fight on every capture, in four themed realms: Enchanted Hall (wizard chess), Iron Keep (medieval), Neon Grid (cyberpunk) and Sakura Arena (anime).</p>
+        <h2>Learn chess from scratch</h2>
+        <p>Eight interactive lessons cover the board, every piece, check and checkmate, castling, en passant and how to keep your pieces safe. A coach warns you before a move that would lose material.</p>
+        <h2>Eight measured opponents</h2>
+        <p>Sleepy Pawn to Archmage, powered by Stockfish and rated on the Stockfish Elo scale. Every number is published on the Evidence page, including the targets that were missed.</p>
+        <p>Gambit Realms needs JavaScript. Please enable it and reload.</p>
+        <p><a href="https://github.com/brej-29/gambit-realms" style="color:#e8b64c">Source code and case study on GitHub</a></p>
+      </main>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
